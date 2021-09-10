@@ -3,4 +3,5 @@
     <string name="recipes">Recipes</string>
     <string name="favorite">favorite</string>
     <string name="joke">joke</string>
+    <string name="content_description">contentDescription</string>
 </resources>
