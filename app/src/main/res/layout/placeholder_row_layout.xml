@@ -3,6 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/big_image_size"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="@dimen/def_margin"
+    android:visibility="gone"
+    tools:visibility="visible"
     android:layout_marginTop="@dimen/def_margin_05"
     android:layout_marginBottom="@dimen/def_margin_05">
 
@@ -43,7 +47,7 @@
         android:id="@+id/view4"
         android:layout_width="@dimen/small_image_size"
         android:layout_height="@dimen/small_image_size"
-        android:layout_margin="@dimen/def_margin_05"
+        android:layout_margin="@dimen/def_margin"
         android:background="@color/mediumGray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/view3"
