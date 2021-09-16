@@ -13,16 +13,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foody.adapters.RecipesAdapter
 import com.example.foody.databinding.FragmentRecipesBinding
 import com.example.foody.util.NetworkResult
-import com.example.foody.util.viewmodels.MainViewModel
-import com.example.foody.util.viewmodels.RecipesViewModel
+import com.example.foody.util.observeOnce
+import com.example.foody.viewmodels.MainViewModel
+import com.example.foody.viewmodels.RecipesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RecipesFragment : Fragment() {
+    private var _binding: FragmentRecipesBinding? = null
+    private val binding get() = _binding!!
     private lateinit var mainViewModel: MainViewModel
     private lateinit var recipesViewModel: RecipesViewModel
-    private lateinit var binding: FragmentRecipesBinding
     private val mAdapter by lazy { RecipesAdapter() }
     private val TAG = RecipesFragment::class.java.simpleName
 
@@ -31,7 +33,9 @@ class RecipesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentRecipesBinding.inflate(inflater, container, false)
+        _binding = FragmentRecipesBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
+        binding.mainViewModel = mainViewModel
         setupRecyclerView()
         readDatabase()
         return binding.root
@@ -55,7 +59,7 @@ class RecipesFragment : Fragment() {
 
     private fun readDatabase() {
         lifecycleScope.launch {
-            mainViewModel.readRecipes.observe(viewLifecycleOwner, { database ->
+            mainViewModel.readRecipes.observeOnce(viewLifecycleOwner, { database ->
                 if (database.isNotEmpty()) {
                     Log.d(TAG, "readDatabase")
                     mAdapter.setData(database[0].foodRecipe)
@@ -106,6 +110,11 @@ class RecipesFragment : Fragment() {
                 }
             }
         })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }
