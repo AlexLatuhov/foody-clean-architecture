@@ -12,6 +12,7 @@ class Constants {
         const val QUERY_RECIPE_INFO = "addRecipeInformation"
         const val QUERY_INGREDIENTS = "fillIngredients"
         const val QUERY_DIET = "diet"
+        const val QUERY_SEARCH = "query"
 
         const val DATABASE_NAME = "recipes_database_"
         const val RECIPES_TABLE = "recipes_table"
