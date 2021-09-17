@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
+import androidx.navigation.fragment.findNavController
 import com.example.foody.databinding.RecipesBottomSheetBinding
 import com.example.foody.util.Constants
 import com.example.foody.viewmodels.RecipesViewModel
@@ -63,6 +64,9 @@ class RecipesBottomSheet : BottomSheetDialogFragment() {
                 selectedDietType,
                 selectedDietTypeId
             )
+            val action =
+                RecipesBottomSheetDirections.actionRecipesBottomSheetToRecipesFragment(true)
+            findNavController().navigate(action)
         }
         return binding.root
     }

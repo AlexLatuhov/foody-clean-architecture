@@ -6,6 +6,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.NetworkCapabilities.*
 import androidx.lifecycle.*
+import com.example.foody.R
 import com.example.foody.data.Repository
 import com.example.foody.data.database.RecipesEntity
 import com.example.foody.models.FoodRecipe
@@ -49,7 +50,9 @@ class MainViewModel @Inject constructor(
                 recipesResponse.value = NetworkResult.Error("Recipes not found")
             }
         } else {
-            recipesResponse.value = NetworkResult.Error("No Internet Connection.")
+            val app = getApplication<Application>()
+            recipesResponse.value =
+                NetworkResult.Error(app.getString(R.string.no_internet_connection))
         }
     }
 
