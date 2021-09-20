@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="result"
             type="com.example.foody.models.Result" />
@@ -12,6 +11,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/recipesRawLayout"
+        onRecipeClickListener="@{result}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/def_margin"
