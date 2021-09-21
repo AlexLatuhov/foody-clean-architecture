@@ -13,6 +13,7 @@ import com.example.foody.R
 import com.example.foody.databinding.FragmentOverviewBinding
 import com.example.foody.models.Result
 import com.example.foody.util.Constants.Companion.RECIPE
+import org.jsoup.Jsoup
 
 class OverviewFragment : Fragment() {
 
@@ -34,8 +35,10 @@ class OverviewFragment : Fragment() {
         binding.titleTextView.text = myBundle.title
         binding.likesTextView.text = myBundle.aggregateLikes.toString()
         binding.timeTextView.text = myBundle.readyInMinutes.toString()
-        binding.summary.text = myBundle.summary
-
+        myBundle.summary.let {
+            val summary = Jsoup.parse(it).text()
+            binding.summary.text = summary
+        }
         setColorByValue(
             myBundle.vegetarian,
             binding.vegetarianTextView,
