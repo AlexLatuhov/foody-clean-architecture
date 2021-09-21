@@ -12,6 +12,7 @@ import com.example.foody.databinding.ActivityDetailsBinding
 import com.example.foody.ui.fragments.ingredients.IngredientsFragment
 import com.example.foody.ui.fragments.instructions.InstructionsFragment
 import com.example.foody.ui.fragments.overview.OverviewFragment
+import com.example.foody.util.Constants.Companion.RECIPE
 import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailsActivity : AppCompatActivity() {
@@ -30,7 +31,7 @@ class DetailsActivity : AppCompatActivity() {
         fragments.add(IngredientsFragment())
         fragments.add(InstructionsFragment())
         val resultBundle = Bundle()
-        resultBundle.putParcelable("recipeBundle", args.result)
+        resultBundle.putParcelable(RECIPE, args.result)
 
         binding.viewPager.adapter =
             PagerAdapter(resultBundle, fragments, supportFragmentManager, lifecycle)

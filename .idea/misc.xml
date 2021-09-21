@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.15572916666666667" />
+        <entry key="app/src/main/res/drawable/gradient_overlay.xml" value="0.26145833333333335" />
         <entry key="app/src/main/res/drawable/ic_clock.xml" value="0.26145833333333335" />
         <entry key="app/src/main/res/drawable/ic_error_placeholder.xml" value="0.28072916666666664" />
         <entry key="app/src/main/res/drawable/ic_food_joke.xml" value="0.26145833333333335" />
@@ -21,7 +22,7 @@
         <entry key="app/src/main/res/layout/fragment_food_joke.xml" value="0.23489583333333333" />
         <entry key="app/src/main/res/layout/fragment_ingredients.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/fragment_instructions.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_overview.xml" value="0.2078125" />
+        <entry key="app/src/main/res/layout/fragment_overview.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_recipes.xml" value="0.25" />
         <entry key="app/src/main/res/layout/placeholder_row_layout.xml" value="0.375" />
         <entry key="app/src/main/res/layout/recipes_bottom_sheet.xml" value="0.335" />

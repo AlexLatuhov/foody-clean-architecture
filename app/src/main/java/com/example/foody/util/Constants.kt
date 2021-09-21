@@ -27,5 +27,6 @@ class Constants {
         const val PREF_DIET_TYPE_ID = "diedTypeId"
         const val BACK_ONLINE = "BACK_ONLINE"
         const val PREF_NAME = "settings"
+        const val RECIPE = "recipeBundle"
     }
 }
