@@ -4,11 +4,24 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.15572916666666667" />
+        <entry key="app/src/main/res/drawable/ic_clock.xml" value="0.26145833333333335" />
         <entry key="app/src/main/res/drawable/ic_error_placeholder.xml" value="0.28072916666666664" />
+        <entry key="app/src/main/res/drawable/ic_food_joke.xml" value="0.26145833333333335" />
+        <entry key="app/src/main/res/drawable/ic_heart.xml" value="0.26145833333333335" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.26145833333333335" />
+        <entry key="app/src/main/res/drawable/ic_leaf.xml" value="0.26145833333333335" />
+        <entry key="app/src/main/res/drawable/ic_menu_book.xml" value="0.26145833333333335" />
+        <entry key="app/src/main/res/drawable/ic_restaurant.xml" value="0.26145833333333335" />
+        <entry key="app/src/main/res/drawable/ic_sad.xml" value="0.26145833333333335" />
+        <entry key="app/src/main/res/drawable/ic_search.xml" value="0.26145833333333335" />
+        <entry key="app/src/main/res/drawable/ic_star.xml" value="0.26145833333333335" />
         <entry key="app/src/main/res/layout/activity_details.xml" value="0.23958333333333334" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.23020833333333332" />
         <entry key="app/src/main/res/layout/fragment_favorite_recipes.xml" value="0.23489583333333333" />
         <entry key="app/src/main/res/layout/fragment_food_joke.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/layout/fragment_ingredients.xml" value="0.2078125" />
+        <entry key="app/src/main/res/layout/fragment_instructions.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_overview.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/fragment_recipes.xml" value="0.25" />
         <entry key="app/src/main/res/layout/placeholder_row_layout.xml" value="0.375" />
         <entry key="app/src/main/res/layout/recipes_bottom_sheet.xml" value="0.335" />
