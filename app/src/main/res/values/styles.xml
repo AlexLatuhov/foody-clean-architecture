@@ -33,4 +33,11 @@
     <style name="CustomTabTextStyle" parent="TextAppearance.Design.Tab">
         <item name="android:textColor">@color/white</item>
     </style>
+
+    <style name="PlaceHolder">
+        <item name="android:layout_width">@dimen/small_image_size</item>
+        <item name="android:layout_height">@dimen/small_image_size</item>
+        <item name="android:layout_margin">@dimen/def_margin</item>
+        <item name="android:background">@color/mediumGray</item>
+    </style>
 </resources>
