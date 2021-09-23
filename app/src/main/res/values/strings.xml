@@ -33,8 +33,8 @@
     <string name="diet_type">Diet Type</string>
     <string name="apply">Apply</string>
     <string name="recipes">Recipes</string>
-    <string name="favorite">favorite</string>
-    <string name="joke">joke</string>
+    <string name="favorite">Favorite</string>
+    <string name="joke">Joke</string>
     <string name="content_description">contentDescription</string>
 
     <string name="no_internet_connection">No internet connection</string>
@@ -51,4 +51,12 @@
     <string name="healthy">Healthy</string>
     <string name="dairy_free">Dairy Free</string>
     <string name="save_to_favorites">Save to Favorites</string>
+    <string name="no_favorite_recipes">No Favorite Recipes.</string>
+    <string name="delete_favorites">Delete Favorites</string>
+
+    <string name="items_selected">%d items selected</string>
+    <string name="recipes_removed">%d Recipes removed</string>
+    <string name="item_selected">1 item selected</string>
+    <string name="delete_all">Delete All</string>
+    <string name="deleted">Deleted</string>
 </resources>
