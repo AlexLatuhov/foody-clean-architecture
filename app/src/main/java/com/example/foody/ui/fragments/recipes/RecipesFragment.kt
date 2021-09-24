@@ -44,23 +44,10 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
         binding.lifecycleOwner = this
         binding.mainViewModel = mainViewModel
         setHasOptionsMenu(true)
-
         setupRecyclerView()
-        readDatabase()
-
         recipesViewModel.readBackOnline.observe(viewLifecycleOwner, {
             recipesViewModel.backOnline = it
         })
-
-        networkListener = NetworkListener()
-        lifecycleScope.launch {
-            networkListener.checkNetwork(requireContext()).collect { status ->
-                Log.d("NETWORK_INFO", "collect $status")
-                recipesViewModel.networkStatus = status
-                recipesViewModel.showNetworkStatus()
-                readDatabase()
-            }
-        }
 
         binding.recipesFab.setOnClickListener {
             if (recipesViewModel.networkStatus) {
@@ -70,6 +57,20 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
             }
         }
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        readDatabase()
+        networkListener = NetworkListener()
+        lifecycleScope.launch {
+            networkListener.checkNetwork(requireContext()).collect { status ->
+                Log.d("NETWORK_INFO", "collect $status")
+                recipesViewModel.networkStatus = status
+                recipesViewModel.showNetworkStatus()
+                readDatabase()
+            }
+        }
     }
 
     private fun setupRecyclerView() {
