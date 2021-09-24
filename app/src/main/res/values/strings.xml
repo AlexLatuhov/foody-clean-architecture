@@ -59,4 +59,5 @@
     <string name="item_selected">1 item selected</string>
     <string name="delete_all">Delete All</string>
     <string name="deleted">Deleted</string>
+    <string name="share">Share</string>
 </resources>
