@@ -28,7 +28,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorControlNormal">@color/white</item>
-        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="android:statusBarColor">@color/statusBarColor</item>`
     </style>
 
     <style name="CustomActionBarStyle" parent="Widget.MaterialComponents.ActionBar.Primary">
@@ -58,6 +58,6 @@
         <item name="android:layout_width">@dimen/small_image_size</item>
         <item name="android:layout_height">@dimen/small_image_size</item>
         <item name="android:layout_margin">@dimen/def_margin</item>
-        <item name="android:background">@color/mediumGray</item>
+        <item name="android:background">@color/placeholderColor</item>
     </style>
 </resources>
