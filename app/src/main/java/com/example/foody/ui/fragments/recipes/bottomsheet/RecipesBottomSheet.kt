@@ -20,10 +20,10 @@ class RecipesBottomSheet : BottomSheetDialogFragment() {
 
     private lateinit var recipesViewModel: RecipesViewModel
 
-    var selectedMealType = Constants.DEFAULT_MEAL_TYPE
-    var selectedMealTypeId = Constants.DEFAULT_ID
-    var selectedDietType = Constants.DEFAULT_DIET_TYPE
-    var selectedDietTypeId = Constants.DEFAULT_ID
+    private var selectedMealType = Constants.DEFAULT_MEAL_TYPE
+    private var selectedMealTypeId = Constants.DEFAULT_ID
+    private var selectedDietType = Constants.DEFAULT_DIET_TYPE
+    private var selectedDietTypeId = Constants.DEFAULT_ID
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
