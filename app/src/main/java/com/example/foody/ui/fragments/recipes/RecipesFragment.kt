@@ -63,7 +63,7 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
         super.onViewCreated(view, savedInstanceState)
         readDatabase()
         networkListener = NetworkListener()
-        lifecycleScope.launch {
+        lifecycleScope.launchWhenStarted {
             networkListener.checkNetwork(requireContext()).collect { status ->
                 Log.d("NETWORK_INFO", "collect $status")
                 recipesViewModel.networkStatus = status
@@ -110,13 +110,13 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun showShimmerEffect() {
+        binding.shimmerFrameLayout.startShimmer()
         binding.recyclerView.visibility = View.GONE
-        binding.loading.root.visibility = View.VISIBLE
     }
 
     private fun hideShimmerEffect() {
         binding.recyclerView.visibility = View.VISIBLE
-        binding.loading.root.visibility = View.GONE
+        binding.shimmerFrameLayout.stopShimmer()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -135,6 +135,7 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
                 is NetworkResult.Success -> {
                     hideShimmerEffect()
                     response.data?.let { mAdapter.setData(it) }
+                    recipesViewModel.saveMealAndDietType()
                 }
                 is NetworkResult.Error -> {
                     hideShimmerEffect()
@@ -177,8 +178,8 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
         })
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 

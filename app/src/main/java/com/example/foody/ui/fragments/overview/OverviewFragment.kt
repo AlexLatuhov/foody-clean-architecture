@@ -10,10 +10,10 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import coil.load
 import com.example.foody.R
+import com.example.foody.bindingadapters.RecipesRowBinding
 import com.example.foody.databinding.FragmentOverviewBinding
 import com.example.foody.models.Result
 import com.example.foody.util.Constants.Companion.RECIPE
-import org.jsoup.Jsoup
 
 class OverviewFragment : Fragment() {
 
@@ -35,10 +35,7 @@ class OverviewFragment : Fragment() {
         binding.titleTextView.text = myBundle.title
         binding.likesTextView.text = myBundle.aggregateLikes.toString()
         binding.timeTextView.text = myBundle.readyInMinutes.toString()
-        myBundle.summary.let {
-            val summary = Jsoup.parse(it).text()
-            binding.summary.text = summary
-        }
+        RecipesRowBinding.parseHtml(binding.summary, myBundle.summary)
         setColorByValue(
             myBundle.vegetarian,
             binding.vegetarianTextView,
@@ -61,5 +58,4 @@ class OverviewFragment : Fragment() {
             text.setTextColor(ContextCompat.getColor(requireContext(), R.color.green))
         }
     }
-
 }

@@ -50,16 +50,14 @@ class FavoriteRecipesAdapter(
                 holder.binding.root.findNavController().navigate(action)
             }
         }
+        validateSelectionUi(holder, item)
         holder.binding.recipesRawLayout.setOnLongClickListener {
             if (!multiSelection) {
                 multiSelection = true
                 requireActivity.startActionMode(this)
-                applySelection(holder, item)
-                true
-            } else {
-                multiSelection = false
-                false
             }
+            applySelection(holder, item)
+            true
         }
         myViewHolder.add(holder)
     }
@@ -107,6 +105,7 @@ class FavoriteRecipesAdapter(
         when (selectedRecipes.size) {
             0 -> {
                 mActionMode.finish()
+                multiSelection = false
             }
             1 -> {
                 mActionMode.title = requireActivity.getString(R.string.item_selected)
@@ -140,16 +139,23 @@ class FavoriteRecipesAdapter(
         diffUtilResult.dispatchUpdatesTo(this)
     }
 
+    private fun validateSelectionUi(holder: RecipeViewHolder, currentRecipe: FavoritesEntity) {
+        if (!selectedRecipes.contains(currentRecipe)) {
+            changeRecipeStyle(holder, R.color.cardBackground, R.color.lightMediumGray)
+        } else {
+            changeRecipeStyle(holder, R.color.cardBackgroundLight, R.color.colorPrimary)
+        }
+    }
+
     private fun applySelection(holder: RecipeViewHolder, currentRecipe: FavoritesEntity) {
         if (selectedRecipes.contains(currentRecipe)) {
             selectedRecipes.remove(currentRecipe)
-            changeRecipeStyle(holder, R.color.cardBackground, R.color.lightMediumGray)
             applyActionModeTitle()
         } else {
             selectedRecipes.add(currentRecipe)
-            changeRecipeStyle(holder, R.color.cardBackgroundLight, R.color.colorPrimary)
             applyActionModeTitle()
         }
+        validateSelectionUi(holder, currentRecipe)
     }
 
     private fun applyStatusBarColor(color: Int) {

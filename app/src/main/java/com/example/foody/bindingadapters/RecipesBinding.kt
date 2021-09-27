@@ -11,20 +11,6 @@ import com.example.foody.util.NetworkResult
 class RecipesBinding {
     companion object {
 
-        @BindingAdapter("readApiResponse", "readDatabase", requireAll = true)
-        @JvmStatic
-        fun errorImageViewVisibility(
-            imageView: View,
-            apiResponse: NetworkResult<FoodRecipe>?,
-            database: List<RecipesEntity>?
-        ) {
-            if (showError(apiResponse, database)) {
-                imageView.visibility = View.VISIBLE
-            } else {
-                imageView.visibility = View.INVISIBLE
-            }
-        }
-
         private fun showError(
             apiResponse: NetworkResult<FoodRecipe>?,
             database: List<RecipesEntity>?
@@ -33,16 +19,18 @@ class RecipesBinding {
         @SuppressLint("SetTextI18n")
         @BindingAdapter("readApiResponse", "readDatabase", requireAll = true)
         @JvmStatic
-        fun errorTextViewVisibility(
-            textView: TextView,
+        fun errorViewVisibility(
+            view: View,
             apiResponse: NetworkResult<FoodRecipe>?,
             database: List<RecipesEntity>?
         ) {
             if (showError(apiResponse, database)) {
-                textView.visibility = View.VISIBLE
-                textView.text = apiResponse?.message
+                view.visibility = View.VISIBLE
+                if (view is TextView) {
+                    view.text = apiResponse?.message
+                }
             } else {
-                textView.visibility = View.INVISIBLE
+                view.visibility = View.INVISIBLE
             }
         }
     }

@@ -76,7 +76,7 @@ class MainViewModel @Inject constructor(
                     insertFoodJoke(FoodJokeEntity(foodJoke))
                 }
             } catch (e: Exception) {
-                foodJokeResponse.value = NetworkResult.Error("Recipes not found")
+                foodJokeResponse.value = NetworkResult.Error("Not found")
             }
         } else {
             val app = getApplication<Application>()

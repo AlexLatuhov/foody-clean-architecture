@@ -97,7 +97,7 @@
 
                 <TextView
                     android:id="@+id/heart_textView"
-                    setNumberToTextView="@{result.aggregateLikes}"
+                    android:text="@{String.valueOf(result.aggregateLikes)}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/red"
@@ -120,7 +120,7 @@
 
                 <TextView
                     android:id="@+id/clock_textView"
-                    setNumberToTextView="@{result.readyInMinutes}"
+                    android:text="@{String.valueOf(result.readyInMinutes)}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/def_margin_x3"

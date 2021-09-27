@@ -47,8 +47,11 @@ class DetailsActivity : AppCompatActivity() {
         val resultBundle = Bundle()
         resultBundle.putParcelable(RECIPE, args.result)
 
-        binding.viewPager.adapter =
-            PagerAdapter(resultBundle, fragments, supportFragmentManager, lifecycle)
+        val pagerAdapter = PagerAdapter(resultBundle, fragments, this)
+        binding.viewPager.isUserInputEnabled = false
+        binding.viewPager.apply {
+            adapter = pagerAdapter
+        }
 
         val titles = ArrayList<Int>()
         titles.add(R.drawable.ic_overview)

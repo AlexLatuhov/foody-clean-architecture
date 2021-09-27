@@ -32,12 +32,6 @@ class RecipesRowBinding {
             }
         }
 
-        @BindingAdapter("setNumberToTextView")
-        @JvmStatic
-        fun setNumberToTextView(textView: TextView, number: Int) {
-            textView.text = number.toString()
-        }
-
         @BindingAdapter("applyVeganColor")
         @JvmStatic
         fun applyVeganColor(view: View, vegan: Boolean) {

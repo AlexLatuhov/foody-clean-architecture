@@ -58,8 +58,8 @@ class FavoriteRecipesFragment : Fragment() {
         inflater.inflate(R.menu.favorite_recipes_menu, menu)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
         mAdapter.clearMode()
     }

@@ -3,10 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/big_image_size"
-    xmlns:tools="http://schemas.android.com/tools"
     android:padding="@dimen/def_margin"
-    android:visibility="gone"
-    tools:visibility="visible"
     android:layout_marginTop="@dimen/def_margin_05"
     android:layout_marginBottom="@dimen/def_margin_05">
 
@@ -44,6 +41,7 @@
     <View
         android:id="@+id/view4"
         style="@style/PlaceHolder"
+        android:layout_marginTop="@dimen/constraint_def_padding"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/view3"
         app:layout_constraintTop_toBottomOf="@+id/view3" />
@@ -51,12 +49,14 @@
     <View
         android:id="@+id/view5"
         style="@style/PlaceHolder"
+        android:layout_marginStart="@dimen/constraint_def_padding"
         app:layout_constraintStart_toEndOf="@+id/view4"
         app:layout_constraintTop_toTopOf="@+id/view4" />
 
     <View
         android:id="@+id/view6"
         style="@style/PlaceHolder"
+        android:layout_marginStart="@dimen/constraint_def_padding"
         app:layout_constraintStart_toEndOf="@+id/view5"
         app:layout_constraintTop_toTopOf="@+id/view5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

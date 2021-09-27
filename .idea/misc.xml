@@ -31,9 +31,9 @@
         <entry key="app/src/main/res/layout/fragment_overview.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_recipes.xml" value="0.25" />
         <entry key="app/src/main/res/layout/ingredients_row_layout.xml" value="0.45" />
-        <entry key="app/src/main/res/layout/placeholder_row_layout.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/placeholder_row_layout.xml" value="0.165" />
         <entry key="app/src/main/res/layout/recipes_bottom_sheet.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/recipes_row_layout.xml" value="0.55" />
+        <entry key="app/src/main/res/layout/recipes_row_layout.xml" value="0.1" />
         <entry key="app/src/main/res/menu-v26/food_joke_menu.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.23489583333333333" />
         <entry key="app/src/main/res/menu/details_menu.xml" value="0.37604166666666666" />
