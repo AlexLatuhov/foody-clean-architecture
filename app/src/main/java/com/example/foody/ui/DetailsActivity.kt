@@ -16,6 +16,7 @@ import com.example.foody.databinding.ActivityDetailsBinding
 import com.example.foody.ui.fragments.ingredients.IngredientsFragment
 import com.example.foody.ui.fragments.instructions.InstructionsFragment
 import com.example.foody.ui.fragments.overview.OverviewFragment
+import com.example.foody.util.Constants.Companion.DEFAULT_ID
 import com.example.foody.util.Constants.Companion.RECIPE
 import com.example.foody.viewmodels.MainViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -28,10 +29,7 @@ class DetailsActivity : AppCompatActivity() {
     private val args by navArgs<DetailsActivityArgs>()
     private val mainViewModel: MainViewModel by viewModels()
     private lateinit var binding: ActivityDetailsBinding
-
-    //todo refactor this piece of code
-    private var recipeSaved = false
-    private var savedRecipeId = 0
+    private var savedRecipeId = DEFAULT_ID
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +55,6 @@ class DetailsActivity : AppCompatActivity() {
         titles.add(R.drawable.ic_overview)
         titles.add(R.drawable.ic_ingredients)
         titles.add(R.drawable.ic_instructions)
-        //todo make it work with title text
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, pos ->
             tab.icon = ContextCompat.getDrawable(this, titles[pos])
         }.attach()
@@ -74,14 +71,13 @@ class DetailsActivity : AppCompatActivity() {
     private fun checkSavedRecipes(menuItem: MenuItem) {
         mainViewModel.readFavoriteRecipes.observe(this, { favoritesEntity ->
             try {
+                changeMenuItemColor(menuItem, R.color.white)
+                savedRecipeId = DEFAULT_ID
                 for (savedRecipe in favoritesEntity) {
                     if (savedRecipe.result.id == args.result.id) {
                         changeMenuItemColor(menuItem, R.color.yellow)
                         savedRecipeId = savedRecipe.id
-                        recipeSaved = true
                         break
-                    } else {
-                        changeMenuItemColor(menuItem, R.color.white)
                     }
                 }
             } catch (e: Exception) {
@@ -94,7 +90,7 @@ class DetailsActivity : AppCompatActivity() {
         if (item.itemId == android.R.id.home) {
             finish()
         } else if (item.itemId == R.id.save_to_favorites_menu) {
-            if (!recipeSaved) {
+            if (savedRecipeId == DEFAULT_ID) {
                 saveToFavorites(item)
             } else {
                 removeFromFavorites(item)
@@ -108,7 +104,6 @@ class DetailsActivity : AppCompatActivity() {
         mainViewModel.insertFavoriteRecipe(favoritesEntity)
         changeMenuItemColor(item, R.color.yellow)
         showSnackBar(getString(R.string.saved_to_favorites))
-        recipeSaved = true
     }
 
     private fun removeFromFavorites(item: MenuItem) {
@@ -116,7 +111,6 @@ class DetailsActivity : AppCompatActivity() {
         mainViewModel.deleteFavoriteRecipe(favoritesEntity)
         changeMenuItemColor(item, R.color.white)
         showSnackBar(getString(R.string.removed_from_favorites))
-        recipeSaved = false
     }
 
     private fun showSnackBar(string: String) {
