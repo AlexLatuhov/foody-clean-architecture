@@ -10,7 +10,7 @@ import javax.inject.Inject
 class LocalDataSource @Inject constructor(
     private val recipesDao: RecipesDao
 ) {
-    suspend fun insertRecipes(recipesEntity: RecipesEntity) {
+    fun insertRecipes(recipesEntity: RecipesEntity) {
         recipesDao.insertRecipes(recipesEntity)
     }
 

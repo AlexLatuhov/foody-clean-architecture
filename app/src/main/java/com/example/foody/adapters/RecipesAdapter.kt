@@ -1,7 +1,6 @@
 package com.example.foody.adapters
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.foody.models.FoodRecipe
 import com.example.foody.models.Result
 import com.example.foody.util.RecipesDiffUtil
 
@@ -13,10 +12,10 @@ class RecipesAdapter : BaseRecipesAdapter() {
         return recipes[position]
     }
 
-    fun setData(newData: FoodRecipe) {
-        val recipesDiffUtil = RecipesDiffUtil(recipes, newData.results)
+    fun setDataItems(items: List<Result>) {
+        val recipesDiffUtil = RecipesDiffUtil(recipes, items)
         val diffUtilResult = DiffUtil.calculateDiff(recipesDiffUtil)
-        recipes = newData.results
+        recipes = items
         diffUtilResult.dispatchUpdatesTo(this)
     }
 

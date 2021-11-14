@@ -5,7 +5,7 @@
     <string name="recipes_fragment">Recipes</string>
     <string name="favorite_recipes_fragment">Favorites</string>
     <string name="food_joke_fragment">Food Joke</string>
-
+    <string name="unknown_error">Unknown Error</string>
     // Bottom Sheet
     <string name="meal_type">Meal Type</string>
     <string name="main_course">Main Course</string>
@@ -40,6 +40,7 @@
     <string name="no_internet_connection">No internet connection</string>
     <string name="back_online">We\'re back online</string>
     <string name="search">Search</string>
+    <string name="no_data">No data found</string>
 
     <string name="overview">Overview</string>
     <string name="ingredients">Ingredients</string>

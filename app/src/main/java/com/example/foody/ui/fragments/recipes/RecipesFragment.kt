@@ -3,21 +3,19 @@ package com.example.foody.ui.fragments.recipes
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.work.WorkInfo
 import com.example.foody.R
 import com.example.foody.adapters.RecipesAdapter
 import com.example.foody.databinding.FragmentRecipesBinding
+import com.example.foody.util.Constants.Companion.ERROR_MESSAGE
 import com.example.foody.util.NetworkListener
-import com.example.foody.util.NetworkResult
-import com.example.foody.util.observeOnce
 import com.example.foody.viewmodels.MainViewModel
 import com.example.foody.viewmodels.RecipesViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,15 +23,13 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
+class RecipesFragment : Fragment(), SearchView.OnQueryTextListener, SearchView.OnCloseListener {
     private var _binding: FragmentRecipesBinding? = null
     private val binding get() = _binding!!
     private lateinit var mainViewModel: MainViewModel
     private lateinit var recipesViewModel: RecipesViewModel
     private lateinit var networkListener: NetworkListener
     private val mAdapter by lazy { RecipesAdapter() }
-    private val args by navArgs<RecipesFragmentArgs>()
-    private val TAG = RecipesFragment::class.java.simpleName
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,14 +57,13 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        readDatabase()
         networkListener = NetworkListener()
         lifecycleScope.launchWhenStarted {
             networkListener.checkNetwork(requireContext()).collect { status ->
                 Log.d("NETWORK_INFO", "collect $status")
                 recipesViewModel.networkStatus = status
                 recipesViewModel.showNetworkStatus()
-                readDatabase()
+                requestApiData()
             }
         }
     }
@@ -76,31 +71,43 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
     private fun setupRecyclerView() {
         binding.recyclerView.adapter = mAdapter
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        showShimmerEffect()
     }
 
-    private fun loadDataFromCache() {
+    private fun validateErrorViewsVisibility(show: Boolean) {
+        val errorVisibility = if (show) View.VISIBLE else View.GONE
+        binding.errorTextView.visibility = errorVisibility
+        binding.errorImageView.visibility = errorVisibility
+    }
+
+    private fun loadDataFromCache(
+        errorMessage: String = getString(R.string.no_data),
+        searchQuery: String? = null
+    ) {
+        showShimmerEffect()
         lifecycleScope.launch {
             mainViewModel.readRecipes.observe(viewLifecycleOwner, { database ->
-                if (database.isNotEmpty()) {
-                    mAdapter.setData(database[0].foodRecipe)
+                hideShimmerEffect()
+                val resultsTemp = database.getOrNull(0)?.foodRecipe?.results
+                val results =
+                    if (searchQuery != null)
+                        resultsTemp?.filter { result ->
+                            result.title.contains(
+                                searchQuery,
+                                true
+                            )
+                        }
+                    else resultsTemp
+                if (results.isNullOrEmpty()) {
+                    setError(errorMessage)
                 }
+                validateErrorViewsVisibility(results.isNullOrEmpty())
+                mAdapter.setDataItems(results ?: emptyList())
             })
         }
     }
 
-    private fun readDatabase() {
-        lifecycleScope.launch {
-            mainViewModel.readRecipes.observeOnce(viewLifecycleOwner, { database ->
-                if (database.isNotEmpty() && !args.backFromBottomSheet) {
-                    Log.d(TAG, "readDatabase")
-                    mAdapter.setData(database[0].foodRecipe)
-                    hideShimmerEffect()
-                } else {
-                    requestApiData()
-                }
-            })
-        }
+    private fun setError(errorMessage: String) {
+        binding.errorTextView.text = errorMessage
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -125,55 +132,33 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
         val searchView = search.actionView as? SearchView
         searchView?.isSubmitButtonEnabled = true
         searchView?.setOnQueryTextListener(this)
+        searchView?.setOnCloseListener(this)
     }
 
     private fun requestApiData() {
-        Log.d(TAG, "requestApiData")
-        mainViewModel.getRecipes(recipesViewModel.applyQueries())
-        mainViewModel.recipesResponse.observe(viewLifecycleOwner, { response ->
-            when (response) {
-                is NetworkResult.Success -> {
-                    hideShimmerEffect()
-                    response.data?.let { mAdapter.setData(it) }
-                    recipesViewModel.saveMealAndDietType()
-                }
-                is NetworkResult.Error -> {
-                    hideShimmerEffect()
-                    loadDataFromCache()
-                    Toast.makeText(
-                        requireContext(),
-                        response.message.toString(),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-                is NetworkResult.Loading -> {
-                    showShimmerEffect()
-                }
-            }
-        })
-    }
-
-    private fun searchApiData(searchQuery: String) {
         showShimmerEffect()
-        mainViewModel.searchRecipes(recipesViewModel.applySearchQuery(searchQuery))
-        mainViewModel.searchRecipesResponse.observe(viewLifecycleOwner, { response ->
-            when (response) {
-                is NetworkResult.Success -> {
-                    hideShimmerEffect()
-                    response.data?.let { mAdapter.setData(it) }
-                }
-                is NetworkResult.Error -> {
-                    hideShimmerEffect()
-                    loadDataFromCache()
-                    Toast.makeText(
-                        requireContext(),
-                        response.message.toString(),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-                is NetworkResult.Loading -> {
-                    showShimmerEffect()
-                }
+        mainViewModel.getRecipes(
+            recipesViewModel.getSelectedMealType(),
+            recipesViewModel.getSelectedDietType()
+        ).observe(viewLifecycleOwner, { workInfo ->
+            val state = workInfo?.state
+            if (state == WorkInfo.State.SUCCEEDED) {
+                recipesViewModel.saveMealAndDietType()
+                loadDataFromCache()
+            } else if (state == WorkInfo.State.FAILED) {
+                val errorMessage = workInfo.outputData.getString(ERROR_MESSAGE)
+                loadDataFromCache(
+                    errorMessage
+                        ?: getString(R.string.unknown_error)
+                )
+                Toast.makeText(
+                    requireContext(),
+                    errorMessage,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            if (state?.isFinished == true) {
+                hideShimmerEffect()
             }
         })
     }
@@ -185,12 +170,17 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         if (query != null) {
-            searchApiData(query)
+            loadDataFromCache(getString(R.string.no_data), query)
         }
         return true
     }
 
     override fun onQueryTextChange(p0: String?): Boolean {
         return true
+    }
+
+    override fun onClose(): Boolean {
+        loadDataFromCache()
+        return false
     }
 }

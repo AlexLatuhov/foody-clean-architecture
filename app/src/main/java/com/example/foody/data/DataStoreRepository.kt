@@ -40,13 +40,15 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
     }
 
     suspend fun saveMealAndDietType(
-        mealAndDietType: MealAndDietType
+        mealAndDietType: MealAndDietType?
     ) {
-        context.dataStore.edit { preferences ->
-            preferences[PreferenceKeys.selectedMealType] = mealAndDietType.selectedMealType
-            preferences[PreferenceKeys.selectedMealTypeId] = mealAndDietType.selectedMealTypeId
-            preferences[PreferenceKeys.selectedDiedType] = mealAndDietType.selectedDietType
-            preferences[PreferenceKeys.selectedDiedTypeId] = mealAndDietType.selectedDietTypeId
+        mealAndDietType?.let {
+            context.dataStore.edit { preferences ->
+                preferences[PreferenceKeys.selectedMealType] = mealAndDietType.selectedMealType
+                preferences[PreferenceKeys.selectedMealTypeId] = mealAndDietType.selectedMealTypeId
+                preferences[PreferenceKeys.selectedDiedType] = mealAndDietType.selectedDietType
+                preferences[PreferenceKeys.selectedDiedTypeId] = mealAndDietType.selectedDietTypeId
+            }
         }
     }
 

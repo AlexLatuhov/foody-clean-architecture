@@ -29,7 +29,13 @@ class Constants {
         const val PREF_DIET_TYPE = "dietType"
         const val PREF_DIET_TYPE_ID = "diedTypeId"
         const val BACK_ONLINE = "BACK_ONLINE"
+        const val SEARCH_QUERY = "SEARCH_QUERY"
         const val PREF_NAME = "settings"
         const val RECIPE = "recipeBundle"
+        const val TEST_TAG = "TEST_TAG"
+        const val RECIPES = "RECIPES"
+        const val ERROR_MESSAGE = "ERROR_MESSAGE"
+        const val SELECTED_MEAL = "SELECTED_MEAL"
+        const val SELECTED_DIET = "SELECTED_DIET"
     }
 }
