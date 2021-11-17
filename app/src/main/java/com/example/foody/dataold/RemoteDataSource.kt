@@ -1,6 +1,6 @@
-package com.example.foody.data
+package com.example.foody.dataold
 
-import com.example.foody.data.network.FoodRecipesApi
+import com.example.foody.dataold.network.FoodRecipesApi
 import com.example.foody.models.FoodJoke
 import com.example.foody.models.FoodRecipe
 import retrofit2.Response
@@ -11,10 +11,6 @@ class RemoteDataSource @Inject constructor(
 ) {
     suspend fun getRecipes(queries: Map<String, String>): Response<FoodRecipe> {
         return foodRecipesApi.getRecipes(queries)
-    }
-
-    suspend fun searchRecipes(queries: Map<String, String>): Response<FoodRecipe> {
-        return foodRecipesApi.searchRecipes(queries)
     }
 
     suspend fun getFoodJoke(api: String): Response<FoodJoke> {

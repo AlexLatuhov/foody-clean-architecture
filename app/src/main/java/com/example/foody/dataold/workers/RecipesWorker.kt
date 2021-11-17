@@ -1,4 +1,4 @@
-package com.example.foody.data.workers
+package com.example.foody.dataold.workers
 
 import android.content.Context
 import android.util.Log
@@ -7,9 +7,9 @@ import androidx.work.CoroutineWorker
 import androidx.work.Data
 import androidx.work.WorkerParameters
 import com.example.foody.R
-import com.example.foody.data.LocalDataSource
-import com.example.foody.data.RemoteDataSource
-import com.example.foody.data.database.entities.RecipesEntity
+import com.example.foody.database.entities.RecipesEntity
+import com.example.foody.dataold.LocalDataSource
+import com.example.foody.dataold.RemoteDataSource
 import com.example.foody.models.FoodRecipe
 import com.example.foody.util.Constants
 import com.example.foody.util.Constants.Companion.ERROR_MESSAGE

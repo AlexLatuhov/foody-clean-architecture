@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import com.example.foody.R
-import com.example.foody.data.database.entities.FavoritesEntity
+import com.example.foody.database.entities.FavoritesEntity
 import com.example.foody.models.Result
 import com.example.foody.ui.fragments.favorites.FavoriteRecipesFragmentDirections
 import com.example.foody.util.RecipesDiffUtil

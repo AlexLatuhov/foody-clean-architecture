@@ -1,4 +1,4 @@
-package com.example.foody.data.network
+package com.example.foody.dataold.network
 
 import com.example.foody.models.FoodJoke
 import com.example.foody.models.FoodRecipe

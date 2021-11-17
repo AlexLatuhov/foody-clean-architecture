@@ -6,10 +6,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.work.*
-import com.example.foody.data.Repository
-import com.example.foody.data.database.entities.FavoritesEntity
-import com.example.foody.data.database.entities.RecipesEntity
-import com.example.foody.data.workers.RecipesWorker
+import com.example.foody.database.entities.FavoritesEntity
+import com.example.foody.database.entities.RecipesEntity
+import com.example.foody.dataold.Repository
+import com.example.foody.dataold.workers.RecipesWorker
 import com.example.foody.util.Constants.Companion.RECIPES
 import com.example.foody.util.Constants.Companion.SELECTED_DIET
 import com.example.foody.util.Constants.Companion.SELECTED_MEAL

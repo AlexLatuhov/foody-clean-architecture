@@ -6,7 +6,7 @@ import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foody.adapters.FavoriteRecipesAdapter
-import com.example.foody.data.database.entities.FavoritesEntity
+import com.example.foody.database.entities.FavoritesEntity
 
 class FavoriteRecipesBinding {
     companion object {

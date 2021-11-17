@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.navArgs
 import com.example.foody.R
 import com.example.foody.adapters.PagerAdapter
-import com.example.foody.data.database.entities.FavoritesEntity
+import com.example.foody.database.entities.FavoritesEntity
 import com.example.foody.databinding.ActivityDetailsBinding
 import com.example.foody.ui.fragments.ingredients.IngredientsFragment
 import com.example.foody.ui.fragments.instructions.InstructionsFragment

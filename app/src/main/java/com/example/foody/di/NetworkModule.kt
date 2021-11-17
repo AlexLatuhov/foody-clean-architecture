@@ -1,6 +1,6 @@
 package com.example.foody.di
 
-import com.example.foody.data.network.FoodRecipesApi
+import com.example.foody.dataold.network.FoodRecipesApi
 import com.example.foody.util.Constants.Companion.BASE_URL
 import com.example.foody.util.Constants.Companion.TIMEOUT
 import dagger.Module

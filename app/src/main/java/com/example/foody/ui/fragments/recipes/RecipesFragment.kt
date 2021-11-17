@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.work.WorkInfo
 import com.example.foody.R
 import com.example.foody.adapters.RecipesAdapter
-import com.example.foody.data.MealAndDietType
 import com.example.foody.databinding.FragmentRecipesBinding
+import com.example.foody.dataold.MealAndDietType
 import com.example.foody.util.Constants.Companion.ERROR_MESSAGE
 import com.example.foody.util.NetworkListener
 import com.example.foody.viewmodels.MainViewModel

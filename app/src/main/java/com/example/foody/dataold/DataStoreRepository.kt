@@ -1,4 +1,4 @@
-package com.example.foody.data
+package com.example.foody.dataold
 
 import android.content.Context
 import androidx.datastore.preferences.core.*

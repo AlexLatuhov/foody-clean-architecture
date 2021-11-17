@@ -1,13 +1,13 @@
-package com.example.foody.data.database
+package com.example.foody.database
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
-import com.example.foody.data.database.entities.FavoritesEntity
-import com.example.foody.data.database.entities.FoodJokeEntity
-import com.example.foody.data.database.entities.RecipesEntity
+import com.example.foody.database.entities.FavoritesEntity
+import com.example.foody.database.entities.FoodJokeEntity
+import com.example.foody.database.entities.RecipesEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
