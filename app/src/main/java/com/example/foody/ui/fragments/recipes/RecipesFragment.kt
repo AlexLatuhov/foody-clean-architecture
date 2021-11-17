@@ -1,18 +1,19 @@
 package com.example.foody.ui.fragments.recipes
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.work.WorkInfo
 import com.example.foody.R
 import com.example.foody.adapters.RecipesAdapter
+import com.example.foody.data.MealAndDietType
 import com.example.foody.databinding.FragmentRecipesBinding
 import com.example.foody.util.Constants.Companion.ERROR_MESSAGE
 import com.example.foody.util.NetworkListener
@@ -60,12 +61,22 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener, SearchView.O
         networkListener = NetworkListener()
         lifecycleScope.launchWhenStarted {
             networkListener.checkNetwork(requireContext()).collect { status ->
-                Log.d("NETWORK_INFO", "collect $status")
                 recipesViewModel.networkStatus = status
                 recipesViewModel.showNetworkStatus()
-                requestApiData()
+                getFilterData()
             }
         }
+    }
+
+    private fun getFilterData() {
+        showShimmerEffect()
+        if (recipesViewModel.hasTempValue()) {
+            requestApiData(recipesViewModel.mealAndDietType)
+            return
+        }
+        recipesViewModel.readMealAndDietType.asLiveData().observe(viewLifecycleOwner, { value ->
+            requestApiData(value)
+        })
     }
 
     private fun setupRecyclerView() {
@@ -135,11 +146,10 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener, SearchView.O
         searchView?.setOnCloseListener(this)
     }
 
-    private fun requestApiData() {
-        showShimmerEffect()
+    private fun requestApiData(value: MealAndDietType) {
         mainViewModel.getRecipes(
-            recipesViewModel.getSelectedMealType(),
-            recipesViewModel.getSelectedDietType()
+            value.selectedMealType,
+            value.selectedDietType
         ).observe(viewLifecycleOwner, { workInfo ->
             val state = workInfo?.state
             if (state == WorkInfo.State.SUCCEEDED) {

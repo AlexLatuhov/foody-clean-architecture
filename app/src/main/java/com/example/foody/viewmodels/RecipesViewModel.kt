@@ -8,8 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.foody.R
 import com.example.foody.data.DataStoreRepository
 import com.example.foody.data.MealAndDietType
-import com.example.foody.util.Constants.Companion.DEFAULT_DIET_TYPE
-import com.example.foody.util.Constants.Companion.DEFAULT_MEAL_TYPE
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,8 +21,8 @@ class RecipesViewModel @Inject constructor(
 
     var networkStatus = false
     var backOnline = false
+    lateinit var mealAndDietType: MealAndDietType
     val readMealAndDietType = dataStoreRepository.readMealAndDietType
-    private var mealAndDietType = readMealAndDietType.asLiveData().value
     val readBackOnline = dataStoreRepository.readBackOnline.asLiveData()
 
     fun saveMealAndDietTypeTemp(
@@ -38,21 +36,20 @@ class RecipesViewModel @Inject constructor(
         )
     }
 
-    fun saveMealAndDietType() =
+    fun hasTempValue(): Boolean {
+        return this::mealAndDietType.isInitialized
+    }
+
+    fun saveMealAndDietType() {
+        if (!hasTempValue()) return
+
         viewModelScope.launch(Dispatchers.IO) {
             dataStoreRepository.saveMealAndDietType(mealAndDietType)
         }
+    }
 
     private fun saveBackOnline(backOnline: Boolean) = viewModelScope.launch(Dispatchers.IO) {
         dataStoreRepository.saveBackOnline(backOnline)
-    }
-
-    fun getSelectedMealType(): String {
-        return mealAndDietType?.selectedMealType ?: DEFAULT_MEAL_TYPE
-    }
-
-    fun getSelectedDietType(): String {
-        return mealAndDietType?.selectedDietType ?: DEFAULT_DIET_TYPE
     }
 
     fun showNetworkStatus() {

@@ -1,8 +1,6 @@
 package com.example.foody.data.workers
 
 import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
 import android.util.Log
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
@@ -17,6 +15,7 @@ import com.example.foody.util.Constants
 import com.example.foody.util.Constants.Companion.ERROR_MESSAGE
 import com.example.foody.util.Constants.Companion.SELECTED_DIET
 import com.example.foody.util.Constants.Companion.SELECTED_MEAL
+import com.example.foody.util.hasInternetConnection
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import retrofit2.Response
@@ -30,7 +29,7 @@ class RecipesWorker @AssistedInject constructor(
 ) : CoroutineWorker(context, workerParams) {
 
     override suspend fun doWork(): Result {
-        if (hasInternetConnection()) {
+        if (applicationContext.hasInternetConnection()) {
             try {
                 val queries = applyQueries(
                     inputData.getString(SELECTED_MEAL) ?: "", inputData.getString(
@@ -38,7 +37,6 @@ class RecipesWorker @AssistedInject constructor(
                     ) ?: ""
                 )
                 val response = remoteDataSource.getRecipes(queries)
-                Log.d(Constants.TEST_TAG, "getRecipes $response")
                 val responseResult = response.getRecipesResult()
                 if (responseResult is Result.Success) {
                     val foodRecipe = response.body()
@@ -106,22 +104,5 @@ class RecipesWorker @AssistedInject constructor(
         queries[Constants.QUERY_RECIPE_INFO] = "true"
         queries[Constants.QUERY_INGREDIENTS] = "true"
         return queries
-    }
-
-    private fun hasInternetConnection(): Boolean {
-        val connectivityManager =
-            applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val activeNetwork = connectivityManager.activeNetwork ?: return false
-        val capabilities = connectivityManager.getNetworkCapabilities(activeNetwork) ?: return false
-        return capabilities.hasActiveConnections()
-    }
-
-    private fun NetworkCapabilities.hasActiveConnections(): Boolean {
-        return when {
-            hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
-            hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
-            hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
-            else -> false
-        }
     }
 }

@@ -1,14 +1,22 @@
 package com.example.foody.util
 
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 
-fun <T> LiveData<T>.observeOnce(lifecycleOwner: LifecycleOwner, observer: Observer<T>) {
-    observe(lifecycleOwner, object : Observer<T> {
-        override fun onChanged(t: T) {
-            removeObserver(this)
-            observer.onChanged(t)
-        }
-    })
+fun Context.hasInternetConnection(): Boolean {
+    val connectivityManager =
+        applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val activeNetwork = connectivityManager.activeNetwork ?: return false
+    val capabilities = connectivityManager.getNetworkCapabilities(activeNetwork) ?: return false
+    return capabilities.hasActiveConnections()
+}
+
+private fun NetworkCapabilities.hasActiveConnections(): Boolean {
+    return when {
+        hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+        hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+        hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+        else -> false
+    }
 }

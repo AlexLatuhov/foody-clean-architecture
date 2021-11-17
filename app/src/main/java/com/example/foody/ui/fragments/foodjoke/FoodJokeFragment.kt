@@ -13,14 +13,14 @@ import com.example.foody.R
 import com.example.foody.databinding.FragmentFoodJokeBinding
 import com.example.foody.util.Constants.Companion.API_KEY
 import com.example.foody.util.NetworkResult
-import com.example.foody.viewmodels.MainViewModel
+import com.example.foody.viewmodels.FoodJokeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class FoodJokeFragment : Fragment() {
 
-    private val mainViewModel: MainViewModel by viewModels()
+    private val viewModel: FoodJokeViewModel by viewModels()
     private var _binding: FragmentFoodJokeBinding? = null
     private val binding get() = _binding!!
     private var foodJoke = ""
@@ -32,9 +32,9 @@ class FoodJokeFragment : Fragment() {
     ): View {
         _binding = FragmentFoodJokeBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
-        binding.mainViewModel = mainViewModel
-        mainViewModel.getFoodJoke(API_KEY)
-        mainViewModel.foodJokeResponse.observe(viewLifecycleOwner, { response ->
+        binding.viewModel = viewModel
+        viewModel.getFoodJoke(API_KEY)
+        viewModel.foodJokeResponse.observe(viewLifecycleOwner, { response ->
             when (response) {
                 is NetworkResult.Success -> {
                     val text = response.data?.text
@@ -78,7 +78,7 @@ class FoodJokeFragment : Fragment() {
 
     private fun loadFromCache() {
         lifecycleScope.launch {
-            mainViewModel.readFoodJoke.observe(viewLifecycleOwner, { database ->
+            viewModel.readFoodJoke.observe(viewLifecycleOwner, { database ->
                 if (!database.isNullOrEmpty()) {
                     binding.foodJokeTextView.text = database[0].foodJoke.text
                     foodJoke = database[0].foodJoke.text
