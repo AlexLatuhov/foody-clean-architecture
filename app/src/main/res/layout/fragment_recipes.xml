@@ -7,14 +7,14 @@
 
         <variable
             name="mainViewModel"
-            type="com.example.foody.viewmodels.MainViewModel" />
+            type="com.example.foody.presentation.viewmodels.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/backgroundColor"
-        tools:context=".ui.fragments.recipes.RecipesFragment">
+        tools:context=".presentation.recipes.RecipesFragment">
 
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/shimmerFrameLayout"

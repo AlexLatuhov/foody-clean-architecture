@@ -7,23 +7,24 @@
 
         <variable
             name="mainViewModel"
-            type="com.example.foody.viewmodels.MainViewModel" />
+            type="com.example.foody.presentation.viewmodels.MainViewModel" />
 
-        <variable
-            name="mAdapter"
-            type="com.example.foody.adapters.FavoriteRecipesAdapter" />
+        <!--        todo complete-->
+        <!--        <variable-->
+        <!--            name="mAdapter"-->
+        <!--            type="com.example.foody.adapters.FavoriteRecipesAdapter" />-->
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/backgroundColor"
-        tools:context=".ui.fragments.favorites.FavoriteRecipesFragment">
+        tools:context=".presentation.ui.FavoriteRecipesFragment">
 
 
+        <!--            setData="@{mAdapter}"-->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/favoriteRecipesRecyclerView"
-            setData="@{mAdapter}"
             viewVisibility="@{mainViewModel.readFavoriteRecipes}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

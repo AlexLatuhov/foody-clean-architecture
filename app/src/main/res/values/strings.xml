@@ -38,9 +38,9 @@
     <string name="content_description">contentDescription</string>
 
     <string name="no_internet_connection">No internet connection</string>
-    <string name="back_online">We\'re back online</string>
     <string name="search">Search</string>
     <string name="no_data">No data found</string>
+    <string name="recipes_not_found">Recipes not found</string>
 
     <string name="overview">Overview</string>
     <string name="ingredients">Ingredients</string>

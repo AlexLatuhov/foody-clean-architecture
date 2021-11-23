@@ -2,8 +2,8 @@ package com.example.foody.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.foody.database.RecipesDataBase
-import com.example.foody.util.Constants.Companion.DATABASE_NAME
+import com.example.foody.domain.database.RecipesDataBase
+import com.example.foody.presentation.util.Constants.Companion.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
