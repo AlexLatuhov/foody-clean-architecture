@@ -18,6 +18,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import java.io.IOException
 import javax.inject.Inject
@@ -27,6 +28,9 @@ private val Context.dataStore by preferencesDataStore(name = PREF_NAME)
 @ViewModelScoped
 class LocalDataStoreRepository @Inject constructor(@ApplicationContext private val context: Context) :
     DataStoreRepository {
+    private lateinit var mealAndDietType: MealAndDietType
+
+    override fun hasTempValue() = this::mealAndDietType.isInitialized
 
     private object PreferenceKeys {
         val selectedMealType = stringPreferencesKey(PREF_MEAL_TYPE)
@@ -35,17 +39,39 @@ class LocalDataStoreRepository @Inject constructor(@ApplicationContext private v
         val selectedDiedTypeId = intPreferencesKey(PREF_DIET_TYPE_ID)
     }
 
-    override suspend fun saveMealAndDietType(
-        mealAndDietType: MealAndDietType?
+    override fun saveMealAndDietTypeTemp(
+        mealType: String,
+        mealTypeId: Int,
+        dietType: String,
+        dietTypeId: Int
     ) {
-        mealAndDietType?.let {
-            context.dataStore.edit { preferences ->
-                preferences[PreferenceKeys.selectedMealType] = mealAndDietType.selectedMealType
-                preferences[PreferenceKeys.selectedMealTypeId] = mealAndDietType.selectedMealTypeId
-                preferences[PreferenceKeys.selectedDiedType] = mealAndDietType.selectedDietType
-                preferences[PreferenceKeys.selectedDiedTypeId] = mealAndDietType.selectedDietTypeId
-            }
+        mealAndDietType = MealAndDietType(
+            mealType, mealTypeId, dietType, dietTypeId
+        )
+    }
+
+    private suspend fun getType(): MealAndDietType {
+        return if (hasTempValue()) mealAndDietType else readMealAndDietType.first()
+    }
+
+    override suspend fun selectedDietType(): String {
+        return getType().selectedDietType
+    }
+
+    override suspend fun selectedMealType(): String {
+        return getType().selectedMealType
+    }
+
+    override suspend fun saveMealAndDietType(
+    ) {
+//        mealAndDietType.let {
+        context.dataStore.edit { preferences ->
+            preferences[PreferenceKeys.selectedMealType] = mealAndDietType.selectedMealType
+            preferences[PreferenceKeys.selectedMealTypeId] = mealAndDietType.selectedMealTypeId
+            preferences[PreferenceKeys.selectedDiedType] = mealAndDietType.selectedDietType
+            preferences[PreferenceKeys.selectedDiedTypeId] = mealAndDietType.selectedDietTypeId
         }
+//        }
     }
 
     override val readMealAndDietType: Flow<MealAndDietType> = context.dataStore.data

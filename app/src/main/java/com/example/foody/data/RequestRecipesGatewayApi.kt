@@ -13,7 +13,6 @@ import com.example.foody.presentation.util.hasInternetConnection
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
 class RequestRecipesGatewayApi @Inject constructor(
@@ -21,15 +20,11 @@ class RequestRecipesGatewayApi @Inject constructor(
     private val dataStoreRepository: DataStoreRepository,
     private val remoteDataSource: RemoteDataSource
 ) : RequestRecipesGateway {
-    private lateinit var mealAndDietType: MealAndDietType
+
     private val dataRequestResult = MutableStateFlow<DataRequestResult>(DataRequestResult.None)
 
-    private suspend fun saveMealAndDietType() =
-        dataStoreRepository.saveMealAndDietType(mealAndDietType)
-
-    private fun hasTempValue(): Boolean {
-        return this::mealAndDietType.isInitialized
-    }
+    private suspend fun saveMealAndDietType() = dataStoreRepository.saveMealAndDietType()
+    private fun hasTempValue(): Boolean = dataStoreRepository.hasTempValue()
 
     override fun saveMealAndDietTypeTemp(
         mealType: String,
@@ -37,9 +32,7 @@ class RequestRecipesGatewayApi @Inject constructor(
         dietType: String,
         dietTypeId: Int
     ) {
-        mealAndDietType = MealAndDietType(
-            mealType, mealTypeId, dietType, dietTypeId
-        )
+        dataStoreRepository.saveMealAndDietTypeTemp(mealType, mealTypeId, dietType, dietTypeId)
     }
 
     override fun readMealAndDietType(): Flow<MealAndDietType> {
@@ -47,16 +40,11 @@ class RequestRecipesGatewayApi @Inject constructor(
     }
 
     override suspend fun getData(): Flow<DataRequestResult> {
-        if (!hasTempValue()) {
-            mealAndDietType = dataStoreRepository.readMealAndDietType.first()
-        }
-        Log.d(CLEAN_TAG, "getData, return getRecipes()")
-        return getRecipes()
-    }
-
-    private suspend fun getRecipes(): Flow<DataRequestResult> {
         dataRequestResult.value =
-            requestAndStoreData(mealAndDietType.selectedMealType, mealAndDietType.selectedDietType)
+            requestAndStoreData(
+                dataStoreRepository.selectedMealType(),
+                dataStoreRepository.selectedDietType()
+            )
         return dataRequestResult
     }
 

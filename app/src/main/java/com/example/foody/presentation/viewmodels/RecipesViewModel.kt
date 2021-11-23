@@ -6,14 +6,15 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.foody.domain.DataRequestResult
-import com.example.foody.domain.MealAndDietType
 import com.example.foody.domain.recipes.RequestRecipesUseCase
-import com.example.foody.presentation.recipes.DomainToUiMapper
+import com.example.foody.presentation.DomainToUiMapper
+import com.example.foody.presentation.recipes.MealAndDietTypeUi
 import com.example.foody.presentation.util.Constants.Companion.CLEAN_TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -35,8 +36,8 @@ class RecipesViewModel @Inject constructor(
         requestRecipesUseCase.saveMealAndDietTypeTemp(mealType, mealTypeId, dietType, dietTypeId)
     }
 
-    fun readMealAndDietType(): Flow<MealAndDietType> {
-        return requestRecipesUseCase.readMealAndDietType()
+    fun readMealAndDietType(): Flow<MealAndDietTypeUi> {
+        return requestRecipesUseCase.readMealAndDietType().map { domainToUiMapper.map(it) }
     }
 
     fun getData() {
