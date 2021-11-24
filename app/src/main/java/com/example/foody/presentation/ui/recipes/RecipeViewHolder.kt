@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foody.databinding.RecipesRowLayoutBinding
-import com.example.foody.presentation.recipes.RecipeUi
+import com.example.foody.presentation.models.RecipeUi
 
 class RecipeViewHolder(internal val binding: RecipesRowLayoutBinding) :
     RecyclerView.ViewHolder(binding.root) {

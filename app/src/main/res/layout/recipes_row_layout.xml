@@ -6,7 +6,7 @@
     <data>
         <variable
             name="result"
-            type="com.example.foody.presentation.recipes.RecipeUi" />
+            type="com.example.foody.presentation.models.RecipeUi" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

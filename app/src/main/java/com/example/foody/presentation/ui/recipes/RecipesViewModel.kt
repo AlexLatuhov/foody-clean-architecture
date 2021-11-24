@@ -10,7 +10,7 @@ import com.example.foody.domain.usecase.LoadRecipesUseCase
 import com.example.foody.domain.usecase.RequestRecipesUseCase
 import com.example.foody.presentation.DomainToUiMapper
 import com.example.foody.presentation.models.MealAndDietTypeUi
-import com.example.foody.presentation.recipes.RecipeUi
+import com.example.foody.presentation.models.RecipeUi
 import com.example.foody.presentation.util.Constants.Companion.CLEAN_TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

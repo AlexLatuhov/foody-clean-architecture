@@ -9,7 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import coil.load
 import com.example.foody.R
-import com.example.foody.presentation.recipes.RecipeUi
+import com.example.foody.presentation.models.RecipeUi
 import org.jsoup.Jsoup
 
 class RecipesRowBinding {

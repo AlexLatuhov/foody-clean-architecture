@@ -1,14 +1,12 @@
-package com.example.foody.presentation.recipes
+package com.example.foody.presentation.models
 
 import android.os.Parcelable
-import com.example.foody.presentation.models.ExtendedIngredientUi
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
 
 @Parcelize
 data class RecipeUi(
-//todo move
     @SerializedName("aggregateLikes")
     val aggregateLikes: Int,
     @SerializedName("cheap")

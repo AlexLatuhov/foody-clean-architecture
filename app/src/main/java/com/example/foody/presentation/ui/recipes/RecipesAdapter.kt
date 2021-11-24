@@ -2,7 +2,7 @@ package com.example.foody.presentation.ui.recipes
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.foody.presentation.adapters.BaseRecipesAdapter
-import com.example.foody.presentation.recipes.RecipeUi
+import com.example.foody.presentation.models.RecipeUi
 import com.example.foody.presentation.util.RecipesDiffUtil
 
 class RecipesAdapter : BaseRecipesAdapter() {
