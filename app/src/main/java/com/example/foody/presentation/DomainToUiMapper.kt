@@ -1,10 +1,10 @@
 package com.example.foody.presentation
 
-import com.example.foody.domain.datamanage.MealAndDietType
-import com.example.foody.domain.models.ExtendedIngredient
-import com.example.foody.domain.models.Result
-import com.example.foody.presentation.recipes.ExtendedIngredientUi
-import com.example.foody.presentation.recipes.MealAndDietTypeUi
+import com.example.foody.data.database.models.ExtendedIngredient
+import com.example.foody.data.database.models.Result
+import com.example.foody.data.database.repositories.MealAndDietType
+import com.example.foody.presentation.models.ExtendedIngredientUi
+import com.example.foody.presentation.models.MealAndDietTypeUi
 import com.example.foody.presentation.recipes.RecipeUi
 import javax.inject.Inject
 

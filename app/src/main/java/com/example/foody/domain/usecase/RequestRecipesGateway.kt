@@ -1,8 +1,8 @@
 package com.example.foody.domain.usecase
 
-import com.example.foody.domain.datamanage.MealAndDietType
-import com.example.foody.domain.datamanage.MealAndDietTypeSaver
-import com.example.foody.domain.models.DataRequestResult
+import com.example.foody.data.database.models.DataRequestResult
+import com.example.foody.data.database.repositories.MealAndDietType
+import com.example.foody.domain.repositories.MealAndDietTypeSaver
 import kotlinx.coroutines.flow.Flow
 
 interface RequestRecipesGateway : MealAndDietTypeSaver {

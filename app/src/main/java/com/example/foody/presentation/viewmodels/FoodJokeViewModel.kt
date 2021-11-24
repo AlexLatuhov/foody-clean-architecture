@@ -3,8 +3,8 @@ package com.example.foody.presentation.viewmodels
 import android.app.Application
 import androidx.lifecycle.*
 import com.example.foody.R
-import com.example.foody.domain.database.entities.FoodJokeEntity
-import com.example.foody.domain.models.FoodJoke
+import com.example.foody.data.database.entities.FoodJokeEntity
+import com.example.foody.data.database.models.FoodJoke
 import com.example.foody.presentation.Repository
 import com.example.foody.presentation.util.NetworkResult
 import com.example.foody.presentation.util.hasInternetConnection

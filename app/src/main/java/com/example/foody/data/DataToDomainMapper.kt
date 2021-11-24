@@ -1,12 +1,12 @@
 package com.example.foody.data
 
-import com.example.foody.data.models.ExtendedIngredientDataItem
-import com.example.foody.data.models.RecipeDataItem
-import com.example.foody.data.models.ResultDataItem
-import com.example.foody.domain.models.ExtendedIngredient
-import com.example.foody.domain.models.FoodRecipe
-import com.example.foody.domain.models.RecipesEntity
-import com.example.foody.domain.models.Result
+import com.example.foody.data.api.models.ExtendedIngredientDataItem
+import com.example.foody.data.api.models.RecipeDataItem
+import com.example.foody.data.api.models.ResultDataItem
+import com.example.foody.data.database.models.ExtendedIngredient
+import com.example.foody.data.database.models.FoodRecipe
+import com.example.foody.data.database.models.RecipesEntity
+import com.example.foody.data.database.models.Result
 import javax.inject.Inject
 
 class DataToDomainMapper @Inject constructor() {

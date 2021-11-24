@@ -1,7 +1,7 @@
 package com.example.foody.domain.usecase
 
-import com.example.foody.domain.datamanage.MealAndDietType
-import com.example.foody.domain.models.DataRequestResult
+import com.example.foody.data.database.models.DataRequestResult
+import com.example.foody.data.database.repositories.MealAndDietType
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

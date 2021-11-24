@@ -8,7 +8,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import com.example.foody.R
-import com.example.foody.domain.models.Result
+import com.example.foody.data.database.models.Result
 import com.example.foody.presentation.util.Constants
 
 class InstructionsFragment : Fragment() {

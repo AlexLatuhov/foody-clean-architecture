@@ -1,12 +1,12 @@
 package com.example.foody.di
 
 import android.content.Context
-import com.example.foody.data.DataLoadRecipesGateway
-import com.example.foody.data.RemoteDataSource
-import com.example.foody.data.RequestRecipesGatewayApi
-import com.example.foody.domain.datamanage.DataStoreRepository
-import com.example.foody.domain.datamanage.LocalDataStoreRepository
-import com.example.foody.domain.datamanage.RecipesLoader
+import com.example.foody.data.api.RemoteDataSource
+import com.example.foody.data.database.repositories.LocalDataStoreRepository
+import com.example.foody.data.gateways.DataLoadRecipesGateway
+import com.example.foody.data.gateways.RequestRecipesGatewayApi
+import com.example.foody.domain.repositories.DataStoreRepository
+import com.example.foody.domain.repositories.RecipesLoader
 import com.example.foody.domain.usecase.LoadRecipesGateway
 import com.example.foody.domain.usecase.RequestRecipesGateway
 import dagger.Module

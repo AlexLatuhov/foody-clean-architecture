@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.foody.R
+import com.example.foody.data.database.models.ExtendedIngredient
 import com.example.foody.databinding.IngredientsRowLayoutBinding
-import com.example.foody.domain.models.ExtendedIngredient
 import com.example.foody.presentation.util.Constants.Companion.IMG_URL
 import com.example.foody.presentation.util.RecipesDiffUtil
 

@@ -3,6 +3,7 @@ package com.example.foody.presentation.adapters
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foody.presentation.recipes.RecipeUi
+import com.example.foody.presentation.ui.recipes.RecipeViewHolder
 
 abstract class BaseRecipesAdapter : RecyclerView.Adapter<RecipeViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {

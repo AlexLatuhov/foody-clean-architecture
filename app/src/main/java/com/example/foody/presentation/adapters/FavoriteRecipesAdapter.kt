@@ -8,7 +8,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.DiffUtil
 import com.example.foody.R
-import com.example.foody.domain.database.entities.FavoritesEntity
+import com.example.foody.data.database.entities.FavoritesEntity
+import com.example.foody.presentation.ui.recipes.RecipeViewHolder
 
 import com.example.foody.presentation.util.RecipesDiffUtil
 import com.example.foody.presentation.viewmodels.MainViewModel

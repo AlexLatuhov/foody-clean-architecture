@@ -4,8 +4,8 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.example.foody.domain.database.entities.FoodJokeEntity
-import com.example.foody.domain.models.FoodJoke
+import com.example.foody.data.database.entities.FoodJokeEntity
+import com.example.foody.data.database.models.FoodJoke
 import com.example.foody.presentation.util.NetworkResult
 import com.google.android.material.card.MaterialCardView
 

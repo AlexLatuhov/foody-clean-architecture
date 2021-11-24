@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.foody.data.database.models.Result
 import com.example.foody.databinding.FragmentIngredientsBinding
-import com.example.foody.domain.models.Result
 import com.example.foody.presentation.adapters.IngredientsAdapter
 import com.example.foody.presentation.util.Constants
 

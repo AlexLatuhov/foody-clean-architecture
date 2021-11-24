@@ -10,8 +10,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import coil.load
 import com.example.foody.R
+import com.example.foody.data.database.models.Result
 import com.example.foody.databinding.FragmentOverviewBinding
-import com.example.foody.domain.models.Result
 import com.example.foody.presentation.bindingadapters.RecipesRowBinding
 import com.example.foody.presentation.util.Constants.Companion.RECIPE
 
