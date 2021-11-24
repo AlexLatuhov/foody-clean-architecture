@@ -1,8 +1,7 @@
-package com.example.foody.domain
+package com.example.foody.domain.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.foody.domain.models.FoodRecipe
 import com.example.foody.presentation.util.Constants.Companion.RECIPES_TABLE
 
 @Entity(tableName = RECIPES_TABLE)

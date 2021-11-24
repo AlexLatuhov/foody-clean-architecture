@@ -5,9 +5,9 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
-import com.example.foody.domain.RecipesEntity
 import com.example.foody.domain.database.entities.FavoritesEntity
 import com.example.foody.domain.database.entities.FoodJokeEntity
+import com.example.foody.domain.models.RecipesEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

@@ -3,15 +3,13 @@ package com.example.foody.domain
 import com.example.foody.domain.database.RecipesDao
 import com.example.foody.domain.database.entities.FavoritesEntity
 import com.example.foody.domain.database.entities.FoodJokeEntity
+import com.example.foody.domain.models.RecipesEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class LocalDataSource @Inject constructor(
     private val recipesDao: RecipesDao
 ) {
-    fun insertRecipes(recipesEntity: RecipesEntity) {
-        recipesDao.insertRecipes(recipesEntity)
-    }
 
     fun readFoodJoke(): Flow<List<FoodJokeEntity>> {
         return recipesDao.readFoodJoke()

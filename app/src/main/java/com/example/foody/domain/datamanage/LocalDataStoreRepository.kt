@@ -1,4 +1,4 @@
-package com.example.foody.domain
+package com.example.foody.domain.datamanage
 
 import android.content.Context
 import androidx.datastore.preferences.core.edit
@@ -64,14 +64,12 @@ class LocalDataStoreRepository @Inject constructor(@ApplicationContext private v
 
     override suspend fun saveMealAndDietType(
     ) {
-//        mealAndDietType.let {
         context.dataStore.edit { preferences ->
             preferences[PreferenceKeys.selectedMealType] = mealAndDietType.selectedMealType
             preferences[PreferenceKeys.selectedMealTypeId] = mealAndDietType.selectedMealTypeId
             preferences[PreferenceKeys.selectedDiedType] = mealAndDietType.selectedDietType
             preferences[PreferenceKeys.selectedDiedTypeId] = mealAndDietType.selectedDietTypeId
         }
-//        }
     }
 
     override val readMealAndDietType: Flow<MealAndDietType> = context.dataStore.data
@@ -96,7 +94,7 @@ class LocalDataStoreRepository @Inject constructor(@ApplicationContext private v
         }
 }
 
-data class MealAndDietType(//todo add mapper
+data class MealAndDietType(
     val selectedMealType: String,
     val selectedMealTypeId: Int,
     val selectedDietType: String,

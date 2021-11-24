@@ -3,10 +3,10 @@ package com.example.foody.data
 import android.content.Context
 import android.util.Log
 import com.example.foody.R
-import com.example.foody.domain.DataRequestResult
-import com.example.foody.domain.DataStoreRepository
-import com.example.foody.domain.MealAndDietType
-import com.example.foody.domain.recipes.RequestRecipesGateway
+import com.example.foody.domain.datamanage.DataStoreRepository
+import com.example.foody.domain.datamanage.MealAndDietType
+import com.example.foody.domain.models.DataRequestResult
+import com.example.foody.domain.usecase.RequestRecipesGateway
 import com.example.foody.presentation.util.Constants
 import com.example.foody.presentation.util.Constants.Companion.CLEAN_TAG
 import com.example.foody.presentation.util.hasInternetConnection

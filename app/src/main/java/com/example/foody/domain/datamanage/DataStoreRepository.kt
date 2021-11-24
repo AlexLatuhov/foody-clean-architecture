@@ -1,6 +1,5 @@
-package com.example.foody.domain
+package com.example.foody.domain.datamanage
 
-import com.example.foody.domain.recipes.MealAndDietTypeSaver
 import kotlinx.coroutines.flow.Flow
 
 interface DataStoreRepository : MealAndDietTypeSaver {

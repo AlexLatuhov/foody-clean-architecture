@@ -1,4 +1,4 @@
-package com.example.foody.domain.recipes
+package com.example.foody.domain.datamanage
 
 interface MealAndDietTypeSaver {
     fun saveMealAndDietTypeTemp(

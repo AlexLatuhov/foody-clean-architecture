@@ -2,8 +2,8 @@ package com.example.foody.data
 
 import android.util.Log
 import com.example.foody.data.models.RecipeDataItem
-import com.example.foody.domain.DataRequestResult
-import com.example.foody.domain.LocalDataSource
+import com.example.foody.domain.datamanage.RecipesSaver
+import com.example.foody.domain.models.DataRequestResult
 import com.example.foody.domain.models.FoodJoke
 import com.example.foody.presentation.util.Constants
 import retrofit2.Response
@@ -12,7 +12,7 @@ import javax.inject.Inject
 class RemoteDataSource @Inject constructor(
     private val foodRecipesApi: FoodRecipesApi,
     private val dataToDomainMapper: DataToDomainMapper,
-    private val localDataSource: LocalDataSource
+    private val localDataSource: RecipesSaver
 ) {
     suspend fun getRecipes(queries: Map<String, String>): DataRequestResult {
         val dataResponse = foodRecipesApi.getRecipes(queries)

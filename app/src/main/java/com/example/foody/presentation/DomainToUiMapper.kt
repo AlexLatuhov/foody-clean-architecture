@@ -1,6 +1,6 @@
 package com.example.foody.presentation
 
-import com.example.foody.domain.MealAndDietType
+import com.example.foody.domain.datamanage.MealAndDietType
 import com.example.foody.domain.models.ExtendedIngredient
 import com.example.foody.domain.models.Result
 import com.example.foody.presentation.recipes.ExtendedIngredientUi

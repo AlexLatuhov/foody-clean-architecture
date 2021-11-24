@@ -7,18 +7,17 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foody.R
 import com.example.foody.databinding.FragmentRecipesBinding
-import com.example.foody.domain.DataRequestResult
+import com.example.foody.domain.models.DataRequestResult
 import com.example.foody.presentation.adapters.RecipesAdapter
 import com.example.foody.presentation.util.Constants.Companion.CLEAN_TAG
 import com.example.foody.presentation.viewmodels.MainViewModel
 import com.example.foody.presentation.viewmodels.RecipesViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RecipesFragment : Fragment(), SearchView.OnQueryTextListener, SearchView.OnCloseListener {
@@ -93,30 +92,15 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener, SearchView.O
         searchQuery: String? = null
     ) {
         showShimmerEffect()
-        lifecycleScope.launch {
-            mainViewModel.readRecipes.observe(
-                viewLifecycleOwner,
-                { database ->//todo move this logic to use-case
-                    hideShimmerEffect()
-                    val resultsTemp = database.getOrNull(0)?.foodRecipe?.results
-                    val results =
-                        if (searchQuery != null)
-                            resultsTemp?.filter { result ->
-                                result.title.contains(
-                                    searchQuery,
-                                    true
-                                )
-                            }
-                        else resultsTemp
-                    if (results.isNullOrEmpty()) {
-                        setError(errorMessage)
-                    }
-                    val resultsMapped =
-                        recipesViewModel.domainToUiMapper.map(results ?: emptyList())
-                    validateErrorViewsVisibility(results.isNullOrEmpty())
-                    mAdapter.setDataItems(resultsMapped)
-                })
-        }
+        recipesViewModel.loadDataFromCache(searchQuery)
+            .asLiveData().observe(viewLifecycleOwner, { results ->
+                if (results.isNullOrEmpty()) {
+                    setError(errorMessage)
+                }
+                validateErrorViewsVisibility(results.isNullOrEmpty())
+                mAdapter.setDataItems(results)
+                hideShimmerEffect()
+            })
     }
 
     private fun setError(errorMessage: String) {

@@ -1,4 +1,4 @@
-package com.example.foody.domain
+package com.example.foody.domain.models
 
 sealed class DataRequestResult {
     object Success : DataRequestResult()

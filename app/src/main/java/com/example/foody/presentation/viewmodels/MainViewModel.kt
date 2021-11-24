@@ -5,7 +5,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.foody.domain.RecipesEntity
 import com.example.foody.domain.database.entities.FavoritesEntity
 import com.example.foody.presentation.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,7 +20,6 @@ class MainViewModel @Inject constructor(
 
     val readFavoriteRecipes: LiveData<List<FavoritesEntity>> =
         repository.local.readFavoriteRecipes().asLiveData()
-    val readRecipes: LiveData<List<RecipesEntity>> = repository.local.readRecipes().asLiveData()
 
     fun insertFavoriteRecipe(favoritesEntity: FavoritesEntity) =//todo
         viewModelScope.launch(Dispatchers.IO) {

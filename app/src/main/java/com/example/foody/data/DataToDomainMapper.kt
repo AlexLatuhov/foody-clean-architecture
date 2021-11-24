@@ -3,9 +3,9 @@ package com.example.foody.data
 import com.example.foody.data.models.ExtendedIngredientDataItem
 import com.example.foody.data.models.RecipeDataItem
 import com.example.foody.data.models.ResultDataItem
-import com.example.foody.domain.RecipesEntity
 import com.example.foody.domain.models.ExtendedIngredient
 import com.example.foody.domain.models.FoodRecipe
+import com.example.foody.domain.models.RecipesEntity
 import com.example.foody.domain.models.Result
 import javax.inject.Inject
 
