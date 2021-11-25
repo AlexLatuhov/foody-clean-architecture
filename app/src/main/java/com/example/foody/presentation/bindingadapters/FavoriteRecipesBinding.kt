@@ -5,8 +5,8 @@ import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.foody.data.database.entities.FavoritesEntity
 import com.example.foody.presentation.adapters.FavoriteRecipesAdapter
+import com.example.foody.presentation.models.FavoritesEntityUi
 
 class FavoriteRecipesBinding {
     companion object {
@@ -15,7 +15,7 @@ class FavoriteRecipesBinding {
         @JvmStatic
         fun setDataAndViewVisibility(
             view: View,
-            favoritesEntity: List<FavoritesEntity>?,
+            favoritesEntity: List<FavoritesEntityUi>?,
             mAdapter: FavoriteRecipesAdapter?
         ) {
             val noData = favoritesEntity.isNullOrEmpty()

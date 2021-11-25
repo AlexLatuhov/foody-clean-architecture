@@ -1,8 +1,7 @@
-package com.example.foody.data.database.entities
+package com.example.foody.data.database.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.foody.data.database.models.Result
 import com.example.foody.presentation.util.Constants.Companion.FAVORITE_RECIPES_TABLE
 
 @Entity(tableName = FAVORITE_RECIPES_TABLE)

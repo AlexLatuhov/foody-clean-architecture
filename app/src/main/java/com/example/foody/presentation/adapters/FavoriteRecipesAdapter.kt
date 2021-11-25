@@ -6,34 +6,31 @@ import android.view.MenuItem
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import com.example.foody.R
-import com.example.foody.data.database.entities.FavoritesEntity
+import com.example.foody.presentation.models.FavoritesEntityUi
+import com.example.foody.presentation.ui.FavoriteRecipesFragmentDirections
 import com.example.foody.presentation.ui.recipes.RecipeViewHolder
-
 import com.example.foody.presentation.util.RecipesDiffUtil
 import com.example.foody.presentation.viewmodels.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 
-abstract class FavoriteRecipesAdapter(//todo complete
+class FavoriteRecipesAdapter(//todo complete
     private val requireActivity: FragmentActivity,
     private val mainViewModel: MainViewModel
 ) : BaseRecipesAdapter(),
     ActionMode.Callback {
     private var multiSelection = false
-    private var selectedRecipes = arrayListOf<FavoritesEntity>()
+    private var selectedRecipes = arrayListOf<FavoritesEntityUi>()
     private var myViewHolder = arrayListOf<RecipeViewHolder>()
-    private var favoritesEntity = emptyList<FavoritesEntity>()
+    private var favoritesEntity = emptyList<FavoritesEntityUi>()
     private lateinit var mActionMode: ActionMode
     private lateinit var rootView: View
 
-//    override fun getResult(position: Int): RecipeUi {
-//        return favoritesEntity[position].result
-//    }
+    override fun getResult(position: Int) = favoritesEntity[position].result
 
-    override fun getItemCount(): Int {
-        return favoritesEntity.size
-    }
+    override fun getItemCount() = favoritesEntity.size
 
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
         super.onBindViewHolder(holder, position)
@@ -42,12 +39,12 @@ abstract class FavoriteRecipesAdapter(//todo complete
         holder.binding.recipesRawLayout.setOnClickListener {
             if (multiSelection) {
                 applySelection(holder, item)
-            } else {//todo complete
-//                val action =
-//                    FavoriteRecipesFragmentDirections.actionFavoriteRecipesFragmentToDetailsActivity(
-//                        getResult(position)
-//                    )
-//                holder.binding.root.findNavController().navigate(action)
+            } else {
+                val action =
+                    FavoriteRecipesFragmentDirections.actionFavoriteRecipesFragmentToDetailsActivity(
+                        getResult(position)
+                    )
+                holder.binding.root.findNavController().navigate(action)
             }
         }
         validateSelectionUi(holder, item)
@@ -132,14 +129,14 @@ abstract class FavoriteRecipesAdapter(//todo complete
             ContextCompat.getColor(requireActivity, strokeColor)
     }
 
-    fun setFavoritesData(favoritesEntityValues: List<FavoritesEntity>) {
+    fun setFavoritesData(favoritesEntityValues: List<FavoritesEntityUi>) {
         val recipesDiffUtil = RecipesDiffUtil(favoritesEntity, favoritesEntityValues)
         val diffUtilResult = DiffUtil.calculateDiff(recipesDiffUtil)
         favoritesEntity = favoritesEntityValues
         diffUtilResult.dispatchUpdatesTo(this)
     }
 
-    private fun validateSelectionUi(holder: RecipeViewHolder, currentRecipe: FavoritesEntity) {
+    private fun validateSelectionUi(holder: RecipeViewHolder, currentRecipe: FavoritesEntityUi) {
         if (!selectedRecipes.contains(currentRecipe)) {
             changeRecipeStyle(holder, R.color.cardBackground, R.color.lightMediumGray)
         } else {
@@ -147,7 +144,7 @@ abstract class FavoriteRecipesAdapter(//todo complete
         }
     }
 
-    private fun applySelection(holder: RecipeViewHolder, currentRecipe: FavoritesEntity) {
+    private fun applySelection(holder: RecipeViewHolder, currentRecipe: FavoritesEntityUi) {
         if (selectedRecipes.contains(currentRecipe)) {
             selectedRecipes.remove(currentRecipe)
             applyActionModeTitle()

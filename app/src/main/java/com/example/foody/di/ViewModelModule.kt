@@ -8,6 +8,7 @@ import com.example.foody.data.gateways.RequestRecipesGatewayApi
 import com.example.foody.domain.repositories.DataStoreRepository
 import com.example.foody.domain.repositories.RecipesLoader
 import com.example.foody.domain.usecase.LoadRecipesGateway
+import com.example.foody.domain.usecase.ReadFavoriteRecipesGateWay
 import com.example.foody.domain.usecase.RequestRecipesGateway
 import dagger.Module
 import dagger.Provides
@@ -21,6 +22,13 @@ object ViewModelModule {
 
     @Provides
     fun provideLoadRecipesGateway(recipesLoader: RecipesLoader): LoadRecipesGateway {
+        return DataLoadRecipesGateway(recipesLoader)
+    }
+
+    @Provides
+    fun provideReadFavoriteRecipesGateWay(
+        recipesLoader: RecipesLoader
+    ): ReadFavoriteRecipesGateWay {
         return DataLoadRecipesGateway(recipesLoader)
     }
 

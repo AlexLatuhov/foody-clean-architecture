@@ -3,13 +3,14 @@ package com.example.foody.data.gateways
 import com.example.foody.data.database.models.Result
 import com.example.foody.domain.repositories.RecipesLoader
 import com.example.foody.domain.usecase.LoadRecipesGateway
+import com.example.foody.domain.usecase.ReadFavoriteRecipesGateWay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class DataLoadRecipesGateway @Inject constructor(
     private val recipesLoader: RecipesLoader
-) : LoadRecipesGateway {
+) : LoadRecipesGateway, ReadFavoriteRecipesGateWay {
 
     override fun loadDataFromCache(searchQuery: String?): Flow<List<Result>?> {
         return recipesLoader.readRecipes().map { database ->
@@ -24,4 +25,6 @@ class DataLoadRecipesGateway @Inject constructor(
             else resultsTemp
         }
     }
+
+    override fun readFavoriteRecipes() = recipesLoader.readFavoriteRecipes()
 }

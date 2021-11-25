@@ -9,12 +9,9 @@ import com.example.foody.data.database.models.DataRequestResult
 import com.example.foody.domain.usecase.LoadRecipesUseCase
 import com.example.foody.domain.usecase.RequestRecipesUseCase
 import com.example.foody.presentation.DomainToUiMapper
-import com.example.foody.presentation.models.MealAndDietTypeUi
-import com.example.foody.presentation.models.RecipeUi
 import com.example.foody.presentation.util.Constants.Companion.CLEAN_TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -23,7 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class RecipesViewModel @Inject constructor(
     application: Application,
-    val domainToUiMapper: DomainToUiMapper,
+    private val domainToUiMapper: DomainToUiMapper,
     private val requestRecipesUseCase: RequestRecipesUseCase,
     private val loadRecipesUseCase: LoadRecipesUseCase
 ) : AndroidViewModel(application) {
@@ -35,25 +32,19 @@ class RecipesViewModel @Inject constructor(
         mealTypeId: Int,
         dietType: String,
         dietTypeId: Int
-    ) {
-        requestRecipesUseCase.saveMealAndDietTypeTemp(mealType, mealTypeId, dietType, dietTypeId)
-    }
+    ) = requestRecipesUseCase.saveMealAndDietTypeTemp(mealType, mealTypeId, dietType, dietTypeId)
 
-    fun readMealAndDietType(): Flow<MealAndDietTypeUi> {
-        return requestRecipesUseCase.readMealAndDietType().map { domainToUiMapper.map(it) }
-    }
+    fun readMealAndDietType() =
+        requestRecipesUseCase.readMealAndDietType().map { domainToUiMapper.map(it) }
 
-    fun loadDataFromCache(searchQuery: String?): Flow<List<RecipeUi>> {
-        return loadRecipesUseCase.loadDataFromCache(searchQuery)
-            .map { domainToUiMapper.map(it ?: emptyList()) }
-    }
+    fun loadDataFromCache(searchQuery: String?) = loadRecipesUseCase.loadDataFromCache(searchQuery)
+        .map { domainToUiMapper.map(it ?: emptyList()) }
 
-    fun getData() {
+    fun getData() =
         viewModelScope.launch(Dispatchers.IO) {
             requestRecipesUseCase.getData().collect { dataRequestResult ->
                 Log.d(CLEAN_TAG, "onDataRequestResult in collect $dataRequestResult")
                 recipesRequestResult.postValue(dataRequestResult)
             }
         }
-    }
 }

@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foody.R
 import com.example.foody.databinding.FragmentFavoriteRecipesBinding
+import com.example.foody.presentation.adapters.FavoriteRecipesAdapter
 import com.example.foody.presentation.viewmodels.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,12 +17,10 @@ class FavoriteRecipesFragment : Fragment() {
 
     private val mainViewModel: MainViewModel by viewModels()
 
-    //    private val mAdapter: FavoriteRecipesAdapter by lazy {
-//        FavoriteRecipesAdapter(
-//            requireActivity(),
-//            mainViewModel
-//        )
-//    }
+    private val mAdapter: FavoriteRecipesAdapter by lazy {
+        FavoriteRecipesAdapter(requireActivity(), mainViewModel)
+    }
+
     private var _binding: FragmentFavoriteRecipesBinding? = null
     private val binding get() = _binding!!
 
@@ -33,8 +32,8 @@ class FavoriteRecipesFragment : Fragment() {
         _binding = FragmentFavoriteRecipesBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.mainViewModel = mainViewModel
-//        binding.mAdapter = mAdapter
-//        binding.favoriteRecipesRecyclerView.adapter = mAdapter
+        binding.mAdapter = mAdapter
+        binding.favoriteRecipesRecyclerView.adapter = mAdapter
         binding.favoriteRecipesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         setHasOptionsMenu(true)
         return binding.root
@@ -61,6 +60,6 @@ class FavoriteRecipesFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-//        mAdapter.clearMode()
+        mAdapter.clearMode()
     }
 }
