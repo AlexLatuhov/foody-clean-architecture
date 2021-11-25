@@ -2,7 +2,7 @@ package com.example.foody.data.database
 
 import androidx.room.TypeConverter
 import com.example.foody.data.database.models.FoodRecipe
-import com.example.foody.data.database.models.Result
+import com.example.foody.data.database.models.Recipe
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -22,13 +22,13 @@ class RecipesTypeConverter {
     }
 
     @TypeConverter
-    fun resultToString(result: Result): String {
-        return gson.toJson(result)
+    fun resultToString(recipe: Recipe): String {
+        return gson.toJson(recipe)
     }
 
     @TypeConverter
-    fun stringToResult(data: String): Result {
-        val listType = object : TypeToken<Result>() {}.type
+    fun stringToResult(data: String): Recipe {
+        val listType = object : TypeToken<Recipe>() {}.type
         return gson.fromJson(data, listType)
     }
 }

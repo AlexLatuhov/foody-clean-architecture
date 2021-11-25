@@ -1,6 +1,6 @@
 package com.example.foody.data.gateways
 
-import com.example.foody.data.database.models.Result
+import com.example.foody.data.database.models.Recipe
 import com.example.foody.domain.repositories.RecipesLoader
 import com.example.foody.domain.usecase.LoadRecipesGateway
 import com.example.foody.domain.usecase.ReadFavoriteRecipesGateWay
@@ -12,9 +12,9 @@ class DataLoadRecipesGateway @Inject constructor(
     private val recipesLoader: RecipesLoader
 ) : LoadRecipesGateway, ReadFavoriteRecipesGateWay {
 
-    override fun loadDataFromCache(searchQuery: String?): Flow<List<Result>?> {
+    override fun loadDataFromCache(searchQuery: String?): Flow<List<Recipe>?> {
         return recipesLoader.readRecipes().map { database ->
-            val resultsTemp = database.getOrNull(0)?.foodRecipe?.results
+            val resultsTemp = database.getOrNull(0)?.foodRecipe?.recipes
             if (searchQuery != null)
                 resultsTemp?.filter { result ->
                     result.title.contains(

@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.foody.data.database.models.DataRequestResult
+import com.example.foody.domain.DataRequestResult
 import com.example.foody.domain.usecase.LoadRecipesUseCase
 import com.example.foody.domain.usecase.RequestRecipesUseCase
 import com.example.foody.presentation.DomainToUiMapper

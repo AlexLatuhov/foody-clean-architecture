@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.foody.data.database.models.Result
+import com.example.foody.data.database.models.Recipe
 import com.example.foody.databinding.FragmentIngredientsBinding
 import com.example.foody.presentation.adapters.IngredientsAdapter
 import com.example.foody.presentation.util.Constants
@@ -21,7 +21,7 @@ class IngredientsFragment : Fragment() {
     ): View {
         val binding = FragmentIngredientsBinding.inflate(inflater, container, false)
         val args = arguments
-        val myBundle: Result? = args?.getParcelable(Constants.RECIPE)
+        val myBundle: Recipe? = args?.getParcelable(Constants.RECIPE)
         setupRecyclerView(binding)
         myBundle?.extendedIngredients?.let { mAdapter.setData(it) }
         return binding.root

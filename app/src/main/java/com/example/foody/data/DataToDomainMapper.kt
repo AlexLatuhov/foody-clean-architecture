@@ -5,8 +5,8 @@ import com.example.foody.data.api.models.RecipeDataItem
 import com.example.foody.data.api.models.ResultDataItem
 import com.example.foody.data.database.models.ExtendedIngredient
 import com.example.foody.data.database.models.FoodRecipe
+import com.example.foody.data.database.models.Recipe
 import com.example.foody.data.database.models.RecipesEntity
-import com.example.foody.data.database.models.Result
 import javax.inject.Inject
 
 class DataToDomainMapper @Inject constructor() {
@@ -15,8 +15,8 @@ class DataToDomainMapper @Inject constructor() {
         return RecipesEntity(FoodRecipe(listOfResults))
     }
 
-    private fun ResultDataItem.convertToDomainItem(): Result {
-        return Result(
+    private fun ResultDataItem.convertToDomainItem(): Recipe {
+        return Recipe(
             aggregateLikes,
             cheap,
             dairyFree,

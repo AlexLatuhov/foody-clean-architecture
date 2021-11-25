@@ -4,8 +4,8 @@ import android.util.Log
 import com.example.foody.data.DataToDomainMapper
 import com.example.foody.data.FoodRecipesApi
 import com.example.foody.data.api.models.RecipeDataItem
-import com.example.foody.data.database.models.DataRequestResult
 import com.example.foody.data.database.models.FoodJoke
+import com.example.foody.domain.DataRequestResult
 import com.example.foody.domain.repositories.RecipesSaver
 import com.example.foody.presentation.util.Constants
 import retrofit2.Response
@@ -23,7 +23,7 @@ class RemoteDataSource @Inject constructor(
         if (result is DataRequestResult.Success) {
             if (foodRecipe != null) {
                 val domainData = dataToDomainMapper.map(foodRecipe)
-                Log.d(Constants.TEST_TAG, "insertRecipes ${domainData.foodRecipe.results.size}")
+                Log.d(Constants.TEST_TAG, "insertRecipes ${domainData.foodRecipe.recipes.size}")
                 localDataSource.insertRecipes(domainData)
             } else {
                 return DataRequestResult.Error("No data")

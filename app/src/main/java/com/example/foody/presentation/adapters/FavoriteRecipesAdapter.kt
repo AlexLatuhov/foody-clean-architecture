@@ -13,12 +13,12 @@ import com.example.foody.presentation.models.FavoritesEntityUi
 import com.example.foody.presentation.ui.FavoriteRecipesFragmentDirections
 import com.example.foody.presentation.ui.recipes.RecipeViewHolder
 import com.example.foody.presentation.util.RecipesDiffUtil
-import com.example.foody.presentation.viewmodels.MainViewModel
+import com.example.foody.presentation.viewmodels.FavoritesViewModel
 import com.google.android.material.snackbar.Snackbar
 
-class FavoriteRecipesAdapter(//todo complete
+class FavoriteRecipesAdapter(
     private val requireActivity: FragmentActivity,
-    private val mainViewModel: MainViewModel
+    private val favoritesViewModel: FavoritesViewModel
 ) : BaseRecipesAdapter(),
     ActionMode.Callback {
     private var multiSelection = false
@@ -73,7 +73,7 @@ class FavoriteRecipesAdapter(//todo complete
     override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
         if (item?.itemId == R.id.delete_favorite_recipe_menu) {
             selectedRecipes.forEach {
-                mainViewModel.deleteFavoriteRecipe(it)
+                favoritesViewModel.deleteFavoriteRecipe(it)
             }
             showSnackBar(requireActivity.getString(R.string.recipes_removed, selectedRecipes.size))
             multiSelection = false

@@ -8,17 +8,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foody.R
 import com.example.foody.databinding.FragmentFavoriteRecipesBinding
 import com.example.foody.presentation.adapters.FavoriteRecipesAdapter
-import com.example.foody.presentation.viewmodels.MainViewModel
+import com.example.foody.presentation.viewmodels.FavoritesViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FavoriteRecipesFragment : Fragment() {
 
-    private val mainViewModel: MainViewModel by viewModels()
+    private val favoritesViewModel: FavoritesViewModel by viewModels()
 
     private val mAdapter: FavoriteRecipesAdapter by lazy {
-        FavoriteRecipesAdapter(requireActivity(), mainViewModel)
+        FavoriteRecipesAdapter(requireActivity(), favoritesViewModel)
     }
 
     private var _binding: FragmentFavoriteRecipesBinding? = null
@@ -31,7 +31,7 @@ class FavoriteRecipesFragment : Fragment() {
     ): View {
         _binding = FragmentFavoriteRecipesBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
-        binding.mainViewModel = mainViewModel
+        binding.mainViewModel = favoritesViewModel
         binding.mAdapter = mAdapter
         binding.favoriteRecipesRecyclerView.adapter = mAdapter
         binding.favoriteRecipesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -47,7 +47,7 @@ class FavoriteRecipesFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.delete_all) {
-            mainViewModel.deleteAllFavoriteRecipes()
+            favoritesViewModel.deleteAllFavoriteRecipes()
             showSnackBar(getString(R.string.deleted))
         }
         return super.onOptionsItemSelected(item)

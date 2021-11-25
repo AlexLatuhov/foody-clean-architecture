@@ -17,7 +17,7 @@ import com.example.foody.presentation.ui.fragments.instructions.InstructionsFrag
 import com.example.foody.presentation.ui.fragments.overview.OverviewFragment
 import com.example.foody.presentation.util.Constants.Companion.DEFAULT_ID
 import com.example.foody.presentation.util.Constants.Companion.RECIPE
-import com.example.foody.presentation.viewmodels.MainViewModel
+import com.example.foody.presentation.viewmodels.FavoritesViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,7 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class DetailsActivity : AppCompatActivity() {//todo complete favorites flow
 
     private val args by navArgs<DetailsActivityArgs>()
-    private val mainViewModel: MainViewModel by viewModels()
+    private val favoritesViewModel: FavoritesViewModel by viewModels()
     private lateinit var binding: ActivityDetailsBinding
     private var savedRecipeId = DEFAULT_ID
 
@@ -68,7 +68,7 @@ class DetailsActivity : AppCompatActivity() {//todo complete favorites flow
     }
 
     private fun checkSavedRecipes(menuItem: MenuItem) {
-        mainViewModel.readFavoriteRecipes.observe(this, { favoritesEntity ->
+        favoritesViewModel.readFavoriteRecipes.observe(this, { favoritesEntity ->
             try {
                 changeMenuItemColor(menuItem, R.color.white)
                 savedRecipeId = DEFAULT_ID

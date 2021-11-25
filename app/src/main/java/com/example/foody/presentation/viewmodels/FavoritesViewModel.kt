@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(//todo rename to favoritesViewModel
+class FavoritesViewModel @Inject constructor(//todo rename to favoritesViewModel
     application: Application,
     readFavoriteRecipesUseCase: ReadFavoriteRecipesUseCase,
     private val domainToUiMapper: DomainToUiMapper

@@ -11,17 +11,17 @@ import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foody.R
-import com.example.foody.data.database.models.DataRequestResult
 import com.example.foody.databinding.FragmentRecipesBinding
+import com.example.foody.domain.DataRequestResult
 import com.example.foody.presentation.util.Constants.Companion.CLEAN_TAG
-import com.example.foody.presentation.viewmodels.MainViewModel
+import com.example.foody.presentation.viewmodels.FavoritesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RecipesFragment : Fragment(), SearchView.OnQueryTextListener, SearchView.OnCloseListener {
     private var _binding: FragmentRecipesBinding? = null
     private val binding get() = _binding!!
-    private lateinit var mainViewModel: MainViewModel
+    private lateinit var favoritesViewModel: FavoritesViewModel
     private lateinit var recipesViewModel: RecipesViewModel
     private val mAdapter by lazy { RecipesAdapter() }
 
@@ -32,7 +32,7 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener, SearchView.O
     ): View {
         _binding = FragmentRecipesBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
-        binding.mainViewModel = mainViewModel
+        binding.mainViewModel = favoritesViewModel
         setHasOptionsMenu(true)
         setupRecyclerView()
 
@@ -107,7 +107,8 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener, SearchView.O
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+        favoritesViewModel =
+            ViewModelProvider(requireActivity()).get(FavoritesViewModel::class.java)
         recipesViewModel = ViewModelProvider(requireActivity()).get(RecipesViewModel::class.java)
     }
 

@@ -4,8 +4,8 @@ import android.content.Context
 import android.util.Log
 import com.example.foody.R
 import com.example.foody.data.api.RemoteDataSource
-import com.example.foody.data.database.models.DataRequestResult
 import com.example.foody.data.database.repositories.MealAndDietType
+import com.example.foody.domain.DataRequestResult
 import com.example.foody.domain.repositories.DataStoreRepository
 import com.example.foody.domain.usecase.RequestRecipesGateway
 import com.example.foody.presentation.util.Constants

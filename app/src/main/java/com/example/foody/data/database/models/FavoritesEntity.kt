@@ -8,5 +8,5 @@ import com.example.foody.presentation.util.Constants.Companion.FAVORITE_RECIPES_
 class FavoritesEntity(
     @PrimaryKey(autoGenerate = true)
     var id: Int,
-    var result: Result
+    var recipe: Recipe
 )
