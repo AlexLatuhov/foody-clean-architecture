@@ -2,7 +2,7 @@ package com.example.foody.presentation.adapters
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.foody.presentation.models.RecipeUi
+import com.example.foody.domain.models.RecipeDomain
 import com.example.foody.presentation.ui.recipes.RecipeViewHolder
 
 abstract class BaseRecipesAdapter : RecyclerView.Adapter<RecipeViewHolder>() {
@@ -14,5 +14,5 @@ abstract class BaseRecipesAdapter : RecyclerView.Adapter<RecipeViewHolder>() {
         holder.bind(getResult(position))
     }
 
-    abstract fun getResult(position: Int): RecipeUi
+    abstract fun getResult(position: Int): RecipeDomain
 }

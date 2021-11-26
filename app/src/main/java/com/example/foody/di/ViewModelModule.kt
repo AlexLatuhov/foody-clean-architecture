@@ -5,6 +5,7 @@ import com.example.foody.data.api.RemoteDataSource
 import com.example.foody.data.database.repositories.LocalDataStoreRepository
 import com.example.foody.data.gateways.DataLoadRecipesGateway
 import com.example.foody.data.gateways.RequestRecipesGatewayApi
+import com.example.foody.domain.LocalDbToDomainMapper
 import com.example.foody.domain.repositories.DataStoreRepository
 import com.example.foody.domain.repositories.RecipesLoader
 import com.example.foody.domain.usecase.LoadRecipesGateway
@@ -21,24 +22,34 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 object ViewModelModule {
 
     @Provides
-    fun provideLoadRecipesGateway(recipesLoader: RecipesLoader): LoadRecipesGateway {
-        return DataLoadRecipesGateway(recipesLoader)
+    fun provideLoadRecipesGateway(
+        recipesLoader: RecipesLoader,
+        localDbToDomainMapper: LocalDbToDomainMapper
+    ): LoadRecipesGateway {
+        return DataLoadRecipesGateway(localDbToDomainMapper, recipesLoader)
     }
 
     @Provides
     fun provideReadFavoriteRecipesGateWay(
-        recipesLoader: RecipesLoader
+        recipesLoader: RecipesLoader,
+        localDbToDomainMapper: LocalDbToDomainMapper
     ): ReadFavoriteRecipesGateWay {
-        return DataLoadRecipesGateway(recipesLoader)
+        return DataLoadRecipesGateway(localDbToDomainMapper, recipesLoader)
     }
 
     @Provides
     fun provideRequestRecipesGateway(
         @ApplicationContext context: Context,
         localDataStoreRepository: LocalDataStoreRepository,
-        remoteDataSource: RemoteDataSource
+        remoteDataSource: RemoteDataSource,
+        localDbToDomainMapper: LocalDbToDomainMapper
     ): RequestRecipesGateway {
-        return RequestRecipesGatewayApi(context, localDataStoreRepository, remoteDataSource)
+        return RequestRecipesGatewayApi(
+            context,
+            localDataStoreRepository,
+            remoteDataSource,
+            localDbToDomainMapper
+        )
     }
 
     @Provides

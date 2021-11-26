@@ -1,21 +1,21 @@
 package com.example.foody.data.gateways
 
-import com.example.foody.data.database.models.Recipe
+import com.example.foody.domain.LocalDbToDomainMapper
 import com.example.foody.domain.repositories.RecipesLoader
 import com.example.foody.domain.usecase.LoadRecipesGateway
 import com.example.foody.domain.usecase.ReadFavoriteRecipesGateWay
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class DataLoadRecipesGateway @Inject constructor(
+    private val localDbToDomainMapper: LocalDbToDomainMapper,
     private val recipesLoader: RecipesLoader
 ) : LoadRecipesGateway, ReadFavoriteRecipesGateWay {
 
-    override fun loadDataFromCache(searchQuery: String?): Flow<List<Recipe>?> {
-        return recipesLoader.readRecipes().map { database ->
+    override fun loadDataFromCache(searchQuery: String?) =
+        recipesLoader.readRecipes().map { database ->
             val resultsTemp = database.getOrNull(0)?.foodRecipe?.recipes
-            if (searchQuery != null)
+            val returnResult = if (searchQuery != null)
                 resultsTemp?.filter { result ->
                     result.title.contains(
                         searchQuery,
@@ -23,8 +23,10 @@ class DataLoadRecipesGateway @Inject constructor(
                     )
                 }
             else resultsTemp
+            localDbToDomainMapper.map(returnResult ?: emptyList())
+
         }
-    }
 
     override fun readFavoriteRecipes() = recipesLoader.readFavoriteRecipes()
+        .map { items -> items.map { localDbToDomainMapper.map(it) } }
 }

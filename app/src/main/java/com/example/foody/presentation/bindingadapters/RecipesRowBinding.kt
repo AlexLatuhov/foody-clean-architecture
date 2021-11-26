@@ -9,7 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import coil.load
 import com.example.foody.R
-import com.example.foody.presentation.models.RecipeUi
+import com.example.foody.domain.models.RecipeDomain
 import org.jsoup.Jsoup
 
 class RecipesRowBinding {
@@ -17,7 +17,7 @@ class RecipesRowBinding {
 
         @BindingAdapter("onRecipeClickListener")
         @JvmStatic
-        fun onRecipeClickListener(recipeRowLayout: ConstraintLayout, result: RecipeUi) {
+        fun onRecipeClickListener(recipeRowLayout: ConstraintLayout, result: RecipeDomain) {
             Log.d("onRecipeClickListener", "called")
             recipeRowLayout.setOnClickListener {
                 try {//todo complete

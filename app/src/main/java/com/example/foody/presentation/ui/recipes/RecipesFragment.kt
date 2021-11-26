@@ -96,7 +96,7 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener, SearchView.O
                     setError(errorMessage)
                 }
                 validateErrorViewsVisibility(results.isNullOrEmpty())
-                mAdapter.setDataItems(results)
+                mAdapter.setDataItems(results ?: emptyList())
                 hideShimmerEffect()
             })
     }

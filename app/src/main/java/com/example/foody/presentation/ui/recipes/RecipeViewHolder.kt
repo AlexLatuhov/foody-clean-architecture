@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foody.databinding.RecipesRowLayoutBinding
-import com.example.foody.presentation.models.RecipeUi
+import com.example.foody.domain.models.RecipeDomain
 
 class RecipeViewHolder(internal val binding: RecipesRowLayoutBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(result: RecipeUi) {
+    fun bind(result: RecipeDomain) {
         binding.result = result
         binding.executePendingBindings()
     }

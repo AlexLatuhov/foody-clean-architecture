@@ -1,19 +1,19 @@
 package com.example.foody.data.api
 
 import android.util.Log
-import com.example.foody.data.DataToDomainMapper
+import com.example.foody.data.Constants
+import com.example.foody.data.DataToLocalDbMapper
 import com.example.foody.data.FoodRecipesApi
 import com.example.foody.data.api.models.RecipeDataItem
 import com.example.foody.data.database.models.FoodJoke
 import com.example.foody.domain.DataRequestResult
 import com.example.foody.domain.repositories.RecipesSaver
-import com.example.foody.presentation.util.Constants
 import retrofit2.Response
 import javax.inject.Inject
 
 class RemoteDataSource @Inject constructor(
     private val foodRecipesApi: FoodRecipesApi,
-    private val dataToDomainMapper: DataToDomainMapper,
+    private val dataToDomainMapper: DataToLocalDbMapper,
     private val localDataSource: RecipesSaver
 ) {
     suspend fun getRecipes(queries: Map<String, String>): DataRequestResult {

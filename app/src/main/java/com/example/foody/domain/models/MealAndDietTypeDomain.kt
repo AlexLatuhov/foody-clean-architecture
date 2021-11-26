@@ -1,6 +1,6 @@
-package com.example.foody.presentation.models
+package com.example.foody.domain.models
 
-data class MealAndDietTypeUi(
+data class MealAndDietTypeDomain(
     val selectedMealType: String,
     val selectedMealTypeId: Int,
     val selectedDietType: String,

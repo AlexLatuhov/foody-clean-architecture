@@ -2,7 +2,7 @@ package com.example.foody.data.database.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.foody.presentation.util.Constants.Companion.RECIPES_TABLE
+import com.example.foody.data.Constants.Companion.RECIPES_TABLE
 
 @Entity(tableName = RECIPES_TABLE)
 class RecipesEntity(var foodRecipe: FoodRecipe) {

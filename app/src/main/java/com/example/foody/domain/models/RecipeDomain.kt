@@ -1,4 +1,4 @@
-package com.example.foody.presentation.models
+package com.example.foody.domain.models
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
 
 @Parcelize
-data class RecipeUi(
+data class RecipeDomain(
     @SerializedName("aggregateLikes")
     val aggregateLikes: Int,
     @SerializedName("cheap")
@@ -14,7 +14,7 @@ data class RecipeUi(
     @SerializedName("dairyFree")
     val dairyFree: Boolean,
     @SerializedName("extendedIngredients")
-    val extendedIngredients: @RawValue List<ExtendedIngredientUi>,
+    val extendedIngredients: @RawValue List<ExtendedIngredientDomain>,
     @SerializedName("glutenFree")
     val glutenFree: Boolean,
     @SerializedName("id")

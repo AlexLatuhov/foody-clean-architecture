@@ -8,19 +8,16 @@ import androidx.lifecycle.viewModelScope
 import com.example.foody.domain.DataRequestResult
 import com.example.foody.domain.usecase.LoadRecipesUseCase
 import com.example.foody.domain.usecase.RequestRecipesUseCase
-import com.example.foody.presentation.DomainToUiMapper
 import com.example.foody.presentation.util.Constants.Companion.CLEAN_TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class RecipesViewModel @Inject constructor(
     application: Application,
-    private val domainToUiMapper: DomainToUiMapper,
     private val requestRecipesUseCase: RequestRecipesUseCase,
     private val loadRecipesUseCase: LoadRecipesUseCase
 ) : AndroidViewModel(application) {
@@ -34,11 +31,9 @@ class RecipesViewModel @Inject constructor(
         dietTypeId: Int
     ) = requestRecipesUseCase.saveMealAndDietTypeTemp(mealType, mealTypeId, dietType, dietTypeId)
 
-    fun readMealAndDietType() =
-        requestRecipesUseCase.readMealAndDietType().map { domainToUiMapper.map(it) }
+    fun readMealAndDietType() = requestRecipesUseCase.readMealAndDietType()
 
     fun loadDataFromCache(searchQuery: String?) = loadRecipesUseCase.loadDataFromCache(searchQuery)
-        .map { domainToUiMapper.map(it ?: emptyList()) }
 
     fun getData() =
         viewModelScope.launch(Dispatchers.IO) {

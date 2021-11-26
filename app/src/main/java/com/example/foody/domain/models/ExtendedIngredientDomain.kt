@@ -1,11 +1,11 @@
-package com.example.foody.presentation.models
+package com.example.foody.domain.models
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class ExtendedIngredientUi(
+data class ExtendedIngredientDomain(
     @SerializedName("amount")
     val amount: Double,
     @SerializedName("consistency")

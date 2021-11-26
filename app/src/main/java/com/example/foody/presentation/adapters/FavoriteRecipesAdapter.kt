@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import com.example.foody.R
-import com.example.foody.presentation.models.FavoritesEntityUi
+import com.example.foody.domain.models.FavoritesEntityDomain
 import com.example.foody.presentation.ui.FavoriteRecipesFragmentDirections
 import com.example.foody.presentation.ui.recipes.RecipeViewHolder
 import com.example.foody.presentation.util.RecipesDiffUtil
@@ -22,9 +22,9 @@ class FavoriteRecipesAdapter(
 ) : BaseRecipesAdapter(),
     ActionMode.Callback {
     private var multiSelection = false
-    private var selectedRecipes = arrayListOf<FavoritesEntityUi>()
+    private var selectedRecipes = arrayListOf<FavoritesEntityDomain>()
     private var myViewHolder = arrayListOf<RecipeViewHolder>()
-    private var favoritesEntity = emptyList<FavoritesEntityUi>()
+    private var favoritesEntity = emptyList<FavoritesEntityDomain>()
     private lateinit var mActionMode: ActionMode
     private lateinit var rootView: View
 
@@ -129,14 +129,17 @@ class FavoriteRecipesAdapter(
             ContextCompat.getColor(requireActivity, strokeColor)
     }
 
-    fun setFavoritesData(favoritesEntityValues: List<FavoritesEntityUi>) {
+    fun setFavoritesData(favoritesEntityValues: List<FavoritesEntityDomain>) {
         val recipesDiffUtil = RecipesDiffUtil(favoritesEntity, favoritesEntityValues)
         val diffUtilResult = DiffUtil.calculateDiff(recipesDiffUtil)
         favoritesEntity = favoritesEntityValues
         diffUtilResult.dispatchUpdatesTo(this)
     }
 
-    private fun validateSelectionUi(holder: RecipeViewHolder, currentRecipe: FavoritesEntityUi) {
+    private fun validateSelectionUi(
+        holder: RecipeViewHolder,
+        currentRecipe: FavoritesEntityDomain
+    ) {
         if (!selectedRecipes.contains(currentRecipe)) {
             changeRecipeStyle(holder, R.color.cardBackground, R.color.lightMediumGray)
         } else {
@@ -144,7 +147,7 @@ class FavoriteRecipesAdapter(
         }
     }
 
-    private fun applySelection(holder: RecipeViewHolder, currentRecipe: FavoritesEntityUi) {
+    private fun applySelection(holder: RecipeViewHolder, currentRecipe: FavoritesEntityDomain) {
         if (selectedRecipes.contains(currentRecipe)) {
             selectedRecipes.remove(currentRecipe)
             applyActionModeTitle()
