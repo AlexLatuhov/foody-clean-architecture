@@ -28,7 +28,7 @@ class FavoriteRecipesAdapter(
     private lateinit var mActionMode: ActionMode
     private lateinit var rootView: View
 
-    override fun getResult(position: Int) = favoritesEntity[position].result
+    override fun getResult(position: Int) = favoritesEntity[position].recipe
 
     override fun getItemCount() = favoritesEntity.size
 
@@ -73,7 +73,7 @@ class FavoriteRecipesAdapter(
     override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
         if (item?.itemId == R.id.delete_favorite_recipe_menu) {
             selectedRecipes.forEach {
-                favoritesViewModel.deleteFavoriteRecipe(it)
+//                favoritesViewModel.deleteFavoriteRecipe(it)//todo
             }
             showSnackBar(requireActivity.getString(R.string.recipes_removed, selectedRecipes.size))
             multiSelection = false

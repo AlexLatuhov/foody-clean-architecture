@@ -10,8 +10,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import coil.load
 import com.example.foody.R
-import com.example.foody.data.database.models.Recipe
 import com.example.foody.databinding.FragmentOverviewBinding
+import com.example.foody.domain.models.RecipeDomain
 import com.example.foody.presentation.bindingadapters.RecipesRowBinding
 import com.example.foody.presentation.util.Constants.Companion.RECIPE
 
@@ -23,12 +23,12 @@ class OverviewFragment : Fragment() {
     ): View {
         val binding = FragmentOverviewBinding.inflate(inflater, container, false)
         val args = arguments
-        val myBundle: Recipe? = args?.getParcelable(RECIPE)
+        val myBundle: RecipeDomain? = args?.getParcelable(RECIPE)
         showResult(myBundle, binding)
         return binding.root
     }
 
-    private fun showResult(myBundle: Recipe?, binding: FragmentOverviewBinding) {
+    private fun showResult(myBundle: RecipeDomain?, binding: FragmentOverviewBinding) {
         if (myBundle == null) return
 
         binding.mainImageView.load(myBundle.image)

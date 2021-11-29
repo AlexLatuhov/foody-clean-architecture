@@ -20,16 +20,16 @@ interface RecipesDao {
     fun readRecipes(): Flow<List<RecipesEntity>>
 
     @Insert(onConflict = REPLACE)
-    suspend fun insertFavoriteRecipe(favoritesEntity: FavoritesEntity)
+    suspend fun insertFavoriteRecipe(favoritesEntity: FavoritesEntity): Long
 
     @Query("SELECT * FROM favorite_recipes_table ORDER BY id ASC")
     fun readFavoriteRecipes(): Flow<List<FavoritesEntity>>
 
     @Delete
-    suspend fun deleteFavoriteRecipe(favoritesEntity: FavoritesEntity)
+    suspend fun deleteFavoriteRecipe(favoritesEntity: FavoritesEntity): Int
 
     @Query("DELETE FROM favorite_recipes_table")
-    suspend fun deleteAll()
+    suspend fun deleteAll(): Int
 
     @Insert(onConflict = REPLACE)
     suspend fun insertFoodJoke(foodJokeEntity: FoodJokeEntity)

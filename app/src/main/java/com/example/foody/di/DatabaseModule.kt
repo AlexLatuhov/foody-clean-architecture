@@ -4,8 +4,10 @@ import android.content.Context
 import androidx.room.Room
 import com.example.foody.data.database.RecipesDao
 import com.example.foody.data.database.RecipesDataBase
+import com.example.foody.data.database.repositories.LocalFavoriteRecipesEditor
 import com.example.foody.data.database.repositories.LocalRecipesLoader
 import com.example.foody.data.database.repositories.LocalRecipesSaver
+import com.example.foody.domain.repositories.FavoriteRecipesEditor
 import com.example.foody.domain.repositories.RecipesLoader
 import com.example.foody.domain.repositories.RecipesSaver
 import com.example.foody.presentation.util.Constants.Companion.DATABASE_NAME
@@ -40,5 +42,11 @@ object DatabaseModule {
     @Provides
     fun provideRecipesLoader(recipesDao: RecipesDao): RecipesLoader {
         return LocalRecipesLoader(recipesDao)
+    }
+
+    @Singleton
+    @Provides
+    fun provideFavoriteRecipesEditor(recipesDao: RecipesDao): FavoriteRecipesEditor {
+        return LocalFavoriteRecipesEditor(recipesDao)
     }
 }

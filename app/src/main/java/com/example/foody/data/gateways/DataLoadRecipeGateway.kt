@@ -7,7 +7,7 @@ import com.example.foody.domain.usecase.ReadFavoriteRecipesGateWay
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class DataLoadRecipesGateway @Inject constructor(
+class DataLoadRecipeGateway @Inject constructor(
     private val localDbToDomainMapper: LocalDbToDomainMapper,
     private val recipesLoader: RecipesLoader
 ) : LoadRecipesGateway, ReadFavoriteRecipesGateWay {

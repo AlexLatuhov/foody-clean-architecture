@@ -3,14 +3,15 @@ package com.example.foody.di
 import android.content.Context
 import com.example.foody.data.api.RemoteDataSource
 import com.example.foody.data.database.repositories.LocalDataStoreRepository
-import com.example.foody.data.gateways.DataLoadRecipesGateway
+import com.example.foody.data.gateways.DataFavoriteRecipesEditorGateway
+import com.example.foody.data.gateways.DataLoadRecipeGateway
 import com.example.foody.data.gateways.RequestRecipesGatewayApi
+import com.example.foody.domain.DomainToLocalDbMapper
 import com.example.foody.domain.LocalDbToDomainMapper
 import com.example.foody.domain.repositories.DataStoreRepository
+import com.example.foody.domain.repositories.FavoriteRecipesEditor
 import com.example.foody.domain.repositories.RecipesLoader
-import com.example.foody.domain.usecase.LoadRecipesGateway
-import com.example.foody.domain.usecase.ReadFavoriteRecipesGateWay
-import com.example.foody.domain.usecase.RequestRecipesGateway
+import com.example.foody.domain.usecase.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,7 +27,32 @@ object ViewModelModule {
         recipesLoader: RecipesLoader,
         localDbToDomainMapper: LocalDbToDomainMapper
     ): LoadRecipesGateway {
-        return DataLoadRecipesGateway(localDbToDomainMapper, recipesLoader)
+        return DataLoadRecipeGateway(localDbToDomainMapper, recipesLoader)
+    }
+
+    @Provides
+    fun provideInsertFavoriteRecipeGateWay(
+        favoriteRecipesEditor: FavoriteRecipesEditor,
+        domainToLocalDbMapper: DomainToLocalDbMapper
+    ): InsertFavoriteRecipeGateWay {
+        return DataFavoriteRecipesEditorGateway(domainToLocalDbMapper, favoriteRecipesEditor)
+    }
+
+    @Provides
+    fun provideDeleteFavoriteRecipeGateWay(
+        favoriteRecipesEditor: FavoriteRecipesEditor,
+        domainToLocalDbMapper: DomainToLocalDbMapper
+    ): RemoveFavoriteRecipeGateWay {
+        return DataFavoriteRecipesEditorGateway(domainToLocalDbMapper, favoriteRecipesEditor)
+    }
+
+
+    @Provides
+    fun provideDeleteAllFavoriteRecipeGateWay(
+        favoriteRecipesEditor: FavoriteRecipesEditor,
+        domainToLocalDbMapper: DomainToLocalDbMapper
+    ): DeleteAllFavoriteRecipeGateWay {
+        return DataFavoriteRecipesEditorGateway(domainToLocalDbMapper, favoriteRecipesEditor)
     }
 
     @Provides
@@ -34,7 +60,7 @@ object ViewModelModule {
         recipesLoader: RecipesLoader,
         localDbToDomainMapper: LocalDbToDomainMapper
     ): ReadFavoriteRecipesGateWay {
-        return DataLoadRecipesGateway(localDbToDomainMapper, recipesLoader)
+        return DataLoadRecipeGateway(localDbToDomainMapper, recipesLoader)
     }
 
     @Provides

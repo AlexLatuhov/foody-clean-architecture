@@ -7,9 +7,11 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
+import androidx.navigation.findNavController
 import coil.load
 import com.example.foody.R
 import com.example.foody.domain.models.RecipeDomain
+import com.example.foody.presentation.ui.recipes.RecipesFragmentDirections
 import org.jsoup.Jsoup
 
 class RecipesRowBinding {
@@ -20,10 +22,10 @@ class RecipesRowBinding {
         fun onRecipeClickListener(recipeRowLayout: ConstraintLayout, result: RecipeDomain) {
             Log.d("onRecipeClickListener", "called")
             recipeRowLayout.setOnClickListener {
-                try {//todo complete
-//                    val action =
-//                        RecipesFragmentDirections.actionRecipesFragmentToDetailsActivity(result)
-//                    recipeRowLayout.findNavController().navigate(action)
+                try {
+                    val action =
+                        RecipesFragmentDirections.actionRecipesFragmentToDetailsActivity(result)
+                    recipeRowLayout.findNavController().navigate(action)
                 } catch (e: Exception) {
                     Log.d("onRecipeClickListener", e.toString())
                 }

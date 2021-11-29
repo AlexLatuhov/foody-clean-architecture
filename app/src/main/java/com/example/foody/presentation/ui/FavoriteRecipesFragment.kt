@@ -47,8 +47,10 @@ class FavoriteRecipesFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.delete_all) {
+            favoritesViewModel.operationResult.observe(this, { result ->
+                showSnackBar(getString(if (result) R.string.deleted else R.string.unknown_error))
+            })
             favoritesViewModel.deleteAllFavoriteRecipes()
-            showSnackBar(getString(R.string.deleted))
         }
         return super.onOptionsItemSelected(item)
     }
