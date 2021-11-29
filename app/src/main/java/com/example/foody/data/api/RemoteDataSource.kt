@@ -23,8 +23,14 @@ class RemoteDataSource @Inject constructor(
         if (result is DataRequestResult.Success) {
             if (foodRecipe != null) {
                 val domainData = dataToDomainMapper.map(foodRecipe)
-                Log.d(Constants.TEST_TAG, "insertRecipes ${domainData.foodRecipe.recipes.size}")
-                localDataSource.insertRecipes(domainData)
+                val insertResult = localDataSource.insertRecipes(domainData)
+                Log.d(
+                    Constants.TEST_TAG,
+                    "insertRecipes ${domainData.foodRecipe.recipes.size}, result is $insertResult"
+                )
+                if (!insertResult) {
+                    return DataRequestResult.Error("Error")
+                }
             } else {
                 return DataRequestResult.Error("No data")
             }

@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.Flow
 interface RecipesDao {
 
     @Insert(onConflict = REPLACE)
-    fun insertRecipes(recipesEntity: RecipesEntity)
+    fun insertRecipes(recipesEntity: RecipesEntity): Long
 
     @Query("SELECT * FROM recipes_table ORDER BY id ASC")
     fun readRecipes(): Flow<List<RecipesEntity>>
