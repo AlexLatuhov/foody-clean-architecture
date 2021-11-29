@@ -35,11 +35,13 @@ class RecipesViewModel @Inject constructor(
 
     fun loadDataFromCache(searchQuery: String?) = loadRecipesUseCase.loadDataFromCache(searchQuery)
 
-    fun getData() =
+    fun getData() {
+        recipesRequestResult.value = DataRequestResult.None
         viewModelScope.launch(Dispatchers.IO) {
             requestRecipesUseCase.getData().collect { dataRequestResult ->
                 Log.d(CLEAN_TAG, "onDataRequestResult in collect $dataRequestResult")
                 recipesRequestResult.postValue(dataRequestResult)
             }
         }
+    }
 }

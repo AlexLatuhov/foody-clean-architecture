@@ -1,7 +1,6 @@
 package com.example.foody.presentation.ui.recipes
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
@@ -13,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foody.R
 import com.example.foody.databinding.FragmentRecipesBinding
 import com.example.foody.domain.DataRequestResult
-import com.example.foody.presentation.util.Constants.Companion.CLEAN_TAG
 import com.example.foody.presentation.viewmodels.FavoritesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -45,15 +43,13 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener, SearchView.O
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showShimmerEffect()
+        recipesViewModel.getData()
         recipesViewModel.recipesRequestResult.observe(viewLifecycleOwner, { requestResult ->
-            Log.d(CLEAN_TAG, "observe, event $requestResult")
             onDataRequestResult(requestResult)
         })
-        recipesViewModel.getData()
     }
 
     private fun onDataRequestResult(dataRequestResult: DataRequestResult) {
-        hideShimmerEffect()
         when (dataRequestResult) {
             is DataRequestResult.Success -> {
                 loadDataFromCache()
@@ -89,7 +85,6 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener, SearchView.O
         errorMessage: String = getString(R.string.no_data),
         searchQuery: String? = null
     ) {
-        showShimmerEffect()
         recipesViewModel.loadDataFromCache(searchQuery)
             .asLiveData().observe(viewLifecycleOwner, { results ->
                 if (results.isNullOrEmpty()) {
