@@ -1,14 +1,17 @@
 package com.example.foody.data.gateways
 
 import android.content.Context
+import android.util.Log
 import com.example.foody.R
 import com.example.foody.data.Constants
+import com.example.foody.data.Constants.Companion.TEST_TAG
 import com.example.foody.data.api.RemoteDataSource
 import com.example.foody.data.api.models.FoodJokeDataItem
 import com.example.foody.data.database.models.FoodJokeEntity
+import com.example.foody.data.getErrorMessage
 import com.example.foody.data.hasInternetConnection
+import com.example.foody.domain.DataProviderRequestResult
 import com.example.foody.domain.LocalDbToDomainMapper
-import com.example.foody.domain.NetworkResult
 import com.example.foody.domain.gateway.GetFoodJokeGateway
 import com.example.foody.domain.models.FoodJokeDomain
 import com.example.foody.domain.repositories.JokeStorage
@@ -25,14 +28,14 @@ class RequestFoodJokeGatewayApi @Inject constructor(
     private val jokeStorage: JokeStorage
 ) : GetFoodJokeGateway {
     private val dataRequestResult =
-        MutableStateFlow<NetworkResult<FoodJokeDomain>>(NetworkResult.Loading())
+        MutableStateFlow<DataProviderRequestResult<FoodJokeDomain>>(DataProviderRequestResult.Loading())
 
-    override suspend fun getData(): Flow<NetworkResult<FoodJokeDomain>> {
+    override suspend fun getData(): Flow<DataProviderRequestResult<FoodJokeDomain>> {
         dataRequestResult.value = requestAndStoreData()
         return dataRequestResult
     }
 
-    private suspend fun requestAndStoreData(): NetworkResult<FoodJokeDomain> {
+    private suspend fun requestAndStoreData(): DataProviderRequestResult<FoodJokeDomain> {
         if (context.hasInternetConnection()) {
             try {
                 val response = remoteDataSource.getFoodJoke(Constants.API_KEY)
@@ -42,7 +45,7 @@ class RequestFoodJokeGatewayApi @Inject constructor(
                     val dbEntity = FoodJokeEntity(foodJoke)
                     val insertResult = jokeStorage.insertFoodJoke(dbEntity)
                     return if (insertResult)
-                        NetworkResult.Success(localDbToDomainMapper.map(dbEntity))
+                        DataProviderRequestResult.Success(localDbToDomainMapper.map(dbEntity))
                     else loadFromCache(context.getString(R.string.unknown_error))
                 }
             } catch (e: Exception) {
@@ -52,27 +55,23 @@ class RequestFoodJokeGatewayApi @Inject constructor(
         return loadFromCache(context.getString(R.string.no_internet_connection))
     }
 
-    private suspend fun loadFromCache(errorMessage: String): NetworkResult.Error<FoodJokeDomain> {
+    private suspend fun loadFromCache(errorMessage: String): DataProviderRequestResult.Error<FoodJokeDomain> {
         val entitiesList = jokeStorage.readFoodJoke()
-        return if (entitiesList.isNullOrEmpty()) NetworkResult.Error(
+        Log.d(TEST_TAG, "entitiesList $entitiesList")
+        return if (entitiesList.isNullOrEmpty()) DataProviderRequestResult.Error(errorMessage) else DataProviderRequestResult.Error(
             errorMessage,
             localDbToDomainMapper.map(entitiesList[0])
-        ) else NetworkResult.Error(errorMessage)
+        )
     }
 
-    private fun Response<FoodJokeDataItem>.getFoodJokeResult(): NetworkResult<FoodJokeDataItem> {//todo remove duplication
+    private fun Response<FoodJokeDataItem>.getFoodJokeResult(): DataProviderRequestResult<FoodJokeDataItem> {
+        val error = getErrorMessage()
         return when {
-            message().toString().contains("timeout") -> {
-                NetworkResult.Error("Timeout")
-            }
-            code() == 402 -> {
-                NetworkResult.Error("API Key Limited")
-            }
-            isSuccessful -> {
-                NetworkResult.Success(body()!!)
+            error != null -> {
+                DataProviderRequestResult.Error(error)
             }
             else -> {
-                NetworkResult.Error(message())
+                DataProviderRequestResult.Success(body()!!)
             }
         }
     }

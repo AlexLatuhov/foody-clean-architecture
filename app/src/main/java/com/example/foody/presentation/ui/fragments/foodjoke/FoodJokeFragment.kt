@@ -10,7 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.foody.R
 import com.example.foody.databinding.FragmentFoodJokeBinding
-import com.example.foody.domain.NetworkResult
+import com.example.foody.domain.DataProviderRequestResult
+import com.example.foody.domain.models.FoodJokeDomain
 import com.example.foody.presentation.viewmodels.FoodJokeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,24 +33,30 @@ class FoodJokeFragment : Fragment() {
         viewModel.getFoodJoke()
         viewModel.foodJokeDataItemResponse.observe(viewLifecycleOwner, { response ->
             when (response) {
-                is NetworkResult.Success -> {
-                    val text = response.data?.text
-                    binding.foodJokeTextView.text = text
+                is DataProviderRequestResult.Success -> {
+                    setJokeText(response)
                 }
-                is NetworkResult.Error -> {
+                is DataProviderRequestResult.Error -> {
                     Toast.makeText(
                         requireContext(),
                         response.message.toString(),
                         Toast.LENGTH_SHORT
                     ).show()
+                    setJokeText(response)
                 }
-                is NetworkResult.Loading -> {
+                is DataProviderRequestResult.Loading -> {
                     Log.d("FOOD_JOKE", "Loading")
                 }
             }
         })
         setHasOptionsMenu(true)
         return binding.root
+    }
+
+    private fun setJokeText(dataProviderRequestResult: DataProviderRequestResult<FoodJokeDomain>) {
+        dataProviderRequestResult.data.let {
+            binding.foodJokeTextView.text = dataProviderRequestResult.data?.text
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

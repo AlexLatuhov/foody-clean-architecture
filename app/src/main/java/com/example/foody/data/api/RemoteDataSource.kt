@@ -6,6 +6,7 @@ import com.example.foody.data.DataToLocalDbMapper
 import com.example.foody.data.FoodRecipesApi
 import com.example.foody.data.api.models.FoodJokeDataItem
 import com.example.foody.data.api.models.RecipeDataItem
+import com.example.foody.data.getErrorMessage
 import com.example.foody.domain.DataRequestResult
 import com.example.foody.domain.repositories.RecipesSaver
 import retrofit2.Response
@@ -42,21 +43,16 @@ class RemoteDataSource @Inject constructor(
         foodRecipesApi.getFoodJoke(api)
 
     private fun Response<RecipeDataItem>.getRecipesResult(): DataRequestResult {
+        val error = getErrorMessage()
         return when {
-            message().toString().contains("timeout") -> {
-                DataRequestResult.Error("Timeout")
-            }
-            code() == 402 -> {
-                DataRequestResult.Error("API Key Limited")
+            error != null -> {
+                DataRequestResult.Error(error)
             }
             body()!!.results.isNullOrEmpty() -> {
                 DataRequestResult.Error("Not found")
             }
-            isSuccessful -> {
-                DataRequestResult.Success
-            }
             else -> {
-                DataRequestResult.Error(message())
+                DataRequestResult.Success
             }
         }
     }

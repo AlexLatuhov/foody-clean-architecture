@@ -4,7 +4,7 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.example.foody.domain.NetworkResult
+import com.example.foody.domain.DataProviderRequestResult
 import com.example.foody.domain.models.FoodJokeDomain
 import com.google.android.material.card.MaterialCardView
 
@@ -15,10 +15,10 @@ class FoodJokeBinding {
         @JvmStatic
         fun setCardAndProgressVisibility(
             view: View,
-            apiResponse: NetworkResult<FoodJokeDomain>?
+            apiResponse: DataProviderRequestResult<FoodJokeDomain>?
         ) {
             when (apiResponse) {
-                is NetworkResult.Loading -> {
+                is DataProviderRequestResult.Loading -> {
                     when (view) {
                         is ProgressBar -> {
                             view.visibility = View.VISIBLE
@@ -28,7 +28,7 @@ class FoodJokeBinding {
                         }
                     }
                 }
-                is NetworkResult.Error -> {
+                is DataProviderRequestResult.Error -> {
                     when (view) {
                         is ProgressBar -> {
                             view.visibility = View.INVISIBLE
@@ -39,7 +39,7 @@ class FoodJokeBinding {
                         }
                     }
                 }
-                is NetworkResult.Success -> {
+                is DataProviderRequestResult.Success -> {
                     when (view) {
                         is ProgressBar -> {
                             view.visibility = View.INVISIBLE
@@ -56,7 +56,7 @@ class FoodJokeBinding {
         @JvmStatic
         fun setErrorViewsVisibility(
             view: View,
-            apiResponse: NetworkResult<FoodJokeDomain>?
+            apiResponse: DataProviderRequestResult<FoodJokeDomain>?
         ) {
             if (apiResponse != null && apiResponse.data == null) {
                 view.visibility = View.VISIBLE
@@ -64,7 +64,7 @@ class FoodJokeBinding {
                     view.text = apiResponse.message.toString()
                 }
             }
-            if (apiResponse is NetworkResult.Success || apiResponse is NetworkResult.Loading) {
+            if (apiResponse is DataProviderRequestResult.Success || apiResponse is DataProviderRequestResult.Loading) {
                 view.visibility = View.INVISIBLE
             }
         }
