@@ -1,4 +1,4 @@
-package com.example.foody.domain.usecase
+package com.example.foody.domain.gateway
 
 import com.example.foody.domain.models.RecipeDomain
 import kotlinx.coroutines.flow.Flow

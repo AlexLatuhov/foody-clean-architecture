@@ -2,7 +2,6 @@ package com.example.foody.presentation.util
 
 class Constants {
     companion object {
-        const val API_KEY = "ca3bc72fe3da446cb74b1752bb0dbe22"
         const val IMG_URL = "https://spoonacular.com/cdn/ingredients_100x100/"
         const val DATABASE_NAME = "recipes_database_name"
         const val DEFAULT_ID = 0

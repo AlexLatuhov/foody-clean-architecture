@@ -5,9 +5,11 @@ import androidx.room.Room
 import com.example.foody.data.database.RecipesDao
 import com.example.foody.data.database.RecipesDataBase
 import com.example.foody.data.database.repositories.LocalFavoriteRecipesEditor
+import com.example.foody.data.database.repositories.LocalFoodJokeStorage
 import com.example.foody.data.database.repositories.LocalRecipesLoader
 import com.example.foody.data.database.repositories.LocalRecipesSaver
 import com.example.foody.domain.repositories.FavoriteRecipesEditor
+import com.example.foody.domain.repositories.JokeStorage
 import com.example.foody.domain.repositories.RecipesLoader
 import com.example.foody.domain.repositories.RecipesSaver
 import com.example.foody.presentation.util.Constants.Companion.DATABASE_NAME
@@ -36,6 +38,12 @@ object DatabaseModule {
     @Provides
     fun provideRecipesSaver(recipesDao: RecipesDao): RecipesSaver {
         return LocalRecipesSaver(recipesDao)
+    }
+
+    @Singleton
+    @Provides
+    fun provideJokeSaver(recipesDao: RecipesDao): JokeStorage {
+        return LocalFoodJokeStorage(recipesDao)
     }
 
     @Singleton

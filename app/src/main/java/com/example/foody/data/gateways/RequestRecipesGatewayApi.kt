@@ -9,8 +9,8 @@ import com.example.foody.data.api.RemoteDataSource
 import com.example.foody.data.hasInternetConnection
 import com.example.foody.domain.DataRequestResult
 import com.example.foody.domain.LocalDbToDomainMapper
+import com.example.foody.domain.gateway.RequestRecipesGateway
 import com.example.foody.domain.repositories.DataStoreRepository
-import com.example.foody.domain.usecase.RequestRecipesGateway
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

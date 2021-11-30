@@ -4,20 +4,18 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.example.foody.data.database.entities.FoodJokeEntity
-import com.example.foody.data.database.models.FoodJoke
-import com.example.foody.presentation.util.NetworkResult
+import com.example.foody.domain.NetworkResult
+import com.example.foody.domain.models.FoodJokeDomain
 import com.google.android.material.card.MaterialCardView
 
 class FoodJokeBinding {
     companion object {
 
-        @BindingAdapter("readApiResponse3", "readDatabase3", requireAll = false)
+        @BindingAdapter("readApiResponseFoodJoke", requireAll = false)
         @JvmStatic
         fun setCardAndProgressVisibility(
             view: View,
-            apiResponse: NetworkResult<FoodJoke>?,
-            database: List<FoodJokeEntity>?
+            apiResponse: NetworkResult<FoodJokeDomain>?
         ) {
             when (apiResponse) {
                 is NetworkResult.Loading -> {
@@ -37,7 +35,7 @@ class FoodJokeBinding {
                         }
                         is MaterialCardView -> {
                             view.visibility =
-                                if (database != null && database.isEmpty()) View.INVISIBLE else View.VISIBLE
+                                if (apiResponse.data == null) View.INVISIBLE else View.VISIBLE
                         }
                     }
                 }
@@ -54,16 +52,15 @@ class FoodJokeBinding {
             }
         }
 
-        @BindingAdapter("readApiResponse4", "readDatabase4", requireAll = true)
+        @BindingAdapter("readApiResponseErrorView", requireAll = true)
         @JvmStatic
         fun setErrorViewsVisibility(
             view: View,
-            apiResponse: NetworkResult<FoodJoke>?,
-            database: List<FoodJokeEntity>?
+            apiResponse: NetworkResult<FoodJokeDomain>?
         ) {
-            if (database?.isEmpty() != false) {
+            if (apiResponse != null && apiResponse.data == null) {
                 view.visibility = View.VISIBLE
-                if (view is TextView && apiResponse != null) {
+                if (view is TextView) {
                     view.text = apiResponse.message.toString()
                 }
             }

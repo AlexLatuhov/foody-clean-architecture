@@ -1,4 +1,4 @@
-package com.example.foody.presentation.util
+package com.example.foody.domain
 
 sealed class NetworkResult<T>(
     val data: T? = null,

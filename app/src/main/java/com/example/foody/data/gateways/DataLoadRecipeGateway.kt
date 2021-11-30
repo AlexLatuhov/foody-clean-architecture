@@ -1,9 +1,9 @@
 package com.example.foody.data.gateways
 
 import com.example.foody.domain.LocalDbToDomainMapper
+import com.example.foody.domain.gateway.LoadRecipesGateway
+import com.example.foody.domain.gateway.ReadFavoriteRecipesGateWay
 import com.example.foody.domain.repositories.RecipesLoader
-import com.example.foody.domain.usecase.LoadRecipesGateway
-import com.example.foody.domain.usecase.ReadFavoriteRecipesGateWay
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 

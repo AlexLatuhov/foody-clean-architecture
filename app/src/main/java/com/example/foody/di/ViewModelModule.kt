@@ -5,13 +5,15 @@ import com.example.foody.data.api.RemoteDataSource
 import com.example.foody.data.database.repositories.LocalDataStoreRepository
 import com.example.foody.data.gateways.DataFavoriteRecipesEditorGateway
 import com.example.foody.data.gateways.DataLoadRecipeGateway
+import com.example.foody.data.gateways.RequestFoodJokeGatewayApi
 import com.example.foody.data.gateways.RequestRecipesGatewayApi
 import com.example.foody.domain.DomainToLocalDbMapper
 import com.example.foody.domain.LocalDbToDomainMapper
+import com.example.foody.domain.gateway.*
 import com.example.foody.domain.repositories.DataStoreRepository
 import com.example.foody.domain.repositories.FavoriteRecipesEditor
+import com.example.foody.domain.repositories.JokeStorage
 import com.example.foody.domain.repositories.RecipesLoader
-import com.example.foody.domain.usecase.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -75,6 +77,21 @@ object ViewModelModule {
             localDataStoreRepository,
             remoteDataSource,
             localDbToDomainMapper
+        )
+    }
+
+    @Provides
+    fun provideGetFoodJokeGateway(
+        @ApplicationContext context: Context,
+        remoteDataSource: RemoteDataSource,
+        localDbToDomainMapper: LocalDbToDomainMapper,
+        jokeStorage: JokeStorage
+    ): GetFoodJokeGateway {
+        return RequestFoodJokeGatewayApi(
+            context,
+            remoteDataSource,
+            localDbToDomainMapper,
+            jokeStorage
         )
     }
 

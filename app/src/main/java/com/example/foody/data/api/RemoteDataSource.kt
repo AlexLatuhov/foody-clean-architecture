@@ -4,8 +4,8 @@ import android.util.Log
 import com.example.foody.data.Constants
 import com.example.foody.data.DataToLocalDbMapper
 import com.example.foody.data.FoodRecipesApi
+import com.example.foody.data.api.models.FoodJokeDataItem
 import com.example.foody.data.api.models.RecipeDataItem
-import com.example.foody.data.database.models.FoodJoke
 import com.example.foody.domain.DataRequestResult
 import com.example.foody.domain.repositories.RecipesSaver
 import retrofit2.Response
@@ -38,26 +38,25 @@ class RemoteDataSource @Inject constructor(
         return result
     }
 
-    suspend fun getFoodJoke(api: String): Response<FoodJoke> {//todo complete
-        return foodRecipesApi.getFoodJoke(api)
-    }
+    suspend fun getFoodJoke(api: String): Response<FoodJokeDataItem> =
+        foodRecipesApi.getFoodJoke(api)
 
     private fun Response<RecipeDataItem>.getRecipesResult(): DataRequestResult {
-        when {
+        return when {
             message().toString().contains("timeout") -> {
-                return DataRequestResult.Error("Timeout")
+                DataRequestResult.Error("Timeout")
             }
             code() == 402 -> {
-                return DataRequestResult.Error("API Key Limited")
+                DataRequestResult.Error("API Key Limited")
             }
             body()!!.results.isNullOrEmpty() -> {
-                return DataRequestResult.Error("Recipes not found")
+                DataRequestResult.Error("Not found")
             }
             isSuccessful -> {
-                return DataRequestResult.Success
+                DataRequestResult.Success
             }
             else -> {
-                return DataRequestResult.Error(message())
+                DataRequestResult.Error(message())
             }
         }
     }

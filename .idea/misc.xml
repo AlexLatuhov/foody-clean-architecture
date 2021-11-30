@@ -25,7 +25,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.23020833333333332" />
         <entry key="app/src/main/res/layout/favorite_recipes_row_layout.xml" value="0.2604166666666667" />
         <entry key="app/src/main/res/layout/fragment_favorite_recipes.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/fragment_food_joke.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/layout/fragment_food_joke.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_ingredients.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/fragment_instructions.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_overview.xml" value="0.335" />

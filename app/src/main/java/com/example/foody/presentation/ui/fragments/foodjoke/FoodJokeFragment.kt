@@ -8,14 +8,11 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.example.foody.R
 import com.example.foody.databinding.FragmentFoodJokeBinding
-import com.example.foody.presentation.util.Constants.Companion.API_KEY
-import com.example.foody.presentation.util.NetworkResult
+import com.example.foody.domain.NetworkResult
 import com.example.foody.presentation.viewmodels.FoodJokeViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class FoodJokeFragment : Fragment() {
@@ -23,7 +20,6 @@ class FoodJokeFragment : Fragment() {
     private val viewModel: FoodJokeViewModel by viewModels()
     private var _binding: FragmentFoodJokeBinding? = null
     private val binding get() = _binding!!
-    private var foodJoke = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,15 +29,12 @@ class FoodJokeFragment : Fragment() {
         _binding = FragmentFoodJokeBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        viewModel.getFoodJoke(API_KEY)
-        viewModel.foodJokeResponse.observe(viewLifecycleOwner, { response ->
+        viewModel.getFoodJoke()
+        viewModel.foodJokeDataItemResponse.observe(viewLifecycleOwner, { response ->
             when (response) {
                 is NetworkResult.Success -> {
                     val text = response.data?.text
                     binding.foodJokeTextView.text = text
-                    text?.let {
-                        foodJoke = text
-                    }
                 }
                 is NetworkResult.Error -> {
                     Toast.makeText(
@@ -49,7 +42,6 @@ class FoodJokeFragment : Fragment() {
                         response.message.toString(),
                         Toast.LENGTH_SHORT
                     ).show()
-                    loadFromCache()
                 }
                 is NetworkResult.Loading -> {
                     Log.d("FOOD_JOKE", "Loading")
@@ -68,23 +60,12 @@ class FoodJokeFragment : Fragment() {
         if (item.itemId == R.id.share_food_joke) {
             val shareIntent = Intent().apply {
                 this.action = Intent.ACTION_SEND
-                this.putExtra(EXTRA_TEXT, foodJoke)
+                this.putExtra(EXTRA_TEXT, binding.foodJokeTextView.text)
                 this.type = "text/plain"
             }
             startActivity(shareIntent)
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun loadFromCache() {
-        lifecycleScope.launch {
-            viewModel.readFoodJoke.observe(viewLifecycleOwner, { database ->
-                if (!database.isNullOrEmpty()) {
-                    binding.foodJokeTextView.text = database[0].foodJoke.text
-                    foodJoke = database[0].foodJoke.text
-                }
-            })
-        }
     }
 
     override fun onDestroyView() {

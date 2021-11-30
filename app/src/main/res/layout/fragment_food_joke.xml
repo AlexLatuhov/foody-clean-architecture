@@ -17,8 +17,7 @@
 
         <ImageView
             android:id="@+id/food_joke_error_imageView"
-            readApiResponse4="@{viewModel.foodJokeResponse}"
-            readDatabase4="@{viewModel.readFoodJoke}"
+            readApiResponseErrorView="@{viewModel.foodJokeDataItemResponse}"
             android:layout_width="@dimen/def_image_size"
             android:layout_height="@dimen/def_image_size"
             android:alpha="0.5"
@@ -34,8 +33,7 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/food_joke_cardView"
-            readApiResponse3="@{viewModel.foodJokeResponse}"
-            readDatabase3="@{viewModel.readFoodJoke}"
+            readApiResponseFoodJoke="@{viewModel.foodJokeDataItemResponse}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -77,7 +75,7 @@
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyle"
-            readApiResponse3="@{viewModel.foodJokeResponse}"
+            readApiResponseFoodJoke="@{viewModel.foodJokeDataItemResponse}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
@@ -88,8 +86,7 @@
 
         <TextView
             android:id="@+id/food_joke_error_textView"
-            readApiResponse4="@{viewModel.foodJokeResponse}"
-            readDatabase4="@{viewModel.readFoodJoke}"
+            readApiResponseErrorView="@{viewModel.foodJokeDataItemResponse}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/def_margin"

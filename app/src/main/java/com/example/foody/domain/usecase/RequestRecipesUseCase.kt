@@ -1,5 +1,6 @@
 package com.example.foody.domain.usecase
 
+import com.example.foody.domain.gateway.RequestRecipesGateway
 import javax.inject.Inject
 
 class RequestRecipesUseCase @Inject constructor(

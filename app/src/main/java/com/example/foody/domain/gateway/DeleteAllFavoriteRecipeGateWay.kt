@@ -1,4 +1,4 @@
-package com.example.foody.domain.usecase
+package com.example.foody.domain.gateway
 
 interface DeleteAllFavoriteRecipeGateWay {
     suspend fun deleteAll(): Boolean

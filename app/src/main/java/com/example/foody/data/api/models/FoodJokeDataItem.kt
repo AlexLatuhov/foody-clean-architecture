@@ -1,9 +1,9 @@
-package com.example.foody.data.database.models
+package com.example.foody.data.api.models
 
 
 import com.google.gson.annotations.SerializedName
 
-data class FoodJoke(
+data class FoodJokeDataItem(
     @SerializedName("text")
     val text: String
 )

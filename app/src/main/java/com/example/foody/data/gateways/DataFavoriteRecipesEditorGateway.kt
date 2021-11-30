@@ -1,11 +1,11 @@
 package com.example.foody.data.gateways
 
 import com.example.foody.domain.DomainToLocalDbMapper
+import com.example.foody.domain.gateway.DeleteAllFavoriteRecipeGateWay
+import com.example.foody.domain.gateway.InsertFavoriteRecipeGateWay
+import com.example.foody.domain.gateway.RemoveFavoriteRecipeGateWay
 import com.example.foody.domain.models.FavoritesEntityDomain
 import com.example.foody.domain.repositories.FavoriteRecipesEditor
-import com.example.foody.domain.usecase.DeleteAllFavoriteRecipeGateWay
-import com.example.foody.domain.usecase.InsertFavoriteRecipeGateWay
-import com.example.foody.domain.usecase.RemoveFavoriteRecipeGateWay
 import javax.inject.Inject
 
 class DataFavoriteRecipesEditorGateway @Inject constructor(
