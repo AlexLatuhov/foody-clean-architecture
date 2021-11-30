@@ -47,7 +47,7 @@ class RequestFoodJokeGatewayApi @Inject constructor(
                     else loadFromCache(context.getString(R.string.unknown_error))
                 }
             } catch (e: Exception) {
-                return loadFromCache("Not found")
+                return loadFromCache(context.getString(R.string.not_found))
             }
         }
         return loadFromCache(context.getString(R.string.no_internet_connection))
@@ -62,7 +62,7 @@ class RequestFoodJokeGatewayApi @Inject constructor(
     }
 
     private fun Response<FoodJokeDataItem>.getFoodJokeResult(): DataProviderRequestResult<FoodJokeDataItem> {
-        val error = getErrorMessage()
+        val error = getErrorMessage(context)
         return when {
             error != null -> {
                 DataProviderRequestResult.Error(error)

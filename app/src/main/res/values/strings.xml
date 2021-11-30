@@ -39,8 +39,9 @@
 
     <string name="no_internet_connection">No internet connection</string>
     <string name="search">Search</string>
-    <string name="no_data">No data found</string>
+    <string name="no_data">No data</string>
     <string name="recipes_not_found">Recipes not found</string>
+    <string name="not_found">Not found</string>
 
     <string name="overview">Overview</string>
     <string name="ingredients">Ingredients</string>
@@ -49,7 +50,10 @@
     <string name="saved_to_favorites">Saved to Favorites</string>
     <string name="removed_from_favorites">Removed from Favorites</string>
     <string name="cheap">Cheap</string>
+    <string name="timeout">Timeout</string>
+    <string name="key_limited">API Key Limited</string>
     <string name="healthy">Healthy</string>
+    <string name="no_value">No value</string>
     <string name="dairy_free">Dairy Free</string>
     <string name="save_to_favorites">Save to Favorites</string>
     <string name="no_favorite_recipes">No Favorite Recipes.</string>
