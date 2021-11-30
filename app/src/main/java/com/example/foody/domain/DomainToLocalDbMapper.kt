@@ -9,9 +9,10 @@ import com.example.foody.domain.models.RecipeDomain
 import javax.inject.Inject
 
 class DomainToLocalDbMapper @Inject constructor() {
-    fun map(favoritesEntity: FavoritesEntityDomain) = favoritesEntity.convertToDomainItem()
+    fun map(vararg favoritesEntity: FavoritesEntityDomain) =
+        favoritesEntity.map { it.convertToDataBaseItem() }
 
-    private fun FavoritesEntityDomain.convertToDomainItem() =
+    private fun FavoritesEntityDomain.convertToDataBaseItem() =
         FavoritesEntity(id, recipe.convertToDomainItem())
 
     private fun RecipeDomain.convertToDomainItem() = Recipe(

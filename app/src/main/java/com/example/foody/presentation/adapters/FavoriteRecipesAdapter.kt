@@ -72,13 +72,13 @@ class FavoriteRecipesAdapter(
 
     override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
         if (item?.itemId == R.id.delete_favorite_recipe_menu) {
-            selectedRecipes.forEach {
-//                favoritesViewModel.deleteFavoriteRecipe(it)//todo
-            }
-            showSnackBar(requireActivity.getString(R.string.recipes_removed, selectedRecipes.size))
-            multiSelection = false
-            selectedRecipes.clear()
-            mode?.finish()
+            favoritesViewModel.operationResult.observe(requireActivity, { result ->
+                showSnackBar(requireActivity.getString(if (result) R.string.recipes_removed else R.string.unknown_error))
+                multiSelection = false
+                selectedRecipes.clear()
+                mode?.finish()
+            })
+            favoritesViewModel.deleteFavoriteRecipe(*selectedRecipes.toTypedArray())
         }
         return true
     }

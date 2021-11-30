@@ -56,7 +56,7 @@
     <string name="delete_favorites">Delete Favorites</string>
 
     <string name="items_selected">%d items selected</string>
-    <string name="recipes_removed">%d Recipes removed</string>
+    <string name="recipes_removed">Recipes removed</string>
     <string name="item_selected">1 item selected</string>
     <string name="delete_all">Delete All</string>
     <string name="deleted">Deleted</string>

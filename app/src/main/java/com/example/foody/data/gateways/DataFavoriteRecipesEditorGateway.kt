@@ -14,10 +14,12 @@ class DataFavoriteRecipesEditorGateway @Inject constructor(
 ) : InsertFavoriteRecipeGateWay, RemoveFavoriteRecipeGateWay, DeleteAllFavoriteRecipeGateWay {
 
     override suspend fun insert(favoritesEntity: FavoritesEntityDomain) =
-        favoriteRecipesEditor.insertFavoriteRecipes(domainToLocalDbMapper.map(favoritesEntity))
+        favoriteRecipesEditor.insertFavoriteRecipes(domainToLocalDbMapper.map(favoritesEntity)[0])
 
-    override suspend fun deleteFavoriteRecipe(favoritesEntity: FavoritesEntityDomain) =
-        favoriteRecipesEditor.deleteFavoriteRecipe(domainToLocalDbMapper.map(favoritesEntity))
+    override suspend fun deleteFavoriteRecipe(vararg favoritesEntity: FavoritesEntityDomain) =
+        favoriteRecipesEditor.deleteFavoriteRecipe(
+            *domainToLocalDbMapper.map(*favoritesEntity).toTypedArray()
+        )
 
     override suspend fun deleteAll() = favoriteRecipesEditor.deleteAll()
 }

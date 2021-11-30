@@ -7,6 +7,6 @@ import javax.inject.Inject
 class RemoveFavoriteRecipeUseCase @Inject constructor(
     private val removeFavoriteRecipeGateWay: RemoveFavoriteRecipeGateWay
 ) {
-    suspend fun removeFavoriteRecipe(favoritesEntity: FavoritesEntityDomain) =
-        removeFavoriteRecipeGateWay.deleteFavoriteRecipe(favoritesEntity)
+    suspend fun removeFavoriteRecipe(vararg favoritesEntity: FavoritesEntityDomain) =
+        removeFavoriteRecipeGateWay.deleteFavoriteRecipe(*favoritesEntity)
 }

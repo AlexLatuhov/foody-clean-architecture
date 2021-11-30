@@ -26,7 +26,7 @@ interface RecipesDao {
     fun readFavoriteRecipes(): Flow<List<FavoritesEntity>>
 
     @Delete
-    suspend fun deleteFavoriteRecipe(favoritesEntity: FavoritesEntity): Int
+    suspend fun deleteFavoriteRecipe(vararg favoritesEntity: FavoritesEntity): Int
 
     @Query("DELETE FROM favorite_recipes_table")
     suspend fun deleteAll(): Int

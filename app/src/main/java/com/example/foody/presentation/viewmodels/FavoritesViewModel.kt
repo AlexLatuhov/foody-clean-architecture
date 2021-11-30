@@ -36,11 +36,11 @@ class FavoritesViewModel @Inject constructor(
             )
         }
 
-    fun deleteFavoriteRecipe(favoritesEntity: FavoritesEntityDomain) =
+    fun deleteFavoriteRecipe(vararg favoritesEntity: FavoritesEntityDomain) =
         viewModelScope.launch(Dispatchers.IO) {
             operationResult.postValue(
                 removeFavoriteRecipeUseCase.removeFavoriteRecipe(
-                    favoritesEntity
+                    *favoritesEntity
                 )
             )
         }
