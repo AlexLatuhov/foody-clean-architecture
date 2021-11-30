@@ -1,4 +1,4 @@
-package com.example.foody.presentation.bindingadapters
+package com.example.foody.presentation.ui.joke
 
 import android.view.View
 import android.widget.ProgressBar

@@ -1,4 +1,4 @@
-package com.example.foody.data
+package com.example.foody.data.api
 
 import com.example.foody.data.api.models.FoodJokeDataItem
 import com.example.foody.data.api.models.RecipeDataItem

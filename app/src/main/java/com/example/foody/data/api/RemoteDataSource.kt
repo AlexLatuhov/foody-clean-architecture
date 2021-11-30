@@ -3,7 +3,6 @@ package com.example.foody.data.api
 import android.util.Log
 import com.example.foody.data.Constants
 import com.example.foody.data.DataToLocalDbMapper
-import com.example.foody.data.FoodRecipesApi
 import com.example.foody.data.api.models.FoodJokeDataItem
 import com.example.foody.data.api.models.RecipeDataItem
 import com.example.foody.data.getErrorMessage

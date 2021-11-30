@@ -1,4 +1,4 @@
-package com.example.foody.presentation.bindingadapters
+package com.example.foody.presentation.ui.recipe
 
 import android.util.Log
 import android.view.View

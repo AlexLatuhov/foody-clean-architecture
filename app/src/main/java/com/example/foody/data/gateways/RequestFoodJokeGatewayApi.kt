@@ -1,10 +1,8 @@
 package com.example.foody.data.gateways
 
 import android.content.Context
-import android.util.Log
 import com.example.foody.R
 import com.example.foody.data.Constants
-import com.example.foody.data.Constants.Companion.TEST_TAG
 import com.example.foody.data.api.RemoteDataSource
 import com.example.foody.data.api.models.FoodJokeDataItem
 import com.example.foody.data.database.models.FoodJokeEntity
@@ -57,7 +55,6 @@ class RequestFoodJokeGatewayApi @Inject constructor(
 
     private suspend fun loadFromCache(errorMessage: String): DataProviderRequestResult.Error<FoodJokeDomain> {
         val entitiesList = jokeStorage.readFoodJoke()
-        Log.d(TEST_TAG, "entitiesList $entitiesList")
         return if (entitiesList.isNullOrEmpty()) DataProviderRequestResult.Error(errorMessage) else DataProviderRequestResult.Error(
             errorMessage,
             localDbToDomainMapper.map(entitiesList[0])

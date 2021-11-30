@@ -1,4 +1,4 @@
-package com.example.foody.presentation.ui.fragments.foodjoke
+package com.example.foody.presentation.ui.joke
 
 import android.content.Intent
 import android.content.Intent.EXTRA_TEXT
@@ -12,7 +12,6 @@ import com.example.foody.R
 import com.example.foody.databinding.FragmentFoodJokeBinding
 import com.example.foody.domain.DataProviderRequestResult
 import com.example.foody.domain.models.FoodJokeDomain
-import com.example.foody.presentation.viewmodels.FoodJokeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

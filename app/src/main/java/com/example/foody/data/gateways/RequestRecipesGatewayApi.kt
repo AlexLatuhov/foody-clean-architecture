@@ -89,10 +89,6 @@ class RequestRecipesGatewayApi @Inject constructor(
         selectedMealType: String,
         selectedDietType: String
     ): HashMap<String, String> {
-        Log.d(
-            Constants.TEST_TAG,
-            "selectedMealType $selectedMealType, selectedDietType $selectedDietType"
-        )
         val queries: HashMap<String, String> = HashMap()
         queries[Constants.QUERY_API_KEY] = Constants.API_KEY
         queries[Constants.QUERY_NUMBER] = Constants.DEFAULT_RECIPES_NUMBER

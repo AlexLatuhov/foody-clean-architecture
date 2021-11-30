@@ -1,4 +1,4 @@
-package com.example.foody.presentation.bindingadapters
+package com.example.foody.presentation.ui.favorites
 
 import android.view.View
 import androidx.core.view.isInvisible
@@ -6,7 +6,6 @@ import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foody.domain.models.FavoritesEntityDomain
-import com.example.foody.presentation.adapters.FavoriteRecipesAdapter
 
 class FavoriteRecipesBinding {
     companion object {

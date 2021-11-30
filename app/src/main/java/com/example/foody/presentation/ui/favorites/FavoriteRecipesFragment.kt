@@ -1,4 +1,4 @@
-package com.example.foody.presentation.ui
+package com.example.foody.presentation.ui.favorites
 
 import android.os.Bundle
 import android.view.*
@@ -7,8 +7,6 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foody.R
 import com.example.foody.databinding.FragmentFavoriteRecipesBinding
-import com.example.foody.presentation.adapters.FavoriteRecipesAdapter
-import com.example.foody.presentation.viewmodels.FavoritesViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 

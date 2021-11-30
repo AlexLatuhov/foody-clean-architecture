@@ -1,4 +1,4 @@
-package com.example.foody.presentation.adapters
+package com.example.foody.presentation.ui.favorites
 
 import android.view.ActionMode
 import android.view.Menu
@@ -10,10 +10,10 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import com.example.foody.R
 import com.example.foody.domain.models.FavoritesEntityDomain
-import com.example.foody.presentation.ui.FavoriteRecipesFragmentDirections
+import com.example.foody.presentation.ui.BaseRecipesAdapter
+
 import com.example.foody.presentation.ui.recipes.RecipeViewHolder
 import com.example.foody.presentation.util.RecipesDiffUtil
-import com.example.foody.presentation.viewmodels.FavoritesViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class FavoriteRecipesAdapter(

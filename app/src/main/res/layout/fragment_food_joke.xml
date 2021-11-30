@@ -6,14 +6,14 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.foody.presentation.viewmodels.FoodJokeViewModel" />
+            type="com.example.foody.presentation.ui.joke.FoodJokeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/ic_food_joke_background"
-        tools:context=".presentation.ui.fragments.foodjoke.FoodJokeFragment">
+        tools:context=".presentation.ui.joke.FoodJokeFragment">
 
         <ImageView
             android:id="@+id/food_joke_error_imageView"

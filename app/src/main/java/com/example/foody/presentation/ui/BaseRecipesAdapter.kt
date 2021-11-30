@@ -1,4 +1,4 @@
-package com.example.foody.presentation.adapters
+package com.example.foody.presentation.ui
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

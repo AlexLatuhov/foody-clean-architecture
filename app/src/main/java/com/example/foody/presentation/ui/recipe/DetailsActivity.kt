@@ -1,4 +1,4 @@
-package com.example.foody.presentation.ui
+package com.example.foody.presentation.ui.recipe
 
 import android.os.Bundle
 import android.util.Log
@@ -12,13 +12,9 @@ import androidx.navigation.navArgs
 import com.example.foody.R
 import com.example.foody.databinding.ActivityDetailsBinding
 import com.example.foody.domain.models.FavoritesEntityDomain
-import com.example.foody.presentation.adapters.PagerAdapter
-import com.example.foody.presentation.ui.fragments.ingredients.IngredientsFragment
-import com.example.foody.presentation.ui.fragments.instructions.InstructionsFragment
-import com.example.foody.presentation.ui.fragments.overview.OverviewFragment
+import com.example.foody.presentation.ui.favorites.FavoritesViewModel
 import com.example.foody.presentation.util.Constants.Companion.DEFAULT_ID
 import com.example.foody.presentation.util.Constants.Companion.RECIPE
-import com.example.foody.presentation.viewmodels.FavoritesViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint

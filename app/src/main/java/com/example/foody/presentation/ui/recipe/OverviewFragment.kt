@@ -1,4 +1,4 @@
-package com.example.foody.presentation.ui.fragments.overview
+package com.example.foody.presentation.ui.recipe
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,6 @@ import coil.load
 import com.example.foody.R
 import com.example.foody.databinding.FragmentOverviewBinding
 import com.example.foody.domain.models.RecipeDomain
-import com.example.foody.presentation.bindingadapters.RecipesRowBinding
 import com.example.foody.presentation.util.Constants.Companion.RECIPE
 
 class OverviewFragment : Fragment() {

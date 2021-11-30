@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoriteRecipesFragment"
-        android:name="com.example.foody.presentation.ui.FavoriteRecipesFragment"
+        android:name="com.example.foody.presentation.ui.favorites.FavoriteRecipesFragment"
         android:label="@string/favorite"
         tools:layout="@layout/fragment_favorite_recipes">
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/foodJokeFragment"
-        android:name="com.example.foody.presentation.ui.fragments.foodjoke.FoodJokeFragment"
+        android:name="com.example.foody.presentation.ui.joke.FoodJokeFragment"
         android:label="@string/joke"
         tools:layout="@layout/fragment_food_joke" />
     <dialog
@@ -44,7 +44,7 @@
     </dialog>
     <activity
         android:id="@+id/detailsActivity"
-        android:name="com.example.foody.presentation.ui.DetailsActivity"
+        android:name="com.example.foody.presentation.ui.recipe.DetailsActivity"
         android:label="activity_details"
         tools:layout="@layout/activity_details">
         <argument

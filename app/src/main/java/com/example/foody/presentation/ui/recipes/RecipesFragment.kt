@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foody.R
 import com.example.foody.databinding.FragmentRecipesBinding
 import com.example.foody.domain.DataRequestResult
-import com.example.foody.presentation.viewmodels.FavoritesViewModel
+import com.example.foody.presentation.ui.favorites.FavoritesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -17,7 +17,7 @@
         android:theme="@style/SplashScreenStyle"
         android:usesCleartextTraffic="true">
         <activity
-            android:name="com.example.foody.presentation.ui.DetailsActivity"
+            android:name="com.example.foody.presentation.ui.recipe.DetailsActivity"
             android:screenOrientation="portrait"
             android:exported="true"
             tools:ignore="LockedOrientationActivity"

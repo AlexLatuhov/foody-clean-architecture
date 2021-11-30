@@ -1,4 +1,4 @@
-package com.example.foody.presentation.viewmodels
+package com.example.foody.presentation.ui.joke
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

@@ -7,18 +7,18 @@
 
         <variable
             name="mainViewModel"
-            type="com.example.foody.presentation.viewmodels.FavoritesViewModel" />
+            type="com.example.foody.presentation.ui.favorites.FavoritesViewModel" />
 
         <variable
             name="mAdapter"
-            type="com.example.foody.presentation.adapters.FavoriteRecipesAdapter" />
+            type="com.example.foody.presentation.ui.favorites.FavoriteRecipesAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/backgroundColor"
-        tools:context=".presentation.ui.FavoriteRecipesFragment">
+        tools:context=".presentation.ui.favorites.FavoriteRecipesFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/favoriteRecipesRecyclerView"
