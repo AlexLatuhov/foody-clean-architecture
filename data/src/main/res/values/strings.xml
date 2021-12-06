@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="timeout">Timeout</string>
+    <string name="key_limited">API Key Limited</string>
+    <string name="unknown_error">Unknown Error</string>
+    <string name="no_data">No data</string>
+    <string name="not_found">Not found</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="no_value">No value</string>
+    <string name="recipes_not_found">Recipes not found</string>
+</resources>

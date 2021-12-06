@@ -1,14 +1,14 @@
 package com.example.foody.di
 
-import com.example.foody.data.database.repositories.LocalDataStoreRepository
-import com.example.foody.data.gateways.DataFavoriteRecipesEditorGateway
-import com.example.foody.data.gateways.DataLoadRecipeGateway
-import com.example.foody.data.gateways.RequestFoodJokeGatewayApi
-import com.example.foody.data.gateways.RequestRecipesGatewayApi
-import com.example.foody.data.repositories.DataStoreRepository
-import com.example.foody.domain.gateway.*
-import com.example.foody.domain.usecase.implementations.*
-import com.example.foody.domain.usecase.interfaces.*
+import com.example.data.database.repositories.LocalDataStoreRepository
+import com.example.data.gateways.DataFavoriteRecipesEditorGateway
+import com.example.data.gateways.DataLoadRecipeGateway
+import com.example.data.gateways.RequestFoodJokeGatewayApi
+import com.example.data.gateways.RequestRecipesGatewayApi
+import com.example.data.repositories.DataStoreRepository
+import com.example.domain.gateway.*
+import com.example.domain.usecase.implementations.*
+import com.example.domain.usecase.interfaces.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
