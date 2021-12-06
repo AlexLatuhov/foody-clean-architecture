@@ -8,11 +8,11 @@ import com.example.foody.data.api.models.FoodJokeDataItem
 import com.example.foody.data.database.models.FoodJokeEntity
 import com.example.foody.data.getErrorMessage
 import com.example.foody.data.hasInternetConnection
+import com.example.foody.data.mappers.convertToDomain
+import com.example.foody.data.repositories.JokeStorage
 import com.example.foody.domain.DataProviderRequestResult
-import com.example.foody.domain.LocalDbToDomainMapper
 import com.example.foody.domain.gateway.GetFoodJokeGateway
 import com.example.foody.domain.models.FoodJokeDomain
-import com.example.foody.domain.repositories.JokeStorage
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,9 +22,9 @@ import javax.inject.Inject
 class RequestFoodJokeGatewayApi @Inject constructor(
     @ApplicationContext val context: Context,
     private val remoteDataSource: RemoteDataSource,
-    private val localDbToDomainMapper: LocalDbToDomainMapper,
     private val jokeStorage: JokeStorage
 ) : GetFoodJokeGateway {
+
     private val dataRequestResult =
         MutableStateFlow<DataProviderRequestResult<FoodJokeDomain>>(DataProviderRequestResult.Loading())
 
@@ -43,7 +43,7 @@ class RequestFoodJokeGatewayApi @Inject constructor(
                     val dbEntity = FoodJokeEntity(foodJoke)
                     val insertResult = jokeStorage.insertFoodJoke(dbEntity)
                     return if (insertResult)
-                        DataProviderRequestResult.Success(localDbToDomainMapper.map(dbEntity))
+                        DataProviderRequestResult.Success(dbEntity.convertToDomain())
                     else loadFromCache(context.getString(R.string.unknown_error))
                 }
             } catch (e: Exception) {
@@ -57,7 +57,7 @@ class RequestFoodJokeGatewayApi @Inject constructor(
         val entitiesList = jokeStorage.readFoodJoke()
         return if (entitiesList.isNullOrEmpty()) DataProviderRequestResult.Error(errorMessage) else DataProviderRequestResult.Error(
             errorMessage,
-            localDbToDomainMapper.map(entitiesList[0])
+            entitiesList[0].convertToDomain()
         )
     }
 

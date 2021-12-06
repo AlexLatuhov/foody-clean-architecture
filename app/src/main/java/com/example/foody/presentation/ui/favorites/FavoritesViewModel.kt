@@ -6,10 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.foody.domain.models.FavoritesEntityDomain
-import com.example.foody.domain.usecase.DeleteAllFavoriteRecipeUseCase
-import com.example.foody.domain.usecase.InsertFavoriteRecipeUseCase
-import com.example.foody.domain.usecase.ReadFavoriteRecipesUseCase
-import com.example.foody.domain.usecase.RemoveFavoriteRecipeUseCase
+import com.example.foody.domain.usecase.implementations.RemoveFavoriteRecipeUseCaseImpl
+import com.example.foody.domain.usecase.interfaces.DeleteAllFavoriteRecipeUseCase
+import com.example.foody.domain.usecase.interfaces.InsertFavoriteRecipeUseCase
+import com.example.foody.domain.usecase.interfaces.ReadFavoriteRecipesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,7 +20,7 @@ class FavoritesViewModel @Inject constructor(
     application: Application,
     readFavoriteRecipesUseCase: ReadFavoriteRecipesUseCase,
     private val insertFavoriteRecipeUseCase: InsertFavoriteRecipeUseCase,
-    private val removeFavoriteRecipeUseCase: RemoveFavoriteRecipeUseCase,
+    private val removeFavoriteRecipeUseCase: RemoveFavoriteRecipeUseCaseImpl,
     private val deleteAllFavoriteRecipeUseCase: DeleteAllFavoriteRecipeUseCase
 ) : AndroidViewModel(application) {
 

@@ -14,7 +14,7 @@ import com.example.foody.data.Constants.Companion.PREF_DIET_TYPE_ID
 import com.example.foody.data.Constants.Companion.PREF_MEAL_TYPE
 import com.example.foody.data.Constants.Companion.PREF_MEAL_TYPE_ID
 import com.example.foody.data.Constants.Companion.PREF_NAME
-import com.example.foody.domain.repositories.DataStoreRepository
+import com.example.foody.data.repositories.DataStoreRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
@@ -29,6 +29,7 @@ private val Context.dataStore by preferencesDataStore(name = PREF_NAME)
 @ViewModelScoped
 class LocalDataStoreRepository @Inject constructor(@ApplicationContext private val context: Context) :
     DataStoreRepository {
+
     private lateinit var mealAndDietType: MealAndDietType
 
     override fun hasTempValue() = this::mealAndDietType.isInitialized

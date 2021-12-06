@@ -17,6 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RecipesFragment : Fragment(), SearchView.OnQueryTextListener, SearchView.OnCloseListener {
+
     private var _binding: FragmentRecipesBinding? = null
     private val binding get() = _binding!!
     private lateinit var favoritesViewModel: FavoritesViewModel

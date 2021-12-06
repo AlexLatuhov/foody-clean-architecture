@@ -21,6 +21,7 @@ class FavoriteRecipesAdapter(
     private val favoritesViewModel: FavoritesViewModel
 ) : BaseRecipesAdapter(),
     ActionMode.Callback {
+
     private var multiSelection = false
     private var selectedRecipes = arrayListOf<FavoritesEntityDomain>()
     private var myViewHolder = arrayListOf<RecipeViewHolder>()

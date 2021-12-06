@@ -1,14 +1,13 @@
 package com.example.foody.data.gateways
 
-import com.example.foody.domain.LocalDbToDomainMapper
+import com.example.foody.data.mappers.convertToDomainItem
+import com.example.foody.data.repositories.RecipesLoader
 import com.example.foody.domain.gateway.LoadRecipesGateway
 import com.example.foody.domain.gateway.ReadFavoriteRecipesGateWay
-import com.example.foody.domain.repositories.RecipesLoader
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class DataLoadRecipeGateway @Inject constructor(
-    private val localDbToDomainMapper: LocalDbToDomainMapper,
     private val recipesLoader: RecipesLoader
 ) : LoadRecipesGateway, ReadFavoriteRecipesGateWay {
 
@@ -23,10 +22,9 @@ class DataLoadRecipeGateway @Inject constructor(
                     )
                 }
             else resultsTemp
-            localDbToDomainMapper.map(returnResult ?: emptyList())
-
+            returnResult?.convertToDomainItem() ?: emptyList()
         }
 
     override fun readFavoriteRecipes() = recipesLoader.readFavoriteRecipes()
-        .map { items -> items.map { localDbToDomainMapper.map(it) } }
+        .map { items -> items.map { favoritesEntity -> favoritesEntity.convertToDomainItem() } }
 }

@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.foody.domain.DataProviderRequestResult
 import com.example.foody.domain.models.FoodJokeDomain
-import com.example.foody.domain.usecase.GetFoodJokeUseCase
+import com.example.foody.domain.usecase.interfaces.GetFoodJokeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -17,6 +17,7 @@ class FoodJokeViewModel @Inject constructor(
     private val getFoodJokeUseCase: GetFoodJokeUseCase,
     application: Application
 ) : AndroidViewModel(application) {
+
     var foodJokeDataItemResponse: MutableLiveData<DataProviderRequestResult<FoodJokeDomain>> =
         MutableLiveData()
 

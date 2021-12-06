@@ -1,10 +1,10 @@
-package com.example.foody.domain.gateway
+package com.example.foody.domain.usecase.interfaces
 
 import com.example.foody.domain.DataProviderRequestResult
 import com.example.foody.domain.models.FoodJokeDomain
 import kotlinx.coroutines.flow.Flow
 
-interface GetFoodJokeGateway {
+interface GetFoodJokeUseCase {
 
     suspend fun getData(): Flow<DataProviderRequestResult<FoodJokeDomain>>
 

@@ -1,24 +1,23 @@
 package com.example.foody.data.gateways
 
-import com.example.foody.domain.DomainToLocalDbMapper
+import com.example.foody.data.mappers.convertToDataBaseItem
+import com.example.foody.data.repositories.FavoriteRecipesEditor
 import com.example.foody.domain.gateway.DeleteAllFavoriteRecipeGateWay
 import com.example.foody.domain.gateway.InsertFavoriteRecipeGateWay
 import com.example.foody.domain.gateway.RemoveFavoriteRecipeGateWay
 import com.example.foody.domain.models.FavoritesEntityDomain
-import com.example.foody.domain.repositories.FavoriteRecipesEditor
 import javax.inject.Inject
 
 class DataFavoriteRecipesEditorGateway @Inject constructor(
-    private val domainToLocalDbMapper: DomainToLocalDbMapper,
     private val favoriteRecipesEditor: FavoriteRecipesEditor
 ) : InsertFavoriteRecipeGateWay, RemoveFavoriteRecipeGateWay, DeleteAllFavoriteRecipeGateWay {
 
     override suspend fun insert(favoritesEntity: FavoritesEntityDomain) =
-        favoriteRecipesEditor.insertFavoriteRecipes(domainToLocalDbMapper.map(favoritesEntity)[0])
+        favoriteRecipesEditor.insertFavoriteRecipes(favoritesEntity.convertToDataBaseItem())
 
     override suspend fun deleteFavoriteRecipe(vararg favoritesEntity: FavoritesEntityDomain) =
         favoriteRecipesEditor.deleteFavoriteRecipe(
-            *domainToLocalDbMapper.map(*favoritesEntity).toTypedArray()
+            *favoritesEntity.map { it.convertToDataBaseItem() }.toTypedArray()
         )
 
     override suspend fun deleteAll() = favoriteRecipesEditor.deleteAll()

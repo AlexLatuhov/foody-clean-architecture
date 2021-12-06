@@ -8,10 +8,10 @@ import com.example.foody.data.database.repositories.LocalFavoriteRecipesEditor
 import com.example.foody.data.database.repositories.LocalFoodJokeStorage
 import com.example.foody.data.database.repositories.LocalRecipesLoader
 import com.example.foody.data.database.repositories.LocalRecipesSaver
-import com.example.foody.domain.repositories.FavoriteRecipesEditor
-import com.example.foody.domain.repositories.JokeStorage
-import com.example.foody.domain.repositories.RecipesLoader
-import com.example.foody.domain.repositories.RecipesSaver
+import com.example.foody.data.repositories.FavoriteRecipesEditor
+import com.example.foody.data.repositories.JokeStorage
+import com.example.foody.data.repositories.RecipesLoader
+import com.example.foody.data.repositories.RecipesSaver
 import com.example.foody.presentation.util.Constants.Companion.DATABASE_NAME
 import dagger.Module
 import dagger.Provides

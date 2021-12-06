@@ -1,9 +1,9 @@
-package com.example.foody.domain.gateway
+package com.example.foody.domain.usecase.interfaces
 
 import com.example.foody.domain.models.FavoritesEntityDomain
 import kotlinx.coroutines.flow.Flow
 
-interface ReadFavoriteRecipesGateWay {
+interface ReadFavoriteRecipesUseCase {
 
     fun readFavoriteRecipes(): Flow<List<FavoritesEntityDomain>>
 

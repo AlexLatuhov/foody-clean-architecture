@@ -7,10 +7,10 @@ import com.example.foody.data.Constants
 import com.example.foody.data.Constants.Companion.CLEAN_TAG
 import com.example.foody.data.api.RemoteDataSource
 import com.example.foody.data.hasInternetConnection
+import com.example.foody.data.mappers.convertToDomainItem
+import com.example.foody.data.repositories.DataStoreRepository
 import com.example.foody.domain.DataRequestResult
-import com.example.foody.domain.LocalDbToDomainMapper
 import com.example.foody.domain.gateway.RequestRecipesGateway
-import com.example.foody.domain.repositories.DataStoreRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,13 +20,13 @@ import javax.inject.Inject
 class RequestRecipesGatewayApi @Inject constructor(
     @ApplicationContext val context: Context,
     private val dataStoreRepository: DataStoreRepository,
-    private val remoteDataSource: RemoteDataSource,
-    private val localDbToDomainMapper: LocalDbToDomainMapper
+    private val remoteDataSource: RemoteDataSource
 ) : RequestRecipesGateway {
 
     private val dataRequestResult = MutableStateFlow<DataRequestResult>(DataRequestResult.None)
 
     private suspend fun saveMealAndDietType() = dataStoreRepository.saveMealAndDietType()
+
     private fun hasTempValue(): Boolean = dataStoreRepository.hasTempValue()
 
     override fun saveMealAndDietTypeTemp(
@@ -39,7 +39,7 @@ class RequestRecipesGatewayApi @Inject constructor(
     }
 
     override fun readMealAndDietType() = dataStoreRepository.readMealAndDietType.map {
-        localDbToDomainMapper.map(it)
+        it.convertToDomainItem()
     }
 
     override suspend fun getData(): Flow<DataRequestResult> {

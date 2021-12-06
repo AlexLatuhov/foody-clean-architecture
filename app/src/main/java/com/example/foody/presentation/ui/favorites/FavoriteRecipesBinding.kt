@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.foody.domain.models.FavoritesEntityDomain
 
 class FavoriteRecipesBinding {
+
     companion object {
 
         @BindingAdapter("viewVisibility", "setData", requireAll = false)

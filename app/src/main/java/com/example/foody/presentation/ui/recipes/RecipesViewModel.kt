@@ -6,8 +6,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.foody.domain.DataRequestResult
-import com.example.foody.domain.usecase.LoadRecipesUseCase
-import com.example.foody.domain.usecase.RequestRecipesUseCase
+import com.example.foody.domain.usecase.interfaces.LoadRecipesUseCase
+import com.example.foody.domain.usecase.interfaces.RequestRecipesUseCase
 import com.example.foody.presentation.util.Constants.Companion.CLEAN_TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
