@@ -2,7 +2,7 @@ package com.example.data.database.models
 
 import com.google.gson.annotations.SerializedName
 
-data class FoodRecipe(
+data class FoodRecipeEntity(
     @SerializedName("results")
-    val recipes: List<Recipe>
+    val recipeItemEntities: List<RecipeItemEntity>
 )

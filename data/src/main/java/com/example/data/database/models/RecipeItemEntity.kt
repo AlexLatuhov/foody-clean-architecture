@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
 
 @Parcelize
-data class Recipe(
+data class RecipeItemEntity(
     @SerializedName("aggregateLikes")
     val aggregateLikes: Int,
     @SerializedName("cheap")

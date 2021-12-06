@@ -2,7 +2,7 @@ package com.example.data.mappers
 
 import com.example.data.database.models.ExtendedIngredient
 import com.example.data.database.models.FavoritesEntity
-import com.example.data.database.models.Recipe
+import com.example.data.database.models.RecipeItemEntity
 import com.example.domain.models.ExtendedIngredientDomain
 import com.example.domain.models.FavoritesEntityDomain
 import com.example.domain.models.RecipeDomain
@@ -10,7 +10,7 @@ import com.example.domain.models.RecipeDomain
 fun FavoritesEntityDomain.convertToDataBaseItem() =
     FavoritesEntity(id, recipe.convertToDomainItem())
 
-private fun RecipeDomain.convertToDomainItem() = Recipe(
+private fun RecipeDomain.convertToDomainItem() = RecipeItemEntity(
     aggregateLikes,
     cheap,
     dairyFree,

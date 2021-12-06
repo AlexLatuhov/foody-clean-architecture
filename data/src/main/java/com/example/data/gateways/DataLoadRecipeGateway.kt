@@ -13,7 +13,7 @@ class DataLoadRecipeGateway @Inject constructor(
 
     override fun loadDataFromCache(searchQuery: String?) =
         recipesLoader.readRecipes().map { database ->
-            val resultsTemp = database.getOrNull(0)?.foodRecipe?.recipes
+            val resultsTemp = database.getOrNull(0)?.foodRecipeEntity?.recipeItemEntities
             val returnResult = if (searchQuery != null)
                 resultsTemp?.filter { result ->
                     result.title.contains(

@@ -31,7 +31,7 @@ class RemoteDataSource @Inject constructor(
                 val insertResult = localDataSource.insertRecipes(domainData)
                 Log.d(
                     Constants.TEST_TAG,
-                    "insertRecipes ${domainData.foodRecipe.recipes.size}, result is $insertResult"
+                    "insertRecipes ${domainData.foodRecipeEntity.recipeItemEntities.size}, result is $insertResult"
                 )
                 if (!insertResult) {
                     return DataRequestResult.Error(context.getString(R.string.unknown_error))
