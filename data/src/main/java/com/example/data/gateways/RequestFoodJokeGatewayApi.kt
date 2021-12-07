@@ -10,9 +10,9 @@ import com.example.data.extentions.getErrorMessage
 import com.example.data.extentions.hasInternetConnection
 import com.example.data.mappers.convertToDomain
 import com.example.data.repositories.JokeStorage
-import com.example.domain.DataProviderRequestResult
 import com.example.domain.gateway.GetFoodJokeGateway
 import com.example.domain.models.FoodJokeDomain
+import com.example.domain.models.request.DataProviderRequestResult
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

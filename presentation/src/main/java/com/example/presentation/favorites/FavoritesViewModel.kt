@@ -5,10 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.domain.models.FavoritesEntityDomain
+import com.example.domain.models.request.FavOperationResult
 import com.example.domain.usecase.implementations.RemoveFavoriteRecipeUseCaseImpl
 import com.example.domain.usecase.interfaces.DeleteAllFavoriteRecipeUseCase
 import com.example.domain.usecase.interfaces.InsertFavoriteRecipeUseCase
 import com.example.domain.usecase.interfaces.ReadFavoriteRecipesUseCase
+import com.example.presentation.SuccessAdd
+import com.example.presentation.SuccessRemove
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,29 +26,23 @@ class FavoritesViewModel @Inject constructor(
 ) : ViewModel() {
 
     val readFavoriteRecipes = readFavoriteRecipesUseCase.readFavoriteRecipes().asLiveData()
-    var operationResult: MutableLiveData<Boolean> = MutableLiveData()
+    val favOperationResult = MutableLiveData<FavOperationResult>()
 
     fun insertFavoriteRecipe(favoritesEntity: FavoritesEntityDomain) =
         viewModelScope.launch(Dispatchers.IO) {
-            operationResult.postValue(
-                insertFavoriteRecipeUseCase.insertFavoriteRecipe(
-                    favoritesEntity
-                )
-            )
+            val useCaseRes = insertFavoriteRecipeUseCase.insertFavoriteRecipe(favoritesEntity)
+            favOperationResult.postValue(if (useCaseRes is FavOperationResult.Success) SuccessAdd else useCaseRes)
         }
 
     fun deleteFavoriteRecipe(vararg favoritesEntity: FavoritesEntityDomain) =
         viewModelScope.launch(Dispatchers.IO) {
-            operationResult.postValue(
-                removeFavoriteRecipeUseCase.removeFavoriteRecipe(
-                    *favoritesEntity
-                )
-            )
+            val useCaseRes = removeFavoriteRecipeUseCase.removeFavoriteRecipe(*favoritesEntity)
+            favOperationResult.postValue(if (useCaseRes is FavOperationResult.Success) SuccessRemove else useCaseRes)
         }
 
     fun deleteAllFavoriteRecipes() =
         viewModelScope.launch(Dispatchers.IO) {
-            operationResult.postValue(
+            favOperationResult.postValue(
                 deleteAllFavoriteRecipeUseCase.deleteAll()
             )
         }

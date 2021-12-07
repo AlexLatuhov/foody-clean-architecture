@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.DataRequestResult
+import com.example.domain.models.request.RecipesDataRequestResult
 import com.example.domain.usecase.interfaces.LoadRecipesUseCase
 import com.example.domain.usecase.interfaces.RecipesDataInteractor
 import com.example.presentation.Constants.Companion.CLEAN_TAG
@@ -20,7 +20,7 @@ class RecipesViewModel @Inject constructor(
     private val loadRecipesUseCase: LoadRecipesUseCase
 ) : ViewModel() {
 
-    val recipesRequestResult: MutableLiveData<DataRequestResult> = MutableLiveData()
+    val recipesRequestResultRecipes: MutableLiveData<RecipesDataRequestResult> = MutableLiveData()
 
     fun saveMealAndDietTypeTemp(
         mealType: String,
@@ -37,12 +37,12 @@ class RecipesViewModel @Inject constructor(
     fun loadDataFromCache(searchQuery: String?) = loadRecipesUseCase.loadDataFromCache(searchQuery)
 
     fun getData() {
-        recipesRequestResult.value = DataRequestResult.None
+        recipesRequestResultRecipes.value = RecipesDataRequestResult.None
         viewModelScope.launch(Dispatchers.IO) {
             recipesDataInteractor.requestAndStoreRecipesData()
                 .collect { dataRequestResult ->
                     Log.d(CLEAN_TAG, "onDataRequestResult in collect $dataRequestResult")
-                    recipesRequestResult.postValue(dataRequestResult)
+                    recipesRequestResultRecipes.postValue(dataRequestResult)
                 }
         }
     }

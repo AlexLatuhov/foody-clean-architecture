@@ -4,8 +4,8 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.example.domain.DataProviderRequestResult
 import com.example.domain.models.FoodJokeDomain
+import com.example.domain.models.request.DataProviderRequestResult
 import com.google.android.material.card.MaterialCardView
 
 class FoodJokeBinding {

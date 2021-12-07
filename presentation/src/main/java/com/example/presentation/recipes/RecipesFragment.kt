@@ -8,7 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.domain.DataRequestResult
+import com.example.domain.models.request.RecipesDataRequestResult
 import com.example.presentation.BaseFragment
 import com.example.presentation.R
 import com.example.presentation.databinding.FragmentRecipesBinding
@@ -39,18 +39,18 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(), SearchView.OnQue
         super.onViewCreated(view, savedInstanceState)
         showShimmerEffect()
         recipesViewModel.getData()
-        recipesViewModel.recipesRequestResult.observe(viewLifecycleOwner, { requestResult ->
+        recipesViewModel.recipesRequestResultRecipes.observe(viewLifecycleOwner, { requestResult ->
             onDataRequestResult(requestResult)
         })
     }
 
-    private fun onDataRequestResult(dataRequestResult: DataRequestResult) {
-        when (dataRequestResult) {
-            is DataRequestResult.Success -> {
+    private fun onDataRequestResult(recipesDataRequestResult: RecipesDataRequestResult) {
+        when (recipesDataRequestResult) {
+            is RecipesDataRequestResult.Success -> {
                 loadDataFromCache()
             }
-            is DataRequestResult.Error -> {
-                val errorMessage = dataRequestResult.message
+            is RecipesDataRequestResult.Error -> {
+                val errorMessage = recipesDataRequestResult.message
                 loadDataFromCache(
                     errorMessage
                 )

@@ -13,6 +13,8 @@ import com.example.domain.models.FavoritesEntityDomain
 import com.example.presentation.Constants.Companion.DEFAULT_ID
 import com.example.presentation.Constants.Companion.RECIPE
 import com.example.presentation.R
+import com.example.presentation.SuccessAdd
+import com.example.presentation.SuccessRemove
 import com.example.presentation.databinding.ActivityDetailsBinding
 import com.example.presentation.favorites.FavoritesViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -56,6 +58,20 @@ class DetailsActivity : AppCompatActivity() {
             tab.icon = ContextCompat.getDrawable(this, titles[pos])
         }.attach()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        favoritesViewModel.favOperationResult.observe(this, { result ->
+            val notifyStringId = when (result) {
+                is SuccessAdd -> {
+                    R.string.saved_to_favorites
+                }
+                is SuccessRemove -> {
+                    R.string.removed_from_favorites
+                }
+                else -> {
+                    R.string.unknown_error
+                }
+            }
+            showSnackBar(getString(notifyStringId))
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -88,27 +104,17 @@ class DetailsActivity : AppCompatActivity() {
             finish()
         } else if (item.itemId == R.id.save_to_favorites_menu) {
             if (savedRecipeId == DEFAULT_ID) {
-                saveToFavorites()
+                favoritesViewModel.insertFavoriteRecipe(FavoritesEntityDomain(recipe = args.result))
             } else {
-                removeFromFavorites()
+                favoritesViewModel.deleteFavoriteRecipe(
+                    FavoritesEntityDomain(
+                        savedRecipeId,
+                        args.result
+                    )
+                )
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun saveToFavorites() {
-        favoritesViewModel.operationResult.observe(this, { result ->
-            showSnackBar(getString(if (result) R.string.saved_to_favorites else R.string.unknown_error))
-        })
-        favoritesViewModel.insertFavoriteRecipe(FavoritesEntityDomain(recipe = args.result))
-    }
-
-    private fun removeFromFavorites() {
-        favoritesViewModel.operationResult.observe(this, { result ->
-            showSnackBar(getString(if (result) R.string.removed_from_favorites else R.string.unknown_error))
-        })
-        val favoritesEntity = FavoritesEntityDomain(savedRecipeId, args.result)
-        favoritesViewModel.deleteFavoriteRecipe(favoritesEntity)
     }
 
     private fun showSnackBar(string: String) {

@@ -9,7 +9,7 @@ import com.example.data.api.models.RecipeDataItem
 import com.example.data.extentions.getErrorMessage
 import com.example.data.mappers.convertToLocalDbItem
 import com.example.data.repositories.RecipesSaver
-import com.example.domain.DataRequestResult
+import com.example.domain.models.request.RecipesDataRequestResult
 import dagger.hilt.android.qualifiers.ApplicationContext
 import retrofit2.Response
 import javax.inject.Inject
@@ -20,11 +20,11 @@ class RecipesDataHandler @Inject constructor(
     private val localDataSource: RecipesSaver
 ) {
 
-    suspend fun getRecipes(queries: Map<String, String>): DataRequestResult {
+    suspend fun getRecipes(queries: Map<String, String>): RecipesDataRequestResult {
         val dataResponse = foodRecipesApi.getRecipes(queries)
         val result = dataResponse.getRecipesResult()
         val foodRecipe = dataResponse.body()
-        if (result is DataRequestResult.Success) {
+        if (result is RecipesDataRequestResult.Success) {
             if (foodRecipe != null) {
                 val domainData =
                     foodRecipe.convertToLocalDbItem(context.getString(R.string.no_value))
@@ -34,10 +34,10 @@ class RecipesDataHandler @Inject constructor(
                     "insertRecipes ${domainData.foodRecipeEntity.recipeItemEntities.size}, result is $insertResult"
                 )
                 if (!insertResult) {
-                    return DataRequestResult.Error(context.getString(R.string.unknown_error))
+                    return RecipesDataRequestResult.Error(context.getString(R.string.unknown_error))
                 }
             } else {
-                return DataRequestResult.Error(context.getString(R.string.no_data))
+                return RecipesDataRequestResult.Error(context.getString(R.string.no_data))
             }
         }
         return result
@@ -46,17 +46,17 @@ class RecipesDataHandler @Inject constructor(
     suspend fun getFoodJoke(api: String): Response<FoodJokeDataItem> =
         foodRecipesApi.getFoodJoke(api)
 
-    private fun Response<RecipeDataItem>.getRecipesResult(): DataRequestResult {
+    private fun Response<RecipeDataItem>.getRecipesResult(): RecipesDataRequestResult {
         val error = getErrorMessage(context)
         return when {
             error != null -> {
-                DataRequestResult.Error(error)
+                RecipesDataRequestResult.Error(error)
             }
             body()!!.results.isNullOrEmpty() -> {
-                DataRequestResult.Error(context.getString(R.string.not_found))
+                RecipesDataRequestResult.Error(context.getString(R.string.not_found))
             }
             else -> {
-                DataRequestResult.Success
+                RecipesDataRequestResult.Success
             }
         }
     }

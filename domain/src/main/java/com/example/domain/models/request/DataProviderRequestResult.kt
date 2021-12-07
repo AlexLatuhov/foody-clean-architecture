@@ -1,4 +1,4 @@
-package com.example.domain
+package com.example.domain.models.request
 
 sealed class DataProviderRequestResult<T>(
     val data: T? = null,

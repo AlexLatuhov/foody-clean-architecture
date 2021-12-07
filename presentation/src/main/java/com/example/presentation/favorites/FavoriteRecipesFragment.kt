@@ -3,6 +3,7 @@ package com.example.presentation.favorites
 import android.view.*
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.domain.models.request.FavOperationResult
 import com.example.presentation.BaseFragment
 import com.example.presentation.R
 import com.example.presentation.databinding.FragmentFavoriteRecipesBinding
@@ -15,11 +16,9 @@ class FavoriteRecipesFragment : BaseFragment<FragmentFavoriteRecipesBinding>() {
     private val favoritesViewModel: FavoritesViewModel by viewModels()
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentFavoriteRecipesBinding =
         FragmentFavoriteRecipesBinding::inflate
-
     private val mAdapter: FavoriteRecipesAdapter by lazy {
         FavoriteRecipesAdapter(requireActivity(), favoritesViewModel)
     }
-
 
     override fun setup() {
         binding.lifecycleOwner = this
@@ -28,6 +27,9 @@ class FavoriteRecipesFragment : BaseFragment<FragmentFavoriteRecipesBinding>() {
         binding.favoriteRecipesRecyclerView.adapter = mAdapter
         binding.favoriteRecipesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         setHasOptionsMenu(true)
+        favoritesViewModel.favOperationResult.observe(this, { result ->
+            showSnackBar(getString(if (result is FavOperationResult.Success) R.string.deleted else R.string.unknown_error))
+        })
     }
 
     private fun showSnackBar(string: String) {
@@ -38,9 +40,6 @@ class FavoriteRecipesFragment : BaseFragment<FragmentFavoriteRecipesBinding>() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.delete_all) {
-            favoritesViewModel.operationResult.observe(this, { result ->
-                showSnackBar(getString(if (result) R.string.deleted else R.string.unknown_error))
-            })
             favoritesViewModel.deleteAllFavoriteRecipes()
         }
         return super.onOptionsItemSelected(item)

@@ -9,8 +9,8 @@ import com.example.data.api.RecipesDataHandler
 import com.example.data.extentions.hasInternetConnection
 import com.example.data.mappers.convertToDomainItem
 import com.example.data.repositories.MealAndDietRepository
-import com.example.domain.DataRequestResult
 import com.example.domain.gateway.RequestRecipesGateway
+import com.example.domain.models.request.RecipesDataRequestResult
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,7 +23,8 @@ class RequestRecipesGatewayApi @Inject constructor(
     private val recipesDataHandler: RecipesDataHandler
 ) : RequestRecipesGateway {
 
-    private val dataRequestResult = MutableStateFlow<DataRequestResult>(DataRequestResult.None)
+    private val dataRequestResult =
+        MutableStateFlow<RecipesDataRequestResult>(RecipesDataRequestResult.None)
 
     private suspend fun saveMealAndDietType() = mealAndDietRepository.saveMealAndDietType()
 
@@ -42,7 +43,7 @@ class RequestRecipesGatewayApi @Inject constructor(
         it.convertToDomainItem()
     }
 
-    override suspend fun requestAndStoreRecipesData(): Flow<DataRequestResult> {
+    override suspend fun requestAndStoreRecipesData(): Flow<RecipesDataRequestResult> {
         dataRequestResult.value =
             requestAndStoreData(
                 mealAndDietRepository.selectedMealType(),
@@ -54,20 +55,20 @@ class RequestRecipesGatewayApi @Inject constructor(
     private suspend fun requestAndStoreData(
         selectedMealType: String,
         selectedDietType: String
-    ): DataRequestResult {
+    ): RecipesDataRequestResult {
         if (context.hasInternetConnection()) {
             return try {
                 val queries = applyQueries(
                     selectedMealType, selectedDietType
                 )
                 val response = recipesDataHandler.getRecipes(queries)
-                if (response is DataRequestResult.Error) {
+                if (response is RecipesDataRequestResult.Error) {
                     createError(response.message)
                 } else {
                     if (hasTempValue()) {
                         saveMealAndDietType()
                     }
-                    DataRequestResult.Success
+                    RecipesDataRequestResult.Success
                 }
             } catch (e: Exception) {
                 Log.d(CLEAN_TAG, "Exception!")
@@ -81,8 +82,8 @@ class RequestRecipesGatewayApi @Inject constructor(
         }
     }
 
-    private fun createError(message: String): DataRequestResult.Error {
-        return DataRequestResult.Error(message)
+    private fun createError(message: String): RecipesDataRequestResult.Error {
+        return RecipesDataRequestResult.Error(message)
     }
 
     private fun applyQueries(

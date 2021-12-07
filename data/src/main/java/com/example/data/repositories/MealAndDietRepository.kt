@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface MealAndDietRepository : MealAndDietTypeSaver {
 
-    suspend fun saveMealAndDietType(): Boolean
+    suspend fun saveMealAndDietType(): Boolean//todo use custom object
 
     fun readMealAndDietType(): Flow<MealAndDietType>
 

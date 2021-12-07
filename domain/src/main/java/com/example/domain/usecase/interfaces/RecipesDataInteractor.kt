@@ -1,12 +1,12 @@
 package com.example.domain.usecase.interfaces
 
-import com.example.domain.DataRequestResult
 import com.example.domain.models.MealAndDietTypeDomain
+import com.example.domain.models.request.RecipesDataRequestResult
 import kotlinx.coroutines.flow.Flow
 
 interface RecipesDataInteractor {
 
-    suspend fun requestAndStoreRecipesData(): Flow<DataRequestResult>
+    suspend fun requestAndStoreRecipesData(): Flow<RecipesDataRequestResult>
 
     fun readMealAndDietType(): Flow<MealAndDietTypeDomain>
 

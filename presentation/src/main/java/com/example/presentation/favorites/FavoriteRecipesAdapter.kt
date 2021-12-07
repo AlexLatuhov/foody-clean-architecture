@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import com.example.domain.models.FavoritesEntityDomain
+import com.example.domain.models.request.FavOperationResult
 
 import com.example.presentation.BaseRecipesAdapter
 import com.example.presentation.R
@@ -21,6 +22,14 @@ class FavoriteRecipesAdapter(
     private val favoritesViewModel: FavoritesViewModel
 ) : BaseRecipesAdapter(),
     ActionMode.Callback {
+    init {
+        favoritesViewModel.favOperationResult.observe(requireActivity, { result ->
+            showSnackBar(requireActivity.getString(if (result is FavOperationResult.Success) R.string.recipes_removed else R.string.unknown_error))
+            multiSelection = false
+            selectedRecipes.clear()
+            clearMode()
+        })
+    }
 
     private var multiSelection = false
     private var selectedRecipes = arrayListOf<FavoritesEntityDomain>()
@@ -73,12 +82,6 @@ class FavoriteRecipesAdapter(
 
     override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
         if (item?.itemId == R.id.delete_favorite_recipe_menu) {
-            favoritesViewModel.operationResult.observe(requireActivity, { result ->
-                showSnackBar(requireActivity.getString(if (result) R.string.recipes_removed else R.string.unknown_error))
-                multiSelection = false
-                selectedRecipes.clear()
-                mode?.finish()
-            })
             favoritesViewModel.deleteFavoriteRecipe(*selectedRecipes.toTypedArray())
         }
         return true

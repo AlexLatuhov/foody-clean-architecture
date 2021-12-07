@@ -6,8 +6,8 @@ import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import com.example.domain.DataProviderRequestResult
 import com.example.domain.models.FoodJokeDomain
+import com.example.domain.models.request.DataProviderRequestResult
 import com.example.presentation.BaseFragment
 import com.example.presentation.R
 import com.example.presentation.databinding.FragmentFoodJokeBinding
