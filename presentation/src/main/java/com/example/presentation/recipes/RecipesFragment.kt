@@ -4,41 +4,35 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.domain.DataRequestResult
+import com.example.presentation.BaseFragment
 import com.example.presentation.R
 import com.example.presentation.databinding.FragmentRecipesBinding
 import com.example.presentation.favorites.FavoritesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RecipesFragment : Fragment(), SearchView.OnQueryTextListener, SearchView.OnCloseListener {
+class RecipesFragment : BaseFragment<FragmentRecipesBinding>(), SearchView.OnQueryTextListener,
+    SearchView.OnCloseListener {
 
-    private var _binding: FragmentRecipesBinding? = null
-    private val binding get() = _binding!!
-    private lateinit var favoritesViewModel: FavoritesViewModel
-    private lateinit var recipesViewModel: RecipesViewModel
+    private val favoritesViewModel: FavoritesViewModel by viewModels()
+    private val recipesViewModel: RecipesViewModel by viewModels()
     private val mAdapter by lazy { RecipesAdapter() }
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentRecipesBinding =
+        FragmentRecipesBinding::inflate
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentRecipesBinding.inflate(inflater, container, false)
+    override fun setup() {
         binding.lifecycleOwner = this
         binding.mainViewModel = favoritesViewModel
         setHasOptionsMenu(true)
         setupRecyclerView()
-
         binding.recipesFab.setOnClickListener {
             findNavController().navigate(R.id.action_recipesFragment_to_recipesBottomSheet)
         }
-        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -101,13 +95,6 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener, SearchView.O
         binding.errorTextView.text = errorMessage
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        favoritesViewModel =
-            ViewModelProvider(requireActivity()).get(FavoritesViewModel::class.java)
-        recipesViewModel = ViewModelProvider(requireActivity()).get(RecipesViewModel::class.java)
-    }
-
     private fun showShimmerEffect() {
         binding.shimmerFrameLayout.startShimmer()
         binding.recyclerView.visibility = View.GONE
@@ -125,11 +112,6 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener, SearchView.O
         searchView?.isSubmitButtonEnabled = true
         searchView?.setOnQueryTextListener(this)
         searchView?.setOnCloseListener(this)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {

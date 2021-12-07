@@ -1,8 +1,7 @@
 package com.example.presentation.favorites
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.domain.models.FavoritesEntityDomain
@@ -17,12 +16,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FavoritesViewModel @Inject constructor(
-    application: Application,
     readFavoriteRecipesUseCase: ReadFavoriteRecipesUseCase,
     private val insertFavoriteRecipeUseCase: InsertFavoriteRecipeUseCase,
     private val removeFavoriteRecipeUseCase: RemoveFavoriteRecipeUseCaseImpl,
     private val deleteAllFavoriteRecipeUseCase: DeleteAllFavoriteRecipeUseCase
-) : AndroidViewModel(application) {
+) : ViewModel() {
 
     val readFavoriteRecipes = readFavoriteRecipesUseCase.readFavoriteRecipes().asLiveData()
     var operationResult: MutableLiveData<Boolean> = MutableLiveData()

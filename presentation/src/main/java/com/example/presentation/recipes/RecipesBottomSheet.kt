@@ -17,17 +17,12 @@ import java.util.*
 
 class RecipesBottomSheet : BottomSheetDialogFragment() {
 
-    private lateinit var recipesViewModel: RecipesViewModel
+    private val recipesViewModel: RecipesViewModel by lazy { ViewModelProvider(requireActivity())[RecipesViewModel::class.java] }
 
     private var selectedMealType = Constants.DEFAULT_MEAL_TYPE
     private var selectedMealTypeId = Constants.DEFAULT_ID
     private var selectedDietType = Constants.DEFAULT_DIET_TYPE
     private var selectedDietTypeId = Constants.DEFAULT_ID
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        recipesViewModel = ViewModelProvider(requireActivity()).get(RecipesViewModel::class.java)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

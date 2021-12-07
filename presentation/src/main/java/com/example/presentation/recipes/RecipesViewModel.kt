@@ -1,9 +1,8 @@
 package com.example.presentation.recipes
 
-import android.app.Application
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.DataRequestResult
 import com.example.domain.usecase.interfaces.LoadRecipesUseCase
@@ -17,10 +16,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RecipesViewModel @Inject constructor(
-    application: Application,
     private val recipesDataInteractor: RecipesDataInteractor,
     private val loadRecipesUseCase: LoadRecipesUseCase
-) : AndroidViewModel(application) {
+) : ViewModel() {
 
     val recipesRequestResult: MutableLiveData<DataRequestResult> = MutableLiveData()
 

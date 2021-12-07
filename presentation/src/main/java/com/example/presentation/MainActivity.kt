@@ -13,24 +13,23 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var navController: NavController
+    private val navController: NavController by lazy { findNavController(R.id.navHostFragment) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.AppTheme)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        navController = findNavController(R.id.navHostFragment)
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.recipesFragment,
-                R.id.favoriteRecipesFragment,
-                R.id.foodJokeFragment
+        binding.bottomNavigationView.setupWithNavController(navController)
+        setupActionBarWithNavController(
+            navController, AppBarConfiguration(
+                setOf(
+                    R.id.recipesFragment,
+                    R.id.favoriteRecipesFragment,
+                    R.id.foodJokeFragment
+                )
             )
         )
-        val bottomNavigationView = binding.bottomNavigationView
-        bottomNavigationView.setupWithNavController(navController)
-        setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -1,40 +1,33 @@
 package com.example.presentation.favorites
 
-import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.presentation.BaseFragment
 import com.example.presentation.R
 import com.example.presentation.databinding.FragmentFavoriteRecipesBinding
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FavoriteRecipesFragment : Fragment() {
+class FavoriteRecipesFragment : BaseFragment<FragmentFavoriteRecipesBinding>() {
 
     private val favoritesViewModel: FavoritesViewModel by viewModels()
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentFavoriteRecipesBinding =
+        FragmentFavoriteRecipesBinding::inflate
 
     private val mAdapter: FavoriteRecipesAdapter by lazy {
         FavoriteRecipesAdapter(requireActivity(), favoritesViewModel)
     }
 
-    private var _binding: FragmentFavoriteRecipesBinding? = null
-    private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentFavoriteRecipesBinding.inflate(inflater, container, false)
+    override fun setup() {
         binding.lifecycleOwner = this
         binding.mainViewModel = favoritesViewModel
         binding.mAdapter = mAdapter
         binding.favoriteRecipesRecyclerView.adapter = mAdapter
         binding.favoriteRecipesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         setHasOptionsMenu(true)
-        return binding.root
     }
 
     private fun showSnackBar(string: String) {
@@ -59,7 +52,6 @@ class FavoriteRecipesFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
         mAdapter.clearMode()
     }
 }

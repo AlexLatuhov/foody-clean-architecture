@@ -2,31 +2,25 @@ package com.example.presentation.joke
 
 import android.content.Intent
 import android.content.Intent.EXTRA_TEXT
-import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.domain.DataProviderRequestResult
 import com.example.domain.models.FoodJokeDomain
+import com.example.presentation.BaseFragment
 import com.example.presentation.R
 import com.example.presentation.databinding.FragmentFoodJokeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FoodJokeFragment : Fragment() {
+class FoodJokeFragment : BaseFragment<FragmentFoodJokeBinding>() {
 
     private val viewModel: FoodJokeViewModel by viewModels()
-    private var _binding: FragmentFoodJokeBinding? = null
-    private val binding get() = _binding!!
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentFoodJokeBinding =
+        FragmentFoodJokeBinding::inflate
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentFoodJokeBinding.inflate(inflater, container, false)
+    override fun setup() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         viewModel.getFoodJoke()
@@ -49,7 +43,6 @@ class FoodJokeFragment : Fragment() {
             }
         })
         setHasOptionsMenu(true)
-        return binding.root
     }
 
     private fun setJokeText(dataProviderRequestResult: DataProviderRequestResult<FoodJokeDomain>) {
@@ -72,10 +65,5 @@ class FoodJokeFragment : Fragment() {
             startActivity(shareIntent)
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

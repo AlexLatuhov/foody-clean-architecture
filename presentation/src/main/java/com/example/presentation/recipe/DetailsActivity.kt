@@ -24,12 +24,13 @@ class DetailsActivity : AppCompatActivity() {
 
     private val args by navArgs<DetailsActivityArgs>()
     private val favoritesViewModel: FavoritesViewModel by viewModels()
-    private lateinit var binding: ActivityDetailsBinding
+    private var _binding: ActivityDetailsBinding? = null
+    private val binding get() = _binding!!
     private var savedRecipeId = DEFAULT_ID
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDetailsBinding.inflate(layoutInflater)
+        _binding = ActivityDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         binding.toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.white))
