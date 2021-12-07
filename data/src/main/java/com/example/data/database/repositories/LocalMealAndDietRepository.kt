@@ -86,13 +86,16 @@ class LocalMealAndDietRepository @Inject constructor(@ApplicationContext private
     }
 
     override suspend fun saveMealAndDietType(
-    ) {
+    ) = try {
         context.dataStore.edit { preferences ->
             preferences[PreferenceKeys.selectedMealType] = mealAndDietType.selectedMealType
             preferences[PreferenceKeys.selectedMealTypeId] = mealAndDietType.selectedMealTypeId
             preferences[PreferenceKeys.selectedDiedType] = mealAndDietType.selectedDietType
             preferences[PreferenceKeys.selectedDiedTypeId] = mealAndDietType.selectedDietTypeId
         }
+        true
+    } catch (e: Exception) {
+        false
     }
 
     override fun readMealAndDietType() = readMealAndDietType

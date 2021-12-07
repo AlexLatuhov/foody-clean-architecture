@@ -10,6 +10,7 @@ class LocalRecipesSaver @Inject constructor(
     private val recipesDao: RecipesDao
 ) : RecipesSaver {
 
-    override fun insertRecipes(recipesEntity: RecipesEntity) =
+    override suspend fun insertRecipes(recipesEntity: RecipesEntity) =
         recipesDao.insertRecipes(recipesEntity).compareTo(DEFAULT_ID) == 0
+
 }

@@ -19,7 +19,7 @@ import dagger.hilt.android.components.ViewModelComponent
 abstract class ViewModelBindsModule {
 
     @Binds
-    abstract fun bindRequestRecipesUseCase(requestRecipesUseCaseImpl: RequestRecipesUseCaseImpl): RequestRecipesUseCase
+    abstract fun bindRequestRecipesUseCase(requestRecipesUseCaseImpl: RecipesDataInteractorImpl): RecipesDataInteractor
 
     @Binds
     abstract fun bindDeleteAllFavoriteRecipeUseCase(deleteAllFavoriteRecipeUseCaseImpl: DeleteAllFavoriteRecipeUseCaseImpl): DeleteAllFavoriteRecipeUseCase

@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.domain.DataRequestResult
 import com.example.domain.usecase.interfaces.LoadRecipesUseCase
-import com.example.domain.usecase.interfaces.RequestRecipesUseCase
+import com.example.domain.usecase.interfaces.RecipesDataInteractor
 import com.example.presentation.Constants.Companion.CLEAN_TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -18,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class RecipesViewModel @Inject constructor(
     application: Application,
-    private val requestRecipesUseCase: RequestRecipesUseCase,
+    private val recipesDataInteractor: RecipesDataInteractor,
     private val loadRecipesUseCase: LoadRecipesUseCase
 ) : AndroidViewModel(application) {
 
@@ -31,18 +31,17 @@ class RecipesViewModel @Inject constructor(
         dietTypeId: Int
     ) = viewModelScope.launch(Dispatchers.IO)
     {
-        requestRecipesUseCase.saveMealAndDietTypeTemp(mealType, mealTypeId, dietType, dietTypeId)
+        recipesDataInteractor.saveMealAndDietTypeTemp(mealType, mealTypeId, dietType, dietTypeId)
     }
 
-    fun readMealAndDietType() = requestRecipesUseCase.readMealAndDietType()
+    fun readMealAndDietType() = recipesDataInteractor.readMealAndDietType()
 
     fun loadDataFromCache(searchQuery: String?) = loadRecipesUseCase.loadDataFromCache(searchQuery)
-
 
     fun getData() {
         recipesRequestResult.value = DataRequestResult.None
         viewModelScope.launch(Dispatchers.IO) {
-            requestRecipesUseCase.getData()
+            recipesDataInteractor.requestAndStoreRecipesData()
                 .collect { dataRequestResult ->
                     Log.d(CLEAN_TAG, "onDataRequestResult in collect $dataRequestResult")
                     recipesRequestResult.postValue(dataRequestResult)

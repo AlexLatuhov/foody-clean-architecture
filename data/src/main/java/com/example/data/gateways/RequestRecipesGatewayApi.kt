@@ -42,7 +42,7 @@ class RequestRecipesGatewayApi @Inject constructor(
         it.convertToDomainItem()
     }
 
-    override suspend fun getData(): Flow<DataRequestResult> {
+    override suspend fun requestAndStoreRecipesData(): Flow<DataRequestResult> {
         dataRequestResult.value =
             requestAndStoreData(
                 mealAndDietRepository.selectedMealType(),

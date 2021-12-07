@@ -4,10 +4,9 @@ import com.example.domain.DataRequestResult
 import com.example.domain.models.MealAndDietTypeDomain
 import kotlinx.coroutines.flow.Flow
 
-interface RequestRecipesUseCase {
+interface RecipesDataInteractor {
 
-    //todo correct and probably rename to interactor
-    suspend fun getData(): Flow<DataRequestResult>
+    suspend fun requestAndStoreRecipesData(): Flow<DataRequestResult>
 
     fun readMealAndDietType(): Flow<MealAndDietTypeDomain>
 

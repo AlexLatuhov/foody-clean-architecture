@@ -1,14 +1,15 @@
 package com.example.domain.usecase.implementations
 
 import com.example.domain.gateway.RequestRecipesGateway
-import com.example.domain.usecase.interfaces.RequestRecipesUseCase
+import com.example.domain.usecase.interfaces.RecipesDataInteractor
 import javax.inject.Inject
 
-class RequestRecipesUseCaseImpl @Inject constructor(
+class RecipesDataInteractorImpl @Inject constructor(
     private val requestRecipesGateway: RequestRecipesGateway
-) : RequestRecipesUseCase {
+) : RecipesDataInteractor {
 
-    override suspend fun getData() = requestRecipesGateway.getData()
+    override suspend fun requestAndStoreRecipesData() =
+        requestRecipesGateway.requestAndStoreRecipesData()
 
     override suspend fun saveMealAndDietTypeTemp(
         mealType: String,
