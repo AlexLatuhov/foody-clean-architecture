@@ -4,13 +4,13 @@ import com.example.data.database.repositories.MealAndDietType
 import com.example.domain.gateway.MealAndDietTypeSaver
 import kotlinx.coroutines.flow.Flow
 
-interface DataStoreRepository : MealAndDietTypeSaver {
+interface MealAndDietRepository : MealAndDietTypeSaver {
 
-    suspend fun saveMealAndDietType()
+    suspend fun saveMealAndDietType()//todo add return type
 
-    val readMealAndDietType: Flow<MealAndDietType>
+    fun readMealAndDietType(): Flow<MealAndDietType>
 
-    fun hasTempValue(): Boolean
+    suspend fun hasTempValue(): Boolean
 
     suspend fun selectedMealType(): String
 

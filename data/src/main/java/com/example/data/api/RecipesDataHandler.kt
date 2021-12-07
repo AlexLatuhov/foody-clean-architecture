@@ -6,7 +6,7 @@ import com.example.data.Constants
 import com.example.data.R
 import com.example.data.api.models.FoodJokeDataItem
 import com.example.data.api.models.RecipeDataItem
-import com.example.data.com.example.data.getErrorMessage
+import com.example.data.extentions.getErrorMessage
 import com.example.data.mappers.convertToLocalDbItem
 import com.example.data.repositories.RecipesSaver
 import com.example.domain.DataRequestResult
@@ -14,7 +14,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import retrofit2.Response
 import javax.inject.Inject
 
-class RemoteDataSource @Inject constructor(
+class RecipesDataHandler @Inject constructor(
     @ApplicationContext private val context: Context,
     private val foodRecipesApi: FoodRecipesApi,
     private val localDataSource: RecipesSaver

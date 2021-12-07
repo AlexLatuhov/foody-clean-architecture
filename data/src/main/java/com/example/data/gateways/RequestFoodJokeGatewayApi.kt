@@ -3,11 +3,11 @@ package com.example.data.gateways
 import android.content.Context
 import com.example.data.Constants
 import com.example.data.R
-import com.example.data.api.RemoteDataSource
+import com.example.data.api.RecipesDataHandler
 import com.example.data.api.models.FoodJokeDataItem
-import com.example.data.com.example.data.getErrorMessage
-import com.example.data.com.example.data.hasInternetConnection
 import com.example.data.database.models.FoodJokeEntity
+import com.example.data.extentions.getErrorMessage
+import com.example.data.extentions.hasInternetConnection
 import com.example.data.mappers.convertToDomain
 import com.example.data.repositories.JokeStorage
 import com.example.domain.DataProviderRequestResult
@@ -21,7 +21,7 @@ import javax.inject.Inject
 
 class RequestFoodJokeGatewayApi @Inject constructor(
     @ApplicationContext val context: Context,
-    private val remoteDataSource: RemoteDataSource,
+    private val recipesDataHandler: RecipesDataHandler,
     private val jokeStorage: JokeStorage
 ) : GetFoodJokeGateway {
 
@@ -36,7 +36,7 @@ class RequestFoodJokeGatewayApi @Inject constructor(
     private suspend fun requestAndStoreData(): DataProviderRequestResult<FoodJokeDomain> {
         if (context.hasInternetConnection()) {
             try {
-                val response = remoteDataSource.getFoodJoke(Constants.API_KEY)
+                val response = recipesDataHandler.getFoodJoke(Constants.API_KEY)
                 val res = response.getFoodJokeResult()
                 val foodJoke = res.data
                 if (foodJoke != null) {

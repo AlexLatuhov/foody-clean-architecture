@@ -11,7 +11,7 @@ interface RequestRecipesUseCase {
 
     fun readMealAndDietType(): Flow<MealAndDietTypeDomain>
 
-    fun saveMealAndDietTypeTemp(
+    suspend fun saveMealAndDietTypeTemp(
         mealType: String,
         mealTypeId: Int,
         dietType: String,

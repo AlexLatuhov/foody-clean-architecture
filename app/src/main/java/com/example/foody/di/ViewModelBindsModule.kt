@@ -1,11 +1,11 @@
 package com.example.foody.di
 
-import com.example.data.database.repositories.LocalDataStoreRepository
+import com.example.data.database.repositories.LocalMealAndDietRepository
 import com.example.data.gateways.DataFavoriteRecipesEditorGateway
 import com.example.data.gateways.DataLoadRecipeGateway
 import com.example.data.gateways.RequestFoodJokeGatewayApi
 import com.example.data.gateways.RequestRecipesGatewayApi
-import com.example.data.repositories.DataStoreRepository
+import com.example.data.repositories.MealAndDietRepository
 import com.example.domain.gateway.*
 import com.example.domain.usecase.implementations.*
 import com.example.domain.usecase.interfaces.*
@@ -61,5 +61,5 @@ abstract class ViewModelBindsModule {
     abstract fun bindGetFoodJokeGateway(requestFoodJokeGatewayApi: RequestFoodJokeGatewayApi): GetFoodJokeGateway
 
     @Binds
-    abstract fun bindDataStoreRepository(localDataStoreRepository: LocalDataStoreRepository): DataStoreRepository
+    abstract fun bindDataStoreRepository(localDataStoreRepository: LocalMealAndDietRepository): MealAndDietRepository
 }

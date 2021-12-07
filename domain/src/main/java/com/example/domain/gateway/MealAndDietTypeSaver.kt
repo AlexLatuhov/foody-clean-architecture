@@ -2,7 +2,7 @@ package com.example.domain.gateway
 
 interface MealAndDietTypeSaver {
 
-    fun saveMealAndDietTypeTemp(
+    suspend fun saveMealAndDietTypeTemp(
         mealType: String,
         mealTypeId: Int,
         dietType: String,

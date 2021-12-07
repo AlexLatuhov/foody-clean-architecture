@@ -10,7 +10,7 @@ class RequestRecipesUseCaseImpl @Inject constructor(
 
     override suspend fun getData() = requestRecipesGateway.getData()
 
-    override fun saveMealAndDietTypeTemp(
+    override suspend fun saveMealAndDietTypeTemp(
         mealType: String,
         mealTypeId: Int,
         dietType: String,

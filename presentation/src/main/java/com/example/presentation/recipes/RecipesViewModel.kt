@@ -29,7 +29,10 @@ class RecipesViewModel @Inject constructor(
         mealTypeId: Int,
         dietType: String,
         dietTypeId: Int
-    ) = requestRecipesUseCase.saveMealAndDietTypeTemp(mealType, mealTypeId, dietType, dietTypeId)
+    ) = viewModelScope.launch(Dispatchers.IO)
+    {
+        requestRecipesUseCase.saveMealAndDietTypeTemp(mealType, mealTypeId, dietType, dietTypeId)
+    }
 
     fun readMealAndDietType() = requestRecipesUseCase.readMealAndDietType()
 

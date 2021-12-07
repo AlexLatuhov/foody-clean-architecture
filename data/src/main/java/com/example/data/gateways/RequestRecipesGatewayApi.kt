@@ -5,10 +5,10 @@ import android.util.Log
 import com.example.data.Constants
 import com.example.data.Constants.Companion.CLEAN_TAG
 import com.example.data.R
-import com.example.data.api.RemoteDataSource
-import com.example.data.com.example.data.hasInternetConnection
+import com.example.data.api.RecipesDataHandler
+import com.example.data.extentions.hasInternetConnection
 import com.example.data.mappers.convertToDomainItem
-import com.example.data.repositories.DataStoreRepository
+import com.example.data.repositories.MealAndDietRepository
 import com.example.domain.DataRequestResult
 import com.example.domain.gateway.RequestRecipesGateway
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -19,34 +19,34 @@ import javax.inject.Inject
 
 class RequestRecipesGatewayApi @Inject constructor(
     @ApplicationContext val context: Context,
-    private val dataStoreRepository: DataStoreRepository,
-    private val remoteDataSource: RemoteDataSource
+    private val mealAndDietRepository: MealAndDietRepository,
+    private val recipesDataHandler: RecipesDataHandler
 ) : RequestRecipesGateway {
 
     private val dataRequestResult = MutableStateFlow<DataRequestResult>(DataRequestResult.None)
 
-    private suspend fun saveMealAndDietType() = dataStoreRepository.saveMealAndDietType()
+    private suspend fun saveMealAndDietType() = mealAndDietRepository.saveMealAndDietType()
 
-    private fun hasTempValue(): Boolean = dataStoreRepository.hasTempValue()
+    private suspend fun hasTempValue(): Boolean = mealAndDietRepository.hasTempValue()
 
-    override fun saveMealAndDietTypeTemp(
+    override suspend fun saveMealAndDietTypeTemp(
         mealType: String,
         mealTypeId: Int,
         dietType: String,
         dietTypeId: Int
     ) {
-        dataStoreRepository.saveMealAndDietTypeTemp(mealType, mealTypeId, dietType, dietTypeId)
+        mealAndDietRepository.saveMealAndDietTypeTemp(mealType, mealTypeId, dietType, dietTypeId)
     }
 
-    override fun readMealAndDietType() = dataStoreRepository.readMealAndDietType.map {
+    override fun readMealAndDietType() = mealAndDietRepository.readMealAndDietType().map {
         it.convertToDomainItem()
     }
 
     override suspend fun getData(): Flow<DataRequestResult> {
         dataRequestResult.value =
             requestAndStoreData(
-                dataStoreRepository.selectedMealType(),
-                dataStoreRepository.selectedDietType()
+                mealAndDietRepository.selectedMealType(),
+                mealAndDietRepository.selectedDietType()
             )
         return dataRequestResult
     }
@@ -60,7 +60,7 @@ class RequestRecipesGatewayApi @Inject constructor(
                 val queries = applyQueries(
                     selectedMealType, selectedDietType
                 )
-                val response = remoteDataSource.getRecipes(queries)
+                val response = recipesDataHandler.getRecipes(queries)
                 if (response is DataRequestResult.Error) {
                     createError(response.message)
                 } else {
