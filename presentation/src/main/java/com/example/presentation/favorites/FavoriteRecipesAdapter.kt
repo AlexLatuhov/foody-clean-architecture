@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import com.example.domain.models.FavoritesEntityDomain
-import com.example.domain.models.request.FavOperationResult
+import com.example.domain.models.request.OperationResult
 
 import com.example.presentation.BaseRecipesAdapter
 import com.example.presentation.R
@@ -24,7 +24,7 @@ class FavoriteRecipesAdapter(
     ActionMode.Callback {
     init {
         favoritesViewModel.favOperationResult.observe(requireActivity, { result ->
-            showSnackBar(requireActivity.getString(if (result is FavOperationResult.Success) R.string.recipes_removed else R.string.unknown_error))
+            showSnackBar(requireActivity.getString(if (result is OperationResult.Success) R.string.recipes_removed else R.string.unknown_error))
             multiSelection = false
             selectedRecipes.clear()
             clearMode()

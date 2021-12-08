@@ -3,15 +3,15 @@ package com.example.data.database.repositories
 import com.example.data.database.RecipesDao
 import com.example.data.database.models.FavoritesEntity
 import com.example.data.repositories.FavoriteRecipesEditor
-import com.example.domain.models.request.FavOperationResult
+import com.example.domain.models.request.OperationResult
 import javax.inject.Inject
 
 class LocalFavoriteRecipesEditor @Inject constructor(
     private val recipesDao: RecipesDao
 ) : FavoriteRecipesEditor {
 
-    private fun generateFavResult(operationResCount: Int): FavOperationResult =
-        if (operationResCount > 0) FavOperationResult.Success() else FavOperationResult.Error
+    private fun generateFavResult(operationResCount: Int): OperationResult =
+        if (operationResCount > 0) OperationResult.Success() else OperationResult.Fail
 
     override suspend fun insertFavoriteRecipes(favoritesEntity: FavoritesEntity) =
         generateFavResult(recipesDao.insertFavoriteRecipe(favoritesEntity).toInt())

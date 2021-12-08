@@ -1,9 +1,9 @@
 package com.example.domain.gateway
 
-import com.example.domain.models.request.FavOperationResult
+import com.example.domain.models.request.OperationResult
 
 interface DeleteAllFavoriteRecipeGateWay {
 
-    suspend fun deleteAll(): FavOperationResult
+    suspend fun deleteAll(): OperationResult
 
 }

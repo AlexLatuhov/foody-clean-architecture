@@ -1,6 +1,6 @@
 package com.example.presentation
 
-import com.example.domain.models.request.FavOperationResult
+import com.example.domain.models.request.OperationResult
 
-object SuccessRemove : FavOperationResult.Success()
-object SuccessAdd : FavOperationResult.Success()
+object SuccessRemove : OperationResult.Success()
+object SuccessAdd : OperationResult.Success()

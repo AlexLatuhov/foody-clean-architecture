@@ -4,6 +4,7 @@ import com.example.data.Constants.Companion.DEFAULT_ID
 import com.example.data.database.RecipesDao
 import com.example.data.database.models.RecipesEntity
 import com.example.data.repositories.RecipesSaver
+import com.example.domain.models.request.OperationResult
 import javax.inject.Inject
 
 class LocalRecipesSaver @Inject constructor(
@@ -11,6 +12,8 @@ class LocalRecipesSaver @Inject constructor(
 ) : RecipesSaver {
 
     override suspend fun insertRecipes(recipesEntity: RecipesEntity) =
-        recipesDao.insertRecipes(recipesEntity).compareTo(DEFAULT_ID) == 0
+        if (recipesDao.insertRecipes(recipesEntity)
+                .compareTo(DEFAULT_ID) == 0
+        ) OperationResult.Success() else OperationResult.Fail
 
 }

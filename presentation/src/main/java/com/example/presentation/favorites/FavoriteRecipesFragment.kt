@@ -3,7 +3,7 @@ package com.example.presentation.favorites
 import android.view.*
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.domain.models.request.FavOperationResult
+import com.example.domain.models.request.OperationResult
 import com.example.presentation.BaseFragment
 import com.example.presentation.R
 import com.example.presentation.databinding.FragmentFavoriteRecipesBinding
@@ -28,7 +28,7 @@ class FavoriteRecipesFragment : BaseFragment<FragmentFavoriteRecipesBinding>() {
         binding.favoriteRecipesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         setHasOptionsMenu(true)
         favoritesViewModel.favOperationResult.observe(this, { result ->
-            showSnackBar(getString(if (result is FavOperationResult.Success) R.string.deleted else R.string.unknown_error))
+            showSnackBar(getString(if (result is OperationResult.Success) R.string.deleted else R.string.unknown_error))
         })
     }
 

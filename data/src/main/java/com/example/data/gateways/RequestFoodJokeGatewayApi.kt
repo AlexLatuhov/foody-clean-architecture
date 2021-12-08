@@ -13,6 +13,7 @@ import com.example.data.repositories.JokeStorage
 import com.example.domain.gateway.GetFoodJokeGateway
 import com.example.domain.models.FoodJokeDomain
 import com.example.domain.models.request.DataProviderRequestResult
+import com.example.domain.models.request.OperationResult
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -41,7 +42,8 @@ class RequestFoodJokeGatewayApi @Inject constructor(
                 val foodJoke = res.data
                 if (foodJoke != null) {
                     val dbEntity = FoodJokeEntity(foodJoke)
-                    val insertResult = jokeStorage.insertFoodJoke(dbEntity)
+                    val insertResult =
+                        jokeStorage.insertFoodJoke(dbEntity) is OperationResult.Success
                     return if (insertResult)
                         DataProviderRequestResult.Success(dbEntity.convertToDomain())
                     else loadFromCache(context.getString(R.string.unknown_error))

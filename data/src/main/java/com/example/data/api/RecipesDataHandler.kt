@@ -1,14 +1,13 @@
 package com.example.data.api
 
 import android.content.Context
-import android.util.Log
-import com.example.data.Constants
 import com.example.data.R
 import com.example.data.api.models.FoodJokeDataItem
 import com.example.data.api.models.RecipeDataItem
 import com.example.data.extentions.getErrorMessage
 import com.example.data.mappers.convertToLocalDbItem
 import com.example.data.repositories.RecipesSaver
+import com.example.domain.models.request.OperationResult
 import com.example.domain.models.request.RecipesDataRequestResult
 import dagger.hilt.android.qualifiers.ApplicationContext
 import retrofit2.Response
@@ -28,12 +27,7 @@ class RecipesDataHandler @Inject constructor(
             if (foodRecipe != null) {
                 val domainData =
                     foodRecipe.convertToLocalDbItem(context.getString(R.string.no_value))
-                val insertResult = localDataSource.insertRecipes(domainData)
-                Log.d(
-                    Constants.TEST_TAG,
-                    "insertRecipes ${domainData.foodRecipeEntity.recipeItemEntities.size}, result is $insertResult"
-                )
-                if (!insertResult) {
+                if (localDataSource.insertRecipes(domainData) is OperationResult.Fail) {
                     return RecipesDataRequestResult.Error(context.getString(R.string.unknown_error))
                 }
             } else {

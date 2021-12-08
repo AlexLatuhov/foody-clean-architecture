@@ -15,6 +15,7 @@ import com.example.data.Constants.Companion.PREF_MEAL_TYPE
 import com.example.data.Constants.Companion.PREF_MEAL_TYPE_ID
 import com.example.data.Constants.Companion.PREF_NAME
 import com.example.data.repositories.MealAndDietRepository
+import com.example.domain.models.request.OperationResult
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -93,9 +94,9 @@ class LocalMealAndDietRepository @Inject constructor(@ApplicationContext private
             preferences[PreferenceKeys.selectedDiedType] = mealAndDietType.selectedDietType
             preferences[PreferenceKeys.selectedDiedTypeId] = mealAndDietType.selectedDietTypeId
         }
-        true
+        OperationResult.Success()
     } catch (e: Exception) {
-        false
+        OperationResult.Fail
     }
 
     override fun readMealAndDietType() = readMealAndDietType
