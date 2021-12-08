@@ -28,7 +28,7 @@ fun ConstraintLayout.onRecipeClickListener(result: RecipeDomain) {
 }
 
 @BindingAdapter("applyVeganColor")
-fun View.applyVeganColor(vegan: Boolean) {
+fun View.applySelectedColor(vegan: Boolean) {
     if (vegan) {
         val colorToSet = ContextCompat.getColor(context, R.color.green)
         when (this) {
