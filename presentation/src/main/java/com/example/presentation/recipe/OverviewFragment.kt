@@ -34,7 +34,7 @@ class OverviewFragment : Fragment() {
         binding.titleTextView.text = myBundle.title
         binding.likesTextView.text = myBundle.aggregateLikes.toString()
         binding.timeTextView.text = myBundle.readyInMinutes.toString()
-        RecipesRowBindingTest.parseHtml(binding.summary, myBundle.summary)
+        binding.summary.parseHtml(myBundle.summary)
         setColorByValue(
             myBundle.vegetarian,
             binding.vegetarianTextView,
