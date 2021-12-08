@@ -16,17 +16,17 @@ import com.example.data.Constants.Companion.PREF_MEAL_TYPE_ID
 import com.example.data.Constants.Companion.PREF_NAME
 import com.example.data.repositories.MealAndDietRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import java.io.IOException
 import javax.inject.Inject
+import javax.inject.Singleton
 
 private val Context.dataStore by preferencesDataStore(name = PREF_NAME)
 
-@ViewModelScoped
+@Singleton
 class LocalMealAndDietRepository @Inject constructor(@ApplicationContext private val context: Context) :
     MealAndDietRepository {
 
