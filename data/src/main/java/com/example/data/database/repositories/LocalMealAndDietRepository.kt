@@ -31,7 +31,7 @@ private val Context.dataStore by preferencesDataStore(name = PREF_NAME)
 class LocalMealAndDietRepository @Inject constructor(@ApplicationContext private val context: Context) :
     MealAndDietRepository {
 
-    private lateinit var mealAndDietType: MealAndDietType
+    private var mealAndDietType: MealAndDietType? = null
 
     private object PreferenceKeys {
         val selectedMealType = stringPreferencesKey(PREF_MEAL_TYPE)
@@ -61,8 +61,6 @@ class LocalMealAndDietRepository @Inject constructor(@ApplicationContext private
             )
         }
 
-    override suspend fun hasTempValue() = this::mealAndDietType.isInitialized
-
     override suspend fun saveMealAndDietTypeTemp(
         mealType: String,
         mealTypeId: Int,
@@ -75,7 +73,7 @@ class LocalMealAndDietRepository @Inject constructor(@ApplicationContext private
     }
 
     private suspend fun getType(): MealAndDietType {
-        return if (hasTempValue()) mealAndDietType else readMealAndDietType.first()
+        return mealAndDietType ?: readMealAndDietType().first()
     }
 
     override suspend fun selectedDietType(): String {
@@ -88,11 +86,14 @@ class LocalMealAndDietRepository @Inject constructor(@ApplicationContext private
 
     override suspend fun saveMealAndDietType(
     ) = try {
-        context.dataStore.edit { preferences ->
-            preferences[PreferenceKeys.selectedMealType] = mealAndDietType.selectedMealType
-            preferences[PreferenceKeys.selectedMealTypeId] = mealAndDietType.selectedMealTypeId
-            preferences[PreferenceKeys.selectedDiedType] = mealAndDietType.selectedDietType
-            preferences[PreferenceKeys.selectedDiedTypeId] = mealAndDietType.selectedDietTypeId
+        if (mealAndDietType != null) {
+            val mealAndDietType = getType()
+            context.dataStore.edit { preferences ->
+                preferences[PreferenceKeys.selectedMealType] = mealAndDietType.selectedMealType
+                preferences[PreferenceKeys.selectedMealTypeId] = mealAndDietType.selectedMealTypeId
+                preferences[PreferenceKeys.selectedDiedType] = mealAndDietType.selectedDietType
+                preferences[PreferenceKeys.selectedDiedTypeId] = mealAndDietType.selectedDietTypeId
+            }
         }
         OperationResult.Success()
     } catch (e: Exception) {

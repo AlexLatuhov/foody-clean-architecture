@@ -28,8 +28,6 @@ class RequestRecipesGatewayApi @Inject constructor(
 
     private suspend fun saveMealAndDietType() = mealAndDietRepository.saveMealAndDietType()
 
-    private suspend fun hasTempValue(): Boolean = mealAndDietRepository.hasTempValue()
-
     override suspend fun saveMealAndDietTypeTemp(
         mealType: String,
         mealTypeId: Int,
@@ -65,9 +63,7 @@ class RequestRecipesGatewayApi @Inject constructor(
                 if (response is RecipesDataRequestResult.Error) {
                     createError(response.message)
                 } else {
-                    if (hasTempValue()) {
-                        saveMealAndDietType()
-                    }
+                    saveMealAndDietType()
                     RecipesDataRequestResult.Success
                 }
             } catch (e: Exception) {

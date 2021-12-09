@@ -21,22 +21,22 @@ class FavoriteRecipesAdapter(
     private val requireActivity: FragmentActivity,
     private val favoritesViewModel: FavoritesViewModel
 ) : BaseRecipesAdapter(),
-    ActionMode.Callback {
-    init {
-        favoritesViewModel.favOperationResult.observe(requireActivity, { result ->
-            showSnackBar(requireActivity.getString(if (result is OperationResult.Success) R.string.recipes_removed else R.string.unknown_error))
-            multiSelection = false
-            selectedRecipes.clear()
-            clearMode()
-        })
-    }
+    ActionMode.Callback {//todo move out business logic
+init {
+    favoritesViewModel.favOperationResult.observe(requireActivity, { result ->
+        showSnackBar(requireActivity.getString(if (result is OperationResult.Success) R.string.recipes_removed else R.string.unknown_error))
+        multiSelection = false
+        selectedRecipes.clear()
+        clearMode()
+    })
+}
 
     private var multiSelection = false
     private var selectedRecipes = arrayListOf<FavoritesEntityDomain>()
     private var myViewHolder = arrayListOf<RecipeViewHolder>()
     private var favoritesEntity = emptyList<FavoritesEntityDomain>()
-    private lateinit var mActionMode: ActionMode
-    private lateinit var rootView: View
+    private var mActionMode: ActionMode? = null
+    private var rootView: View? = null
 
     override fun getResult(position: Int) = favoritesEntity[position].recipe
 
@@ -73,7 +73,7 @@ class FavoriteRecipesAdapter(
 
     override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
         mode?.menuInflater?.inflate(R.menu.favorites_contextual_menu, menu)
-        mActionMode = mode!!
+        mActionMode = mode
         applyStatusBarColor(R.color.contextualStatusBarColor)
         return true
     }
@@ -90,9 +90,11 @@ class FavoriteRecipesAdapter(
     }
 
     private fun showSnackBar(string: String) {
-        Snackbar.make(rootView, string, Snackbar.LENGTH_SHORT)
-            .setAction(requireActivity.getString(android.R.string.ok)) {}
-            .show()
+        rootView?.let {
+            Snackbar.make(rootView!!, string, Snackbar.LENGTH_SHORT)
+                .setAction(requireActivity.getString(android.R.string.ok)) {}
+                .show()
+        }
     }
 
     override fun onDestroyActionMode(mode: ActionMode?) {
@@ -107,14 +109,14 @@ class FavoriteRecipesAdapter(
     private fun applyActionModeTitle() {
         when (selectedRecipes.size) {
             0 -> {
-                mActionMode.finish()
+                mActionMode?.finish()
                 multiSelection = false
             }
             1 -> {
-                mActionMode.title = requireActivity.getString(R.string.item_selected)
+                mActionMode?.title = requireActivity.getString(R.string.item_selected)
             }
             else -> {
-                mActionMode.title =
+                mActionMode?.title =
                     requireActivity.getString(R.string.items_selected, selectedRecipes.size)
             }
         }
@@ -169,8 +171,6 @@ class FavoriteRecipesAdapter(
     }
 
     fun clearMode() {
-        if (this::mActionMode.isInitialized) {
-            mActionMode.finish()
-        }
+        mActionMode?.finish()
     }
 }

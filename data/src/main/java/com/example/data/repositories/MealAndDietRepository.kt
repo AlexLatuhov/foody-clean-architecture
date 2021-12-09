@@ -11,8 +11,6 @@ interface MealAndDietRepository : MealAndDietTypeSaver {
 
     fun readMealAndDietType(): Flow<MealAndDietType>
 
-    suspend fun hasTempValue(): Boolean
-
     suspend fun selectedMealType(): String
 
     suspend fun selectedDietType(): String
