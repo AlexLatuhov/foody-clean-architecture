@@ -46,15 +46,17 @@ class FavoriteRecipesAdapter(
         super.onBindViewHolder(holder, position)
         rootView = holder.binding.root
         val item = favoritesEntity[position]
-        holder.binding.recipesRawLayout.setOnClickListener {
-            if (multiSelection) {
-                applySelection(holder, item)
-            } else {
-                val action =
-                    FavoriteRecipesFragmentDirections.actionFavoriteRecipesFragmentToDetailsActivity(
-                        getResult(position)
-                    )
-                holder.binding.root.findNavController().navigate(action)
+        holder.binding.recipeClickListener = object : RecipeClick {
+            override fun onRecipeClick() {
+                if (multiSelection) {
+                    applySelection(holder, item)
+                } else {
+                    val action =
+                        FavoriteRecipesFragmentDirections.actionFavoriteRecipesFragmentToDetailsActivity(
+                            getResult(position)
+                        )
+                    holder.binding.root.findNavController().navigate(action)
+                }
             }
         }
         validateSelectionUi(holder, item)

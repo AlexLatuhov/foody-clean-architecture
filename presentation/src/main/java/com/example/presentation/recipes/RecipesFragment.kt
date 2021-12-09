@@ -13,6 +13,7 @@ import com.example.presentation.BaseFragment
 import com.example.presentation.R
 import com.example.presentation.databinding.FragmentRecipesBinding
 import com.example.presentation.favorites.FavoritesViewModel
+import com.example.presentation.favorites.RecipeClick
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,9 +31,12 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(), SearchView.OnQue
         binding.mainViewModel = favoritesViewModel
         setHasOptionsMenu(true)
         setupRecyclerView()
-        binding.recipesFab.setOnClickListener {
-            findNavController().navigate(R.id.action_recipesFragment_to_recipesBottomSheet)
-        }
+        binding.recipeClickListener =
+            object : RecipeClick {
+                override fun onRecipeClick() {
+                    findNavController().navigate(R.id.action_recipesFragment_to_recipesBottomSheet)
+                }
+            }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

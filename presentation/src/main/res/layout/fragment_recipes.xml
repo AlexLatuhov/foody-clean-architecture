@@ -6,6 +6,10 @@
     <data>
 
         <variable
+            name="recipeClickListener"
+            type="com.example.presentation.favorites.RecipeClick" />
+
+        <variable
             name="mainViewModel"
             type="com.example.presentation.favorites.FavoritesViewModel" />
     </data>
@@ -55,6 +59,7 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/recipes_fab"
+            android:onClick="@{()->recipeClickListener.onRecipeClick()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/def_margin_x3"

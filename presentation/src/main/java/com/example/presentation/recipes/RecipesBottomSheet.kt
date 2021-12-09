@@ -10,6 +10,7 @@ import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import com.example.presentation.Constants
 import com.example.presentation.databinding.RecipesBottomSheetBinding
+import com.example.presentation.favorites.RecipeClick
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -51,17 +52,18 @@ class RecipesBottomSheet : BottomSheetDialogFragment() {
             selectedDietTypeId = selectedChipId
         }
 
-        binding.applyBtn.setOnClickListener {
-            recipesViewModel.saveMealAndDietTypeTemp(
-                selectedMealType,
-                selectedMealTypeId,
-                selectedDietType,
-                selectedDietTypeId
-            )
-            val action =
-                RecipesBottomSheetDirections.actionRecipesBottomSheetToRecipesFragment()
-            findNavController().navigate(action)
-        }
+        binding.recipeClickListener =
+            object : RecipeClick {
+                override fun onRecipeClick() {
+                    recipesViewModel.saveMealAndDietTypeTemp(
+                        selectedMealType,
+                        selectedMealTypeId,
+                        selectedDietType,
+                        selectedDietTypeId
+                    )
+                    findNavController().navigate(RecipesBottomSheetDirections.actionRecipesBottomSheetToRecipesFragment())
+                }
+            }
         return binding.root
     }
 

@@ -44,6 +44,7 @@
         <entry key="presentation/src/main/res/layout/fragment_favorite_recipes.xml" value="0.1" />
         <entry key="presentation/src/main/res/layout/fragment_food_joke.xml" value="0.23125" />
         <entry key="presentation/src/main/res/layout/fragment_overview.xml" value="0.1" />
+        <entry key="presentation/src/main/res/layout/fragment_recipes.xml" value="0.26927083333333335" />
         <entry key="presentation/src/main/res/layout/recipes_bottom_sheet.xml" value="0.29981884057971014" />
         <entry key="presentation/src/main/res/layout/recipes_row_layout.xml" value="0.21979166666666666" />
         <entry key="presentation/src/main/res/layout/recipes_row_layout_presentation.xml" value="0.11322188449848024" />

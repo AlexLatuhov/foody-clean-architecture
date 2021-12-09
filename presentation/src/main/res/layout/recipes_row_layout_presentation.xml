@@ -4,18 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="result"
             type="com.example.domain.models.RecipeDomain" />
+
+        <variable
+            name="recipeClickListener"
+            type="com.example.presentation.favorites.RecipeClick" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/recipesRawLayout"
-        onRecipeClickListener="@{result}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/def_margin"
-        android:layout_marginBottom="@dimen/def_margin">
+        android:layout_marginBottom="@dimen/def_margin"
+        android:onClick="@{()->recipeClickListener.onRecipeClick()}">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/row_cardView"
@@ -97,9 +102,9 @@
 
                 <TextView
                     android:id="@+id/heart_textView"
-                    android:text="@{String.valueOf(result.aggregateLikes)}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(result.aggregateLikes)}"
                     android:textColor="@color/red"
                     app:layout_constraintStart_toStartOf="@+id/description_textView"
                     app:layout_constraintTop_toBottomOf="@+id/heart_imageView"
@@ -120,10 +125,10 @@
 
                 <TextView
                     android:id="@+id/clock_textView"
-                    android:text="@{String.valueOf(result.readyInMinutes)}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/def_margin_x3"
+                    android:text="@{String.valueOf(result.readyInMinutes)}"
                     android:textAlignment="center"
                     android:textColor="@color/yellow"
                     app:layout_constraintStart_toEndOf="@+id/heart_textView"
