@@ -108,7 +108,7 @@
 
         <ImageView
             android:id="@+id/vegetarian_imageView"
-            applyVeganColor="@{result.vegetarian}"
+            applySelectedColor="@{result.vegetarian}"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -121,7 +121,7 @@
 
         <TextView
             android:id="@+id/vegetarian_textView"
-            applyVeganColor="@{result.vegetarian}"
+            applySelectedColor="@{result.vegetarian}"
             android:layout_marginStart="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -136,7 +136,7 @@
 
         <ImageView
             android:id="@+id/vegan_imageView"
-            applyVeganColor="@{result.vegan}"
+            applySelectedColor="@{result.vegan}"
             android:layout_marginTop="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -148,7 +148,7 @@
 
         <TextView
             android:id="@+id/vegan_textView"
-            applyVeganColor="@{result.vegan}"
+            applySelectedColor="@{result.vegan}"
             android:layout_marginBottom="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -162,7 +162,7 @@
 
         <ImageView
             android:id="@+id/gluten_free_imageView"
-            applyVeganColor="@{result.glutenFree}"
+            applySelectedColor="@{result.glutenFree}"
             android:layout_marginStart="24dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -175,7 +175,7 @@
 
         <TextView
             android:id="@+id/gluten_free_textView"
-            applyVeganColor="@{result.glutenFree}"
+            applySelectedColor="@{result.glutenFree}"
             android:layout_marginStart="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -187,7 +187,7 @@
 
         <ImageView
             android:id="@+id/dairy_free_imageView"
-            applyVeganColor="@{result.dairyFree}"
+            applySelectedColor="@{result.dairyFree}"
             android:layout_marginTop="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -199,7 +199,7 @@
 
         <TextView
             android:id="@+id/dairy_free_textView"
-            applyVeganColor="@{result.dairyFree}"
+            applySelectedColor="@{result.dairyFree}"
             android:layout_marginStart="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -211,7 +211,7 @@
 
         <ImageView
             android:id="@+id/healthy_imageView"
-            applyVeganColor="@{result.veryHealthy}"
+            applySelectedColor="@{result.veryHealthy}"
             android:layout_marginStart="24dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -224,7 +224,7 @@
 
         <TextView
             android:id="@+id/healthy_textView"
-            applyVeganColor="@{result.veryHealthy}"
+            applySelectedColor="@{result.veryHealthy}"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_marginStart="8dp"
@@ -237,7 +237,7 @@
 
         <ImageView
             android:id="@+id/cheap_imageView"
-            applyVeganColor="@{result.cheap}"
+            applySelectedColor="@{result.cheap}"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_marginTop="12dp"
@@ -249,7 +249,7 @@
 
         <TextView
             android:id="@+id/cheap_textView"
-            applyVeganColor="@{result.cheap}"
+            applySelectedColor="@{result.cheap}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"

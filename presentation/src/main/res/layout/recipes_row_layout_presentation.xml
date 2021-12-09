@@ -133,7 +133,7 @@
 
                 <ImageView
                     android:id="@+id/leaf_imageView"
-                    applyVeganColor="@{result.vegan}"
+                    applySelectedColor="@{result.vegan}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/content_description"
@@ -144,7 +144,7 @@
 
                 <TextView
                     android:id="@+id/leaf_textView"
-                    applyVeganColor="@{result.vegan}"
+                    applySelectedColor="@{result.vegan}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/def_margin_x3"
