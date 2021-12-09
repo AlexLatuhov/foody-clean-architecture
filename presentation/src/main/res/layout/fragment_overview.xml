@@ -121,8 +121,8 @@
 
         <TextView
             android:id="@+id/vegetarian_textView"
-            andlyVeganColor="@{result.vegetarian}"
-            approid:layout_marginStart="8dp"
+            applyVeganColor="@{result.vegetarian}"
+            android:layout_marginStart="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -136,8 +136,8 @@
 
         <ImageView
             android:id="@+id/vegan_imageView"
-            andlyVeganColor="@{result.vegan}"
-            approid:layout_marginTop="12dp"
+            applyVeganColor="@{result.vegan}"
+            android:layout_marginTop="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/content_description"
@@ -148,8 +148,8 @@
 
         <TextView
             android:id="@+id/vegan_textView"
-            andlyVeganColor="@{result.vegan}"
-            approid:layout_marginBottom="8dp"
+            applyVeganColor="@{result.vegan}"
+            android:layout_marginBottom="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -162,8 +162,8 @@
 
         <ImageView
             android:id="@+id/gluten_free_imageView"
-            andlyVeganColor="@{result.glutenFree}"
-            approid:layout_marginStart="24dp"
+            applyVeganColor="@{result.glutenFree}"
+            android:layout_marginStart="24dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/content_description"
@@ -175,8 +175,8 @@
 
         <TextView
             android:id="@+id/gluten_free_textView"
-            andlyVeganColor="@{result.glutenFree}"
-            approid:layout_marginStart="8dp"
+            applyVeganColor="@{result.glutenFree}"
+            android:layout_marginStart="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/gluten_free"
@@ -187,8 +187,8 @@
 
         <ImageView
             android:id="@+id/dairy_free_imageView"
-            andlyVeganColor="@{result.dairyFree}"
-            approid:layout_marginTop="12dp"
+            applyVeganColor="@{result.dairyFree}"
+            android:layout_marginTop="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/content_description"
@@ -199,8 +199,8 @@
 
         <TextView
             android:id="@+id/dairy_free_textView"
-            andlyVeganColor="@{result.dairyFree}"
-            approid:layout_marginStart="8dp"
+            applyVeganColor="@{result.dairyFree}"
+            android:layout_marginStart="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/dairy_free"
@@ -211,8 +211,8 @@
 
         <ImageView
             android:id="@+id/healthy_imageView"
-            andlyVeganColor="@{result.veryHealthy}"
-            approid:layout_marginStart="24dp"
+            applyVeganColor="@{result.veryHealthy}"
+            android:layout_marginStart="24dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/content_description"
@@ -224,8 +224,8 @@
 
         <TextView
             android:id="@+id/healthy_textView"
-            andlyVeganColor="@{result.veryHealthy}"
-            approid:layout_height="wrap_content"
+            applyVeganColor="@{result.veryHealthy}"
+            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_marginStart="8dp"
             android:contentDescription="@string/content_description"
@@ -237,8 +237,8 @@
 
         <ImageView
             android:id="@+id/cheap_imageView"
-            androieganColor="@{result.cheap}"
-            applyVd:layout_height="wrap_content"
+            applyVeganColor="@{result.cheap}"
+            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_marginTop="12dp"
             android:contentDescription="@string/content_description"
