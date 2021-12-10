@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import com.example.presentation.Constants
 import com.example.presentation.databinding.RecipesBottomSheetBinding
@@ -31,13 +30,13 @@ class RecipesBottomSheet : BottomSheetDialogFragment() {
     ): View {
         val binding = RecipesBottomSheetBinding.inflate(inflater, container, false)
 
-        recipesViewModel.readMealAndDietType().asLiveData().observe(viewLifecycleOwner, { value ->
+        recipesViewModel.mealAndDietType.observe(viewLifecycleOwner, { value ->
             selectedMealType = value.selectedMealType
             selectedDietType = value.selectedDietType
             updateChip(value.selectedMealTypeId, binding.mealTypeChipGroup)
             updateChip(value.selectedDietTypeId, binding.dietTypeChipGroup)
         })
-
+        recipesViewModel.readMealAndDietType()
         binding.mealTypeChipGroup.setOnCheckedChangeListener { group, selectedChipId ->
             val chip = group.findViewById<Chip>(selectedChipId)
             val mealType = chip.text.toString().lowercase(Locale.ROOT)

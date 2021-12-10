@@ -1,14 +1,14 @@
 package com.example.presentation.recipes
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.example.domain.models.MealAndDietTypeDomain
+import com.example.domain.models.RecipeDomain
 import com.example.domain.models.request.RecipesDataRequestResult
 import com.example.domain.usecase.interfaces.LoadRecipesUseCase
 import com.example.domain.usecase.interfaces.RecipesDataInteractor
 import com.example.presentation.BaseViewModel
-import com.example.presentation.Constants.Companion.CLEAN_TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
 @HiltViewModel
@@ -17,7 +17,10 @@ class RecipesViewModel @Inject constructor(
     private val loadRecipesUseCase: LoadRecipesUseCase
 ) : BaseViewModel() {
 
-    val recipesRequestResultRecipes = MutableLiveData<RecipesDataRequestResult>()
+    val recipesRequestResult = MutableLiveData<RecipesDataRequestResult>()
+    val recipesData = MutableLiveData<List<RecipeDomain>>()
+    val errorMessageState = MutableLiveData<String>()
+    val mealAndDietType = MutableLiveData<MealAndDietTypeDomain>()
 
     fun saveMealAndDietTypeTemp(
         mealType: String,
@@ -28,18 +31,24 @@ class RecipesViewModel @Inject constructor(
         recipesDataInteractor.saveMealAndDietTypeTemp(mealType, mealTypeId, dietType, dietTypeId)
     }
 
-    fun readMealAndDietType() = recipesDataInteractor.readMealAndDietType()
+    fun readMealAndDietType() = scopeLaunch {
+        mealAndDietType.postValue(recipesDataInteractor.readMealAndDietType().first())
+    }
 
-    fun loadDataFromCache(searchQuery: String?) = loadRecipesUseCase.loadDataFromCache(searchQuery)
+    fun loadDataFromCache(searchQuery: String?, errorMessage: String) = scopeLaunch {
+        val queryResult = loadRecipesUseCase.loadDataFromCache(searchQuery).first() ?: emptyList()
+        recipesData.postValue(queryResult)
+        if (queryResult.isEmpty()) {
+            errorMessageState.postValue(errorMessage)
+        }
+    }
 
     fun getData() {
-        recipesRequestResultRecipes.value = RecipesDataRequestResult.None
+        recipesRequestResult.value = RecipesDataRequestResult.None
         scopeLaunch {
-            recipesDataInteractor.requestAndStoreRecipesData()
-                .collect { dataRequestResult ->
-                    Log.d(CLEAN_TAG, "onDataRequestResult in collect $dataRequestResult")
-                    recipesRequestResultRecipes.postValue(dataRequestResult)
-                }
+            recipesRequestResult.postValue(
+                recipesDataInteractor.requestAndStoreRecipesData().first()
+            )
         }
     }
 }

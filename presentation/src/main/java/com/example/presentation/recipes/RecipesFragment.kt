@@ -5,7 +5,6 @@ import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.domain.models.request.RecipesDataRequestResult
@@ -43,8 +42,16 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(), SearchView.OnQue
         super.onViewCreated(view, savedInstanceState)
         showShimmerEffect()
         recipesViewModel.getData()
-        recipesViewModel.recipesRequestResultRecipes.observe(viewLifecycleOwner, { requestResult ->
+        recipesViewModel.recipesRequestResult.observe(viewLifecycleOwner, { requestResult ->
             onDataRequestResult(requestResult)
+        })
+        recipesViewModel.recipesData.observe(viewLifecycleOwner, { results ->
+            validateErrorViewsVisibility(results.isNullOrEmpty())
+            mAdapter.setDataItems(results ?: emptyList())
+            hideShimmerEffect()
+        })
+        recipesViewModel.errorMessageState.observe(viewLifecycleOwner, { errorMessage ->
+            setError(errorMessage)
         })
     }
 
@@ -84,15 +91,7 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(), SearchView.OnQue
         errorMessage: String = getString(R.string.no_data),
         searchQuery: String? = null
     ) {
-        recipesViewModel.loadDataFromCache(searchQuery)
-            .asLiveData().observe(viewLifecycleOwner, { results ->
-                if (results.isNullOrEmpty()) {
-                    setError(errorMessage)
-                }
-                validateErrorViewsVisibility(results.isNullOrEmpty())
-                mAdapter.setDataItems(results ?: emptyList())
-                hideShimmerEffect()
-            })
+        recipesViewModel.loadDataFromCache(searchQuery, errorMessage)
     }
 
     private fun setError(errorMessage: String) {
