@@ -32,10 +32,15 @@ init {
 }
 
     private var multiSelection = false
+
     private var selectedRecipes = arrayListOf<FavoritesEntityDomain>()
+
     private var myViewHolder = arrayListOf<RecipeViewHolder>()
+
     private var favoritesEntity = emptyList<FavoritesEntityDomain>()
+
     private var mActionMode: ActionMode? = null
+
     private var rootView: View? = null
 
     override fun getResult(position: Int) = favoritesEntity[position].recipe
@@ -44,8 +49,9 @@ init {
 
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
         super.onBindViewHolder(holder, position)
+        val pos = holder.bindingAdapterPosition
         rootView = holder.binding.root
-        val item = favoritesEntity[position]
+        val item = favoritesEntity[pos]
         holder.binding.recipeClickListener = object : RecipeClick {
             override fun onRecipeClick() {
                 if (multiSelection) {
@@ -53,7 +59,7 @@ init {
                 } else {
                     val action =
                         FavoriteRecipesFragmentDirections.actionFavoriteRecipesFragmentToDetailsActivity(
-                            getResult(position)
+                            getResult(pos)
                         )
                     holder.binding.root.findNavController().navigate(action)
                 }

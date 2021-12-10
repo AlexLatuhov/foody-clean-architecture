@@ -25,9 +25,13 @@ import dagger.hilt.android.AndroidEntryPoint
 class DetailsActivity : AppCompatActivity() {
 
     private val args by navArgs<DetailsActivityArgs>()
+
     private val favoritesViewModel: FavoritesViewModel by viewModels()
+
     private var _binding: ActivityDetailsBinding? = null
+
     private val binding get() = _binding!!
+
     private var savedRecipeId = DEFAULT_ID
 
     override fun onCreate(savedInstanceState: Bundle?) {

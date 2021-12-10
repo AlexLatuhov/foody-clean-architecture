@@ -26,7 +26,6 @@ class Constants {
         const val PREF_DIET_TYPE = "dietType"
         const val PREF_DIET_TYPE_ID = "diedTypeId"
         const val PREF_NAME = "settings"
-        const val TEST_TAG = "TEST_TAG"
         const val CLEAN_TAG = "CLEAN_TAG"
     }
 }

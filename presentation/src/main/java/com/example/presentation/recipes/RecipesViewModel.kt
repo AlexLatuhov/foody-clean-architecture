@@ -18,8 +18,11 @@ class RecipesViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     val recipesRequestResult = MutableLiveData<RecipesDataRequestResult>()
+
     val recipesData = MutableLiveData<List<RecipeDomain>>()
+
     val errorMessageState = MutableLiveData<String>()
+
     val mealAndDietType = MutableLiveData<MealAndDietTypeDomain>()
 
     fun saveMealAndDietTypeTemp(

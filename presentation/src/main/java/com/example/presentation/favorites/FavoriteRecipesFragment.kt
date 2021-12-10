@@ -14,8 +14,10 @@ import dagger.hilt.android.AndroidEntryPoint
 class FavoriteRecipesFragment : BaseFragment<FragmentFavoriteRecipesBinding>() {
 
     private val favoritesViewModel: FavoritesViewModel by viewModels()
+
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentFavoriteRecipesBinding =
         FragmentFavoriteRecipesBinding::inflate
+
     private val mAdapter: FavoriteRecipesAdapter by lazy {
         FavoriteRecipesAdapter(requireActivity(), favoritesViewModel)
     }

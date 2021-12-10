@@ -7,6 +7,7 @@ import com.example.data.Constants.Companion.RECIPES_TABLE
 
 @Entity(tableName = RECIPES_TABLE)
 class RecipesEntity(var foodRecipeEntity: FoodRecipeEntity) {
+
     @PrimaryKey(autoGenerate = false)
     var id: Int = DEFAULT_ID
 }

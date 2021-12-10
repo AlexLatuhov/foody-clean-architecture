@@ -20,8 +20,11 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(), SearchView.OnQue
     SearchView.OnCloseListener {
 
     private val favoritesViewModel: FavoritesViewModel by viewModels()
+
     private val recipesViewModel: RecipesViewModel by viewModels()
+
     private val mAdapter by lazy { RecipesAdapter() }
+
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentRecipesBinding =
         FragmentRecipesBinding::inflate
 

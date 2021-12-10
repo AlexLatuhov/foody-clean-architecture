@@ -20,8 +20,11 @@ class RecipesBottomSheet : BottomSheetDialogFragment() {
     private val recipesViewModel: RecipesViewModel by lazy { ViewModelProvider(requireActivity())[RecipesViewModel::class.java] }
 
     private var selectedMealType = Constants.DEFAULT_MEAL_TYPE
+
     private var selectedMealTypeId = Constants.DEFAULT_ID
+
     private var selectedDietType = Constants.DEFAULT_DIET_TYPE
+
     private var selectedDietTypeId = Constants.DEFAULT_ID
 
     override fun onCreateView(

@@ -17,6 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class FoodJokeFragment : BaseFragment<FragmentFoodJokeBinding>() {
 
     private val viewModel: FoodJokeViewModel by viewModels()
+
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentFoodJokeBinding =
         FragmentFoodJokeBinding::inflate
 

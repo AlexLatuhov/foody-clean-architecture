@@ -8,6 +8,5 @@ class Constants {
         const val DEFAULT_MEAL_TYPE = "main course"
         const val DEFAULT_DIET_TYPE = "gluten free"
         const val RECIPE = "recipeBundle"
-        const val CLEAN_TAG = "CLEAN_TAG"
     }
 }

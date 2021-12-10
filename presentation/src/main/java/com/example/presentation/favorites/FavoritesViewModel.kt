@@ -23,6 +23,7 @@ class FavoritesViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     val readFavoriteRecipes = readFavoriteRecipesUseCase.readFavoriteRecipes().asLiveData()
+
     val favOperationResult = MutableLiveData<OperationResult>()
 
     fun insertFavoriteRecipe(favoritesEntity: FavoritesEntityDomain) = scopeLaunch {
