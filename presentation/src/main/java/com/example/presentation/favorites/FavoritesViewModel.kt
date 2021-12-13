@@ -15,7 +15,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class FavoritesViewModel @Inject constructor(
+open class FavoritesViewModel @Inject constructor(
     readFavoriteRecipesUseCase: ReadFavoriteRecipesUseCase,
     private val insertFavoriteRecipeUseCase: InsertFavoriteRecipeUseCase,
     private val removeFavoriteRecipeUseCase: RemoveFavoriteRecipeUseCaseImpl,
@@ -33,7 +33,7 @@ class FavoritesViewModel @Inject constructor(
         )
     }
 
-    private fun postOperationResult(
+    open fun postOperationResult(
         useCaseRes: OperationResult,
         successOperationResult: OperationResult
     ) {

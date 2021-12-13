@@ -59,4 +59,9 @@
     <string name="delete_all">Delete All</string>
     <string name="deleted">Deleted</string>
     <string name="share">Share</string>
+
+    <plurals name="items_selected_plurals">
+        <item quantity="one">@string/item_selected</item>
+        <item quantity="other">@string/items_selected</item>
+    </plurals>
 </resources>
