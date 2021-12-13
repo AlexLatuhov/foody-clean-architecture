@@ -10,7 +10,7 @@ data class ExtendedIngredientDomain(
     val amount: Double,
 
     @SerializedName("consistency")
-    val consistency: String,
+    val consistency: String?,
 
     @SerializedName("image")
     val image: String?,

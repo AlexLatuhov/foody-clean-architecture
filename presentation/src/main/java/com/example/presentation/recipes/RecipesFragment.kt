@@ -64,19 +64,38 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(), SearchView.OnQue
                 loadDataFromCache()
             }
             is RecipesDataRequestResult.Error -> {
-                val errorMessage = recipesDataRequestResult.message
-                loadDataFromCache(
-                    errorMessage
-                )
-                Toast.makeText(
-                    requireContext(),
-                    errorMessage,
-                    Toast.LENGTH_SHORT
-                ).show()
+                onError(recipesDataRequestResult)
             }
             else -> {
             }
         }
+    }
+
+    private fun onError(error: RecipesDataRequestResult.Error) {
+        val errorMessage = when (error) {
+            is RecipesDataRequestResult.NoConnectionError -> {
+                getString(R.string.no_internet_connection)
+            }
+            is RecipesDataRequestResult.NotFound -> {
+                getString(R.string.not_found)
+            }
+            is RecipesDataRequestResult.NoData -> {
+                getString(R.string.no_data)
+            }
+            is RecipesDataRequestResult.ErrorWithMessage -> {
+                error.message
+            }
+            else -> {
+                getString(R.string.unknown_error)
+            }
+        }
+
+        loadDataFromCache(errorMessage)
+        Toast.makeText(
+            requireContext(),
+            errorMessage,
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     private fun setupRecyclerView() {

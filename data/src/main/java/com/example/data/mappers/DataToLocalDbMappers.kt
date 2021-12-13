@@ -8,17 +8,17 @@ import com.example.data.database.models.FoodRecipeEntity
 import com.example.data.database.models.RecipeItemEntity
 import com.example.data.database.models.RecipesEntity
 
-fun RecipeDataItem.convertToLocalDbItem(defaultConsistency: String): RecipesEntity {
-    val listOfResults = results.map { it.convertToLocalDbItem(defaultConsistency) }
+fun RecipeDataItem.convertToLocalDbItem(): RecipesEntity {
+    val listOfResults = results.map { it.convertToLocalDbItem() }
     return RecipesEntity(FoodRecipeEntity(listOfResults))
 }
 
-private fun ResultDataItem.convertToLocalDbItem(defaultConsistency: String): RecipeItemEntity {
+private fun ResultDataItem.convertToLocalDbItem(): RecipeItemEntity {
     return RecipeItemEntity(
         aggregateLikes,
         cheap,
         dairyFree,
-        extendedIngredients.map { it.convertToLocalDbItem(defaultConsistency) },
+        extendedIngredients.map { it.convertToLocalDbItem() },
         glutenFree,
         id,
         image,
@@ -32,10 +32,10 @@ private fun ResultDataItem.convertToLocalDbItem(defaultConsistency: String): Rec
     )
 }
 
-private fun ExtendedIngredientDataItem.convertToLocalDbItem(defaultConsistency: String): ExtendedIngredient {
+private fun ExtendedIngredientDataItem.convertToLocalDbItem(): ExtendedIngredient {
     return ExtendedIngredient(
         amount,
-        consistency ?: defaultConsistency,
+        consistency,
         image,
         name,
         original,

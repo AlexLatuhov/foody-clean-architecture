@@ -64,4 +64,7 @@
         <item quantity="one">@string/item_selected</item>
         <item quantity="other">@string/items_selected</item>
     </plurals>
+
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="not_found">Not found</string>
 </resources>

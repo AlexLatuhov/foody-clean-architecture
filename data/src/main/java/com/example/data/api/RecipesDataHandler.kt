@@ -1,20 +1,17 @@
 package com.example.data.api
 
-import android.content.Context
-import com.example.data.R
 import com.example.data.api.models.FoodJokeDataItem
 import com.example.data.api.models.RecipeDataItem
-import com.example.data.extentions.getErrorMessage
+import com.example.data.extentions.wasKeyLimited
+import com.example.data.extentions.wasTimeout
 import com.example.data.mappers.convertToLocalDbItem
 import com.example.data.repositories.RecipesSaver
 import com.example.domain.models.request.OperationResult
 import com.example.domain.models.request.RecipesDataRequestResult
-import dagger.hilt.android.qualifiers.ApplicationContext
 import retrofit2.Response
 import javax.inject.Inject
 
 class RecipesDataHandler @Inject constructor(
-    @ApplicationContext private val context: Context,
     private val foodRecipesApi: FoodRecipesApi,
     private val localDataSource: RecipesSaver
 ) {
@@ -26,12 +23,12 @@ class RecipesDataHandler @Inject constructor(
         if (result is RecipesDataRequestResult.Success) {
             if (foodRecipe != null) {
                 val domainData =
-                    foodRecipe.convertToLocalDbItem(context.getString(R.string.no_value))
+                    foodRecipe.convertToLocalDbItem()
                 if (localDataSource.insertRecipes(domainData) is OperationResult.Fail) {
-                    return RecipesDataRequestResult.Error(context.getString(R.string.unknown_error))
+                    return RecipesDataRequestResult.UnknownError
                 }
             } else {
-                return RecipesDataRequestResult.Error(context.getString(R.string.no_data))
+                return RecipesDataRequestResult.NoData
             }
         }
         return result
@@ -41,16 +38,21 @@ class RecipesDataHandler @Inject constructor(
         foodRecipesApi.getFoodJoke(api)
 
     private fun Response<RecipeDataItem>.getRecipesResult(): RecipesDataRequestResult {
-        val error = getErrorMessage(context)
         return when {
-            error != null -> {
-                RecipesDataRequestResult.Error(error)
+            wasTimeout() -> {
+                RecipesDataRequestResult.Timeout
+            }
+            wasKeyLimited() -> {
+                RecipesDataRequestResult.ApiKetLimited
+            }
+            isSuccessful -> {
+                RecipesDataRequestResult.Success
             }
             body()!!.results.isNullOrEmpty() -> {
-                RecipesDataRequestResult.Error(context.getString(R.string.not_found))
+                RecipesDataRequestResult.NotFound
             }
             else -> {
-                RecipesDataRequestResult.Success
+                RecipesDataRequestResult.ErrorWithMessage(message())
             }
         }
     }

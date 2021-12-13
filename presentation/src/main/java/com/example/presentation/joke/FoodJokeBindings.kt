@@ -54,7 +54,7 @@ fun View.setErrorViewsVisibility(
     if (apiResponse != null && apiResponse.data == null) {
         visibility = View.VISIBLE
         if (this is TextView) {
-            text = apiResponse.message.toString()
+            text = apiResponse.getErrorString(this.context.resources)
         }
     }
     if (apiResponse is DataProviderRequestResult.Success || apiResponse is DataProviderRequestResult.Loading) {

@@ -30,7 +30,8 @@ class IngredientsAdapter : RecyclerView.Adapter<IngredientsAdapter.MyViewHolder>
             ingredientName.text = item.getPrintName()
             ingredientAmount.text = item.amount.toString()
             ingredientUnit.text = item.unit
-            ingredientConsistency.text = item.consistency
+            ingredientConsistency.text =
+                item.consistency ?: ingredientConsistency.resources.getString(R.string.no_data)
             ingredientOriginal.text = item.original
         }
 

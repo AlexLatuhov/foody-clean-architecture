@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.Log
 import com.example.data.Constants
 import com.example.data.Constants.Companion.CLEAN_TAG
-import com.example.data.R
 import com.example.data.api.RecipesDataHandler
 import com.example.data.extentions.hasInternetConnection
 import com.example.data.mappers.convertToDomainItem
@@ -60,26 +59,18 @@ class RequestRecipesGatewayApi @Inject constructor(
                     selectedMealType, selectedDietType
                 )
                 val response = recipesDataHandler.getRecipes(queries)
-                if (response is RecipesDataRequestResult.Error) {
-                    createError(response.message)
-                } else {
+                if (response is RecipesDataRequestResult.Success) {
                     saveMealAndDietType()
-                    RecipesDataRequestResult.Success
                 }
+                response
             } catch (e: Exception) {
                 Log.d(CLEAN_TAG, "Exception!")
                 e.printStackTrace()
-                createError(context.getString(R.string.recipes_not_found))
+                RecipesDataRequestResult.NotFound
             }
         } else {
-            return createError(
-                context.getString(R.string.no_internet_connection)
-            )
+            return RecipesDataRequestResult.NoConnectionError
         }
-    }
-
-    private fun createError(message: String): RecipesDataRequestResult.Error {
-        return RecipesDataRequestResult.Error(message)
     }
 
     private fun applyQueries(

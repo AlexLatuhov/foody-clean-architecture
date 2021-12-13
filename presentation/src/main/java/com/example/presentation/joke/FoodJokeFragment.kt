@@ -31,12 +31,7 @@ class FoodJokeFragment : BaseFragment<FragmentFoodJokeBinding>() {
                     setJokeText(response)
                 }
                 is DataProviderRequestResult.Error -> {
-                    Toast.makeText(
-                        requireContext(),
-                        response.message.toString(),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    setJokeText(response)
+                    onError(response)
                 }
                 is DataProviderRequestResult.Loading -> {
                     Log.d("FOOD_JOKE", "Loading")
@@ -44,6 +39,16 @@ class FoodJokeFragment : BaseFragment<FragmentFoodJokeBinding>() {
             }
         })
         setHasOptionsMenu(true)
+    }
+
+    private fun onError(errorResponse: DataProviderRequestResult.Error<FoodJokeDomain>) {
+        val errorMessage = errorResponse.getErrorString(resources)
+        Toast.makeText(
+            requireContext(),
+            errorMessage,
+            Toast.LENGTH_SHORT
+        ).show()
+        setJokeText(errorResponse)
     }
 
     private fun setJokeText(dataProviderRequestResult: DataProviderRequestResult<FoodJokeDomain>) {
