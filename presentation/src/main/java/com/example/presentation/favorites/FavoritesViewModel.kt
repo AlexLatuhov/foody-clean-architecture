@@ -1,6 +1,7 @@
 package com.example.presentation.favorites
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.example.domain.models.FavoritesEntityDomain
 import com.example.domain.models.request.OperationResult
@@ -10,7 +11,7 @@ import com.example.domain.usecase.interfaces.InsertFavoriteRecipeUseCase
 import com.example.domain.usecase.interfaces.ReadFavoriteRecipesUseCase
 import com.example.presentation.SuccessAdd
 import com.example.presentation.SuccessRemove
-import com.example.presentation.base.BaseViewModel
+import com.example.presentation.base.scopeLaunch
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -20,7 +21,7 @@ open class FavoritesViewModel @Inject constructor(
     private val insertFavoriteRecipeUseCase: InsertFavoriteRecipeUseCase,
     private val removeFavoriteRecipeUseCase: RemoveFavoriteRecipeUseCaseImpl,
     private val deleteAllFavoriteRecipeUseCase: DeleteAllFavoriteRecipeUseCase
-) : BaseViewModel() {
+) : ViewModel() {
 
     val readFavoriteRecipes = readFavoriteRecipesUseCase.readFavoriteRecipes().asLiveData()
 

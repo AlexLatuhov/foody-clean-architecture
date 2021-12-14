@@ -2,7 +2,7 @@ package com.example.data.database.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.data.Constants.Companion.FAVORITE_RECIPES_TABLE
+import com.example.data.Constants.FAVORITE_RECIPES_TABLE
 
 @Entity(tableName = FAVORITE_RECIPES_TABLE)
 class FavoritesEntity(

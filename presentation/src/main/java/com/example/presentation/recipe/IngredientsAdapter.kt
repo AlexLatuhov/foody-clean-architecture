@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.domain.models.ExtendedIngredientDomain
-import com.example.presentation.Constants.Companion.IMG_URL
+import com.example.presentation.Constants.IMG_URL
 import com.example.presentation.R
 import com.example.presentation.RecipesDiffUtil
 import com.example.presentation.databinding.IngredientsRowLayoutBinding

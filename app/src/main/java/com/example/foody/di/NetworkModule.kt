@@ -1,7 +1,7 @@
 package com.example.foody.di
 
-import com.example.data.Constants.Companion.BASE_URL
-import com.example.data.Constants.Companion.TIMEOUT
+import com.example.data.Constants.BASE_URL
+import com.example.data.Constants.TIMEOUT
 import com.example.data.api.FoodRecipesApi
 import dagger.Module
 import dagger.Provides

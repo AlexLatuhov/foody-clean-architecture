@@ -3,7 +3,7 @@ package com.example.data.gateways
 import android.content.Context
 import android.util.Log
 import com.example.data.Constants
-import com.example.data.Constants.Companion.CLEAN_TAG
+import com.example.data.Constants.CLEAN_TAG
 import com.example.data.api.RecipesDataHandler
 import com.example.data.extentions.hasInternetConnection
 import com.example.data.mappers.convertToDomainItem
@@ -40,7 +40,7 @@ class RequestRecipesGatewayApi @Inject constructor(
         it.convertToDomainItem()
     }
 
-    override suspend fun requestAndStoreRecipesData(): Flow<RecipesDataRequestResult> {
+    override suspend fun obtainRecipesData(): Flow<RecipesDataRequestResult> {
         dataRequestResult.value =
             requestAndStoreData(
                 mealAndDietRepository.selectedMealType(),

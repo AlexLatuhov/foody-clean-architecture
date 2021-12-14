@@ -10,8 +10,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.navArgs
 import com.example.domain.models.FavoritesEntityDomain
-import com.example.presentation.Constants.Companion.DEFAULT_ID
-import com.example.presentation.Constants.Companion.RECIPE
+import com.example.presentation.Constants.DEFAULT_ID
+import com.example.presentation.Constants.RECIPE
 import com.example.presentation.R
 import com.example.presentation.SuccessAdd
 import com.example.presentation.SuccessRemove

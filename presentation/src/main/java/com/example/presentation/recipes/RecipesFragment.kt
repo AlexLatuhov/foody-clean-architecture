@@ -44,7 +44,7 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(), SearchView.OnQue
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showShimmerEffect()
-        recipesViewModel.getData()
+        recipesViewModel.obtainRecipesData()
         recipesViewModel.recipesRequestResult.observe(viewLifecycleOwner, { requestResult ->
             onDataRequestResult(requestResult)
         })

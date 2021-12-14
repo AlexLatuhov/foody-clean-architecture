@@ -1,6 +1,6 @@
 package com.example.data.database.repositories
 
-import com.example.data.Constants.Companion.DEFAULT_ID
+import com.example.data.Constants.DEFAULT_ID
 import com.example.data.database.RecipesDao
 import com.example.data.database.models.RecipesEntity
 import com.example.data.repositories.RecipesSaver

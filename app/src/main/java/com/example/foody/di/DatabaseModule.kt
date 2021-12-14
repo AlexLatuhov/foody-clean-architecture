@@ -12,7 +12,7 @@ import com.example.data.repositories.FavoriteRecipesEditor
 import com.example.data.repositories.JokeStorage
 import com.example.data.repositories.RecipesLoader
 import com.example.data.repositories.RecipesSaver
-import com.example.presentation.Constants.Companion.DATABASE_NAME
+import com.example.presentation.Constants.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

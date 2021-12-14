@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.domain.models.RecipeDomain
-import com.example.presentation.Constants.Companion.RECIPE
+import com.example.presentation.Constants.RECIPE
 import com.example.presentation.databinding.FragmentOverviewBinding
 
 class OverviewFragment : Fragment() {

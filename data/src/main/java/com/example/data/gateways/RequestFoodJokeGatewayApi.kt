@@ -6,7 +6,6 @@ import com.example.data.api.RecipesDataHandler
 import com.example.data.database.models.FoodJokeEntity
 import com.example.data.extentions.hasInternetConnection
 import com.example.data.extentions.wasKeyLimited
-import com.example.data.extentions.wasTimeout
 import com.example.data.mappers.convertToDomain
 import com.example.data.repositories.JokeStorage
 import com.example.domain.gateway.GetFoodJokeGateway
@@ -27,7 +26,7 @@ class RequestFoodJokeGatewayApi @Inject constructor(
     private val dataRequestResult =
         MutableStateFlow<DataProviderRequestResult<FoodJokeDomain>>(DataProviderRequestResult.Loading())
 
-    override suspend fun getData(): Flow<DataProviderRequestResult<FoodJokeDomain>> {
+    override suspend fun obtainFoodJokeData(): Flow<DataProviderRequestResult<FoodJokeDomain>> {
         dataRequestResult.value = requestAndStoreData()
         return dataRequestResult
     }

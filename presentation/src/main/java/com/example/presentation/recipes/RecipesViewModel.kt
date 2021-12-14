@@ -1,12 +1,13 @@
 package com.example.presentation.recipes
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.domain.models.MealAndDietTypeDomain
 import com.example.domain.models.RecipeDomain
 import com.example.domain.models.request.RecipesDataRequestResult
 import com.example.domain.usecase.interfaces.LoadRecipesUseCase
 import com.example.domain.usecase.interfaces.RecipesDataInteractor
-import com.example.presentation.base.BaseViewModel
+import com.example.presentation.base.scopeLaunch
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
@@ -15,7 +16,7 @@ import javax.inject.Inject
 class RecipesViewModel @Inject constructor(
     private val recipesDataInteractor: RecipesDataInteractor,
     private val loadRecipesUseCase: LoadRecipesUseCase
-) : BaseViewModel() {
+) : ViewModel() {
 
     val recipesRequestResult = MutableLiveData<RecipesDataRequestResult>()
 
@@ -46,11 +47,11 @@ class RecipesViewModel @Inject constructor(
         }
     }
 
-    fun getData() {
+    fun obtainRecipesData() {
         recipesRequestResult.value = RecipesDataRequestResult.None
         scopeLaunch {
             recipesRequestResult.postValue(
-                recipesDataInteractor.requestAndStoreRecipesData().first()
+                recipesDataInteractor.obtainRecipesData().first()
             )
         }
     }
