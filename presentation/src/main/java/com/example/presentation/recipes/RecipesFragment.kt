@@ -116,7 +116,7 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(), SearchView.OnQue
         recipesViewModel.loadDataFromCache(searchQuery, errorMessage)
     }
 
-    private fun setError(errorMessage: String) {
+    private fun setError(errorMessage: String?) {
         binding.errorTextView.text = errorMessage
     }
 

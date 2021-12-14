@@ -42,9 +42,7 @@ class RecipesViewModel @Inject constructor(
     fun loadDataFromCache(searchQuery: String?, errorMessage: String) = scopeLaunch {
         val queryResult = loadRecipesUseCase.loadDataFromCache(searchQuery).first() ?: emptyList()
         recipesData.postValue(queryResult)
-        if (queryResult.isEmpty()) {
-            errorMessageState.postValue(errorMessage)
-        }
+        errorMessageState.postValue(if (queryResult.isEmpty()) errorMessage else null)
     }
 
     fun obtainRecipesData() {
