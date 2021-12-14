@@ -5,8 +5,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.domain.models.request.OperationResult
-import com.example.presentation.BaseFragment
 import com.example.presentation.R
+import com.example.presentation.base.BaseFragment
 import com.example.presentation.databinding.FragmentFavoriteRecipesBinding
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint

@@ -8,8 +8,8 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.example.domain.models.FoodJokeDomain
 import com.example.domain.models.request.DataProviderRequestResult
-import com.example.presentation.BaseFragment
 import com.example.presentation.R
+import com.example.presentation.base.BaseFragment
 import com.example.presentation.databinding.FragmentFoodJokeBinding
 import dagger.hilt.android.AndroidEntryPoint
 

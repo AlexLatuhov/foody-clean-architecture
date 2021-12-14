@@ -17,7 +17,6 @@ import com.example.data.Constants.Companion.PREF_NAME
 import com.example.data.repositories.MealAndDietRepository
 import com.example.domain.models.request.OperationResult
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -40,7 +39,7 @@ class LocalMealAndDietRepository @Inject constructor(@ApplicationContext private
         val selectedDiedTypeId = intPreferencesKey(PREF_DIET_TYPE_ID)
     }
 
-    private val readMealAndDietType: Flow<MealAndDietType> = context.dataStore.data
+    private val readMealAndDietType = context.dataStore.data
         .catch { exception ->
             if (exception is IOException) {
                 emit(emptyPreferences())
@@ -72,17 +71,11 @@ class LocalMealAndDietRepository @Inject constructor(@ApplicationContext private
         )
     }
 
-    private suspend fun getType(): MealAndDietType {
-        return mealAndDietType ?: readMealAndDietType().first()
-    }
+    private suspend fun getType() = mealAndDietType ?: readMealAndDietType().first()
 
-    override suspend fun selectedDietType(): String {
-        return getType().selectedDietType
-    }
+    override suspend fun selectedDietType() = getType().selectedDietType
 
-    override suspend fun selectedMealType(): String {
-        return getType().selectedMealType
-    }
+    override suspend fun selectedMealType() = getType().selectedMealType
 
     override suspend fun saveMealAndDietType(
     ) = try {

@@ -10,7 +10,7 @@ class LocalFavoriteRecipesEditor @Inject constructor(
     private val recipesDao: RecipesDao
 ) : FavoriteRecipesEditor {
 
-    private fun generateFavResult(operationResCount: Int): OperationResult =
+    private fun generateFavResult(operationResCount: Int) =
         if (operationResCount > 0) OperationResult.Success() else OperationResult.Fail
 
     override suspend fun insertFavoriteRecipes(favoritesEntity: FavoritesEntity) =

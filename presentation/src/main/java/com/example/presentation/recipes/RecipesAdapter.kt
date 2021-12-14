@@ -2,16 +2,14 @@ package com.example.presentation.recipes
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.domain.models.RecipeDomain
-import com.example.presentation.BaseRecipesAdapter
 import com.example.presentation.RecipesDiffUtil
+import com.example.presentation.base.BaseRecipesAdapter
 
 class RecipesAdapter : BaseRecipesAdapter() {
 
     internal var recipes = emptyList<RecipeDomain>()
 
-    override fun getResult(position: Int): RecipeDomain {
-        return recipes[position]
-    }
+    override fun getResult(position: Int) = recipes[position]
 
     fun setDataItems(items: List<RecipeDomain>) {
         val recipesDiffUtil = RecipesDiffUtil(recipes, items)
@@ -20,7 +18,5 @@ class RecipesAdapter : BaseRecipesAdapter() {
         diffUtilResult.dispatchUpdatesTo(this)
     }
 
-    override fun getItemCount(): Int {
-        return recipes.size
-    }
+    override fun getItemCount() = recipes.size
 }

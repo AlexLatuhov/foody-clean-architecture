@@ -39,11 +39,14 @@ class IngredientsAdapter : RecyclerView.Adapter<IngredientsAdapter.MyViewHolder>
             if (name.isNotEmpty()) name.replaceFirstChar { it.titlecase() } else ""
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = IngredientsRowLayoutBinding.inflate(layoutInflater, parent, false)
-        return MyViewHolder(binding)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = MyViewHolder(
+        IngredientsRowLayoutBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+    )
+
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bind(ingredientsList[position])

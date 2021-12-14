@@ -5,9 +5,9 @@ import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import com.example.domain.models.FavoritesEntityDomain
-import com.example.presentation.BaseRecipesAdapter
 import com.example.presentation.R
 import com.example.presentation.RecipesDiffUtil
+import com.example.presentation.base.BaseRecipesAdapter
 import com.example.presentation.recipes.RecipeViewHolder
 
 class FavoriteRecipesAdapter(

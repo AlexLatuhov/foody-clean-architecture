@@ -8,9 +8,9 @@ import com.example.domain.usecase.implementations.RemoveFavoriteRecipeUseCaseImp
 import com.example.domain.usecase.interfaces.DeleteAllFavoriteRecipeUseCase
 import com.example.domain.usecase.interfaces.InsertFavoriteRecipeUseCase
 import com.example.domain.usecase.interfaces.ReadFavoriteRecipesUseCase
-import com.example.presentation.BaseViewModel
 import com.example.presentation.SuccessAdd
 import com.example.presentation.SuccessRemove
+import com.example.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

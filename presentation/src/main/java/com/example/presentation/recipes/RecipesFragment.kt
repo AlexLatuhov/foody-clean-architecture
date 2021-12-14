@@ -8,8 +8,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.domain.models.request.RecipesDataRequestResult
-import com.example.presentation.BaseFragment
 import com.example.presentation.R
+import com.example.presentation.base.BaseFragment
 import com.example.presentation.databinding.FragmentRecipesBinding
 import com.example.presentation.favorites.FavoritesViewModel
 import com.example.presentation.favorites.RecipeClick

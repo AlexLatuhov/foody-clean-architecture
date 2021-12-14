@@ -1,6 +1,5 @@
 package com.example.data.api
 
-import com.example.data.api.models.FoodJokeDataItem
 import com.example.data.api.models.RecipeDataItem
 import com.example.data.extentions.wasKeyLimited
 import com.example.data.extentions.wasTimeout
@@ -34,11 +33,10 @@ class RecipesDataHandler @Inject constructor(
         return result
     }
 
-    suspend fun getFoodJoke(api: String): Response<FoodJokeDataItem> =
-        foodRecipesApi.getFoodJoke(api)
+    suspend fun getFoodJoke(api: String) = foodRecipesApi.getFoodJoke(api)
 
-    private fun Response<RecipeDataItem>.getRecipesResult(): RecipesDataRequestResult {
-        return when {
+    private fun Response<RecipeDataItem>.getRecipesResult() =
+        when {
             wasTimeout() -> {
                 RecipesDataRequestResult.Timeout
             }
@@ -55,5 +53,4 @@ class RecipesDataHandler @Inject constructor(
                 RecipesDataRequestResult.ErrorWithMessage(message())
             }
         }
-    }
 }

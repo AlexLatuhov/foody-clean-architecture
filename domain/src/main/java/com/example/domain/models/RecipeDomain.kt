@@ -7,6 +7,7 @@ import kotlinx.parcelize.RawValue
 
 @Parcelize
 data class RecipeDomain(
+
     @SerializedName("aggregateLikes")
     val aggregateLikes: Int,
 
