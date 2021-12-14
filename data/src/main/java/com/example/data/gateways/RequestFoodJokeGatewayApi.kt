@@ -6,6 +6,7 @@ import com.example.data.api.RecipesDataHandler
 import com.example.data.database.models.FoodJokeEntity
 import com.example.data.extentions.hasInternetConnection
 import com.example.data.extentions.wasKeyLimited
+import com.example.data.extentions.wasTimeout
 import com.example.data.mappers.convertToDomain
 import com.example.data.repositories.JokeStorage
 import com.example.domain.gateway.GetFoodJokeGateway
