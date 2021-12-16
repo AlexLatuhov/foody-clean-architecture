@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface RecipesDataInteractor {
 
-    suspend fun obtainRecipesData(): Flow<RecipesDataRequestResult>
+    fun obtainRecipesData(): Flow<RecipesDataRequestResult>
 
     fun readMealAndDietType(): Flow<MealAndDietTypeDomain>
 

@@ -8,6 +8,6 @@ class GetFoodJokeUseCaseImpl @Inject constructor(
     private val getFoodJokeGateway: GetFoodJokeGateway
 ) : GetFoodJokeUseCase {
 
-    override suspend fun obtainFoodJokeData() = getFoodJokeGateway.obtainFoodJokeData()
+    override fun obtainFoodJokeData() = getFoodJokeGateway.obtainFoodJokeData()
 
 }

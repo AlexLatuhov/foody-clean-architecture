@@ -14,8 +14,7 @@ import com.example.domain.models.FoodJokeDomain
 import com.example.domain.models.request.DataProviderRequestResult
 import com.example.domain.models.request.OperationResult
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class RequestFoodJokeGatewayApi @Inject constructor(
@@ -24,13 +23,11 @@ class RequestFoodJokeGatewayApi @Inject constructor(
     private val jokeStorage: JokeStorage
 ) : GetFoodJokeGateway {
 
-    private val dataRequestResult =
-        MutableStateFlow<DataProviderRequestResult<FoodJokeDomain>>(DataProviderRequestResult.Loading())
-
-    override suspend fun obtainFoodJokeData(): Flow<DataProviderRequestResult<FoodJokeDomain>> {
-        dataRequestResult.value = requestAndStoreData()
-        return dataRequestResult
+    private val dataRequestResult = flow {
+        emit(requestAndStoreData())
     }
+
+    override fun obtainFoodJokeData() = dataRequestResult
 
     private suspend fun requestAndStoreData(): DataProviderRequestResult<FoodJokeDomain> {
         if (context.hasInternetConnection()) {

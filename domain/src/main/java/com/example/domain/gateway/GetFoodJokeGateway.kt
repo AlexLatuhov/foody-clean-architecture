@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface GetFoodJokeGateway {
 
-    suspend fun obtainFoodJokeData(): Flow<DataProviderRequestResult<FoodJokeDomain>>
+    fun obtainFoodJokeData(): Flow<DataProviderRequestResult<FoodJokeDomain>>
 
 }

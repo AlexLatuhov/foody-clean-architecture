@@ -8,6 +8,6 @@ interface RequestRecipesGateway : MealAndDietTypeSaver {
 
     fun readMealAndDietType(): Flow<MealAndDietTypeDomain>
 
-    suspend fun obtainRecipesData(): Flow<RecipesDataRequestResult>
+    fun obtainRecipesData(): Flow<RecipesDataRequestResult>
 
 }

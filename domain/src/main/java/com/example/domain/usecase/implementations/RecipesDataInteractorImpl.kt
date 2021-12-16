@@ -8,7 +8,7 @@ class RecipesDataInteractorImpl @Inject constructor(
     private val requestRecipesGateway: RequestRecipesGateway
 ) : RecipesDataInteractor {
 
-    override suspend fun obtainRecipesData() =
+    override fun obtainRecipesData() =
         requestRecipesGateway.obtainRecipesData()
 
     override suspend fun saveMealAndDietTypeTemp(

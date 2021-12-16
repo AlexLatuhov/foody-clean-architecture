@@ -11,8 +11,7 @@ import com.example.data.repositories.MealAndDietRepository
 import com.example.domain.gateway.RequestRecipesGateway
 import com.example.domain.models.request.RecipesDataRequestResult
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
@@ -22,8 +21,14 @@ class RequestRecipesGatewayApi @Inject constructor(
     private val recipesDataHandler: RecipesDataHandler
 ) : RequestRecipesGateway {
 
-    private val dataRequestResult =
-        MutableStateFlow<RecipesDataRequestResult>(RecipesDataRequestResult.None)
+    private val dataRequestResult = flow {
+        emit(
+            requestAndStoreData(
+                mealAndDietRepository.selectedMealType(),
+                mealAndDietRepository.selectedDietType()
+            )
+        )
+    }
 
     private suspend fun saveMealAndDietType() = mealAndDietRepository.saveMealAndDietType()
 
@@ -40,14 +45,7 @@ class RequestRecipesGatewayApi @Inject constructor(
         it.convertToDomainItem()
     }
 
-    override suspend fun obtainRecipesData(): Flow<RecipesDataRequestResult> {
-        dataRequestResult.value =
-            requestAndStoreData(
-                mealAndDietRepository.selectedMealType(),
-                mealAndDietRepository.selectedDietType()
-            )
-        return dataRequestResult
-    }
+    override fun obtainRecipesData() = dataRequestResult
 
     private suspend fun requestAndStoreData(
         selectedMealType: String,
