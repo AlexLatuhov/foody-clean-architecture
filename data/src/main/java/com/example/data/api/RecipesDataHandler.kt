@@ -2,7 +2,6 @@ package com.example.data.api
 
 import com.example.data.api.models.RecipeDataItem
 import com.example.data.extentions.wasKeyLimited
-import com.example.data.extentions.wasTimeout
 import com.example.data.mappers.convertToLocalDbItem
 import com.example.data.repositories.RecipesSaver
 import com.example.domain.models.request.OperationResult
@@ -15,7 +14,7 @@ class RecipesDataHandler @Inject constructor(
     private val localDataSource: RecipesSaver
 ) {
 
-    suspend fun getRecipes(queries: Map<String, String>): RecipesDataRequestResult {
+    suspend fun getRecipes(queries: Map<String, String>): RecipesDataRequestResult {//TODO test RecipesDataRequestResult return value
         val dataResponse = foodRecipesApi.getRecipes(queries)
         val result = dataResponse.getRecipesResult()
         val foodRecipe = dataResponse.body()
@@ -37,16 +36,13 @@ class RecipesDataHandler @Inject constructor(
 
     private fun Response<RecipeDataItem>.getRecipesResult() =
         when {
-            wasTimeout() -> {
-                RecipesDataRequestResult.Timeout
-            }
             wasKeyLimited() -> {
                 RecipesDataRequestResult.ApiKetLimited
             }
             isSuccessful -> {
                 RecipesDataRequestResult.Success
             }
-            body()!!.results.isNullOrEmpty() -> {
+            isSuccessful && body()!!.results.isNullOrEmpty() -> {
                 RecipesDataRequestResult.NotFound
             }
             else -> {

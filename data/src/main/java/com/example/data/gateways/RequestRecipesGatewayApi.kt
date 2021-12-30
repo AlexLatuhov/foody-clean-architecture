@@ -13,6 +13,7 @@ import com.example.domain.models.request.RecipesDataRequestResult
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
+import java.net.SocketTimeoutException
 import javax.inject.Inject
 
 class RequestRecipesGatewayApi @Inject constructor(
@@ -64,7 +65,7 @@ class RequestRecipesGatewayApi @Inject constructor(
             } catch (e: Exception) {
                 Log.d(CLEAN_TAG, "Exception!")
                 e.printStackTrace()
-                RecipesDataRequestResult.NotFound
+                if (e is SocketTimeoutException) RecipesDataRequestResult.Timeout else RecipesDataRequestResult.NotFound
             }
         } else {
             return RecipesDataRequestResult.NoConnectionError

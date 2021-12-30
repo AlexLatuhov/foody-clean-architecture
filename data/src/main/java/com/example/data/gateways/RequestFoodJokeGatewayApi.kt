@@ -6,7 +6,6 @@ import com.example.data.api.RecipesDataHandler
 import com.example.data.database.models.FoodJokeEntity
 import com.example.data.extentions.hasInternetConnection
 import com.example.data.extentions.wasKeyLimited
-import com.example.data.extentions.wasTimeout
 import com.example.data.mappers.convertToDomain
 import com.example.data.repositories.JokeStorage
 import com.example.domain.gateway.GetFoodJokeGateway
@@ -15,6 +14,7 @@ import com.example.domain.models.request.DataProviderRequestResult
 import com.example.domain.models.request.OperationResult
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.flow
+import java.net.SocketTimeoutException
 import javax.inject.Inject
 
 class RequestFoodJokeGatewayApi @Inject constructor(
@@ -43,9 +43,6 @@ class RequestFoodJokeGatewayApi @Inject constructor(
                     else DataProviderRequestResult.UnknownError(loadFromCache())
                 } else {
                     return when {
-                        response.wasTimeout() -> {
-                            DataProviderRequestResult.Timeout(loadFromCache())
-                        }
                         response.wasKeyLimited() -> {
                             DataProviderRequestResult.ApiKetLimited(loadFromCache())
                         }
@@ -58,7 +55,10 @@ class RequestFoodJokeGatewayApi @Inject constructor(
                     }
                 }
             } catch (e: Exception) {
-                return DataProviderRequestResult.UnknownError(loadFromCache())
+                return if (e is SocketTimeoutException)
+                    DataProviderRequestResult.Timeout(loadFromCache())
+                else
+                    DataProviderRequestResult.UnknownError(loadFromCache())
             }
         }
         return DataProviderRequestResult.NoInternetError(loadFromCache())
