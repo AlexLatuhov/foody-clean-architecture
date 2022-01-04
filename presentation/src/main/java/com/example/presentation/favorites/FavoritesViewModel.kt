@@ -5,10 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.example.domain.models.FavoritesEntityDomain
 import com.example.domain.models.request.OperationResult
-import com.example.domain.usecase.implementations.RemoveFavoriteRecipeUseCaseImpl
 import com.example.domain.usecase.interfaces.DeleteAllFavoriteRecipeUseCase
 import com.example.domain.usecase.interfaces.InsertFavoriteRecipeUseCase
 import com.example.domain.usecase.interfaces.ReadFavoriteRecipesUseCase
+import com.example.domain.usecase.interfaces.RemoveFavoriteRecipeUseCase
 import com.example.presentation.SuccessAdd
 import com.example.presentation.SuccessRemove
 import com.example.presentation.base.scopeLaunch
@@ -19,7 +19,7 @@ import javax.inject.Inject
 open class FavoritesViewModel @Inject constructor(
     readFavoriteRecipesUseCase: ReadFavoriteRecipesUseCase,
     private val insertFavoriteRecipeUseCase: InsertFavoriteRecipeUseCase,
-    private val removeFavoriteRecipeUseCase: RemoveFavoriteRecipeUseCaseImpl,
+    private val removeFavoriteRecipeUseCase: RemoveFavoriteRecipeUseCase,
     private val deleteAllFavoriteRecipeUseCase: DeleteAllFavoriteRecipeUseCase
 ) : ViewModel() {
 
