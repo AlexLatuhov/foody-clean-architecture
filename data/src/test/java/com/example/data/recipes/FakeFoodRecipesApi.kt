@@ -5,9 +5,11 @@ import com.example.data.api.models.FoodJokeDataItem
 import com.example.data.api.models.RecipeDataItem
 import retrofit2.Response
 
-class FakeFoodRecipesApi : FoodRecipesApi {
-
-    var testResponse: Response<RecipeDataItem> = Response.success(RecipeDataItem(emptyList()))
+class FakeFoodRecipesApi(
+    var testResponse: Response<RecipeDataItem> = Response.success(
+        RecipeDataItem(emptyList())
+    )
+) : FoodRecipesApi {
 
     override suspend fun getRecipes(queries: Map<String, String>): Response<RecipeDataItem> =
         testResponse
