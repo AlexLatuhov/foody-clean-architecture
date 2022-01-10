@@ -56,4 +56,11 @@
         <item name="android:layout_height">@dimen/small_image_size</item>
         <item name="android:background">@color/placeholderColor</item>
     </style>
+
+    <style name="AppTheme.OverlapSystemBar" parent="Base.AppTheme" />
+
+    <style name="Base.AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
 </resources>

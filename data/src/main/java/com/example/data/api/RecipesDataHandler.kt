@@ -14,7 +14,7 @@ class RecipesDataHandler @Inject constructor(
     private val localDataSource: RecipesSaver
 ) {
 
-    suspend fun getRecipes(queries: Map<String, String>): RecipesDataRequestResult {//TODO test RecipesDataRequestResult return value
+    suspend fun getRecipes(queries: Map<String, String>): RecipesDataRequestResult {
         val dataResponse = foodRecipesApi.getRecipes(queries)
         val result = dataResponse.getRecipesResult()
         val foodRecipe = dataResponse.body()

@@ -27,19 +27,19 @@ class FavoritesViewModelTest {
     private lateinit var fakeInsertFavoriteRecipeUseCase: FakeInsertFavoriteRecipeUseCase
     private val fakeRecipeDomain = RecipeDomain(
         0,
-        false,
-        false,
-        emptyList(),
-        false,
-        1,
-        "",
-        1,
-        "",
-        "",
-        "",
-        false,
-        false,
-        false
+        cheap = false,
+        dairyFree = false,
+        extendedIngredients = emptyList(),
+        glutenFree = false,
+        id = 1,
+        image = "",
+        readyInMinutes = 1,
+        sourceUrl = "",
+        summary = "",
+        title = "",
+        vegan = false,
+        vegetarian = false,
+        veryHealthy = false
     )
 
     @Before
