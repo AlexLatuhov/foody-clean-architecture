@@ -13,4 +13,8 @@
         android:id="@+id/foodJokeFragment"
         android:icon="@drawable/ic_food_joke"
         android:title="@string/joke" />
+    <item
+        android:id="@+id/factFragment"
+        android:icon="@drawable/ic_menu_random_info"
+        android:title="@string/fact" />
 </menu>

@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.example.domain.models.FoodJokeDomain
 import com.example.domain.models.request.DataProviderRequestResult
 import com.example.presentation.R
@@ -17,6 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class FoodJokeFragment : BaseFragment<FragmentFoodJokeBinding>() {
 
     private val viewModel: FoodJokeViewModel by viewModels()
+    private val args by navArgs<FoodJokeFragmentArgs>()
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentFoodJokeBinding =
         FragmentFoodJokeBinding::inflate
@@ -24,7 +26,7 @@ class FoodJokeFragment : BaseFragment<FragmentFoodJokeBinding>() {
     override fun setup() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        viewModel.getFoodJoke()
+        viewModel.getFoodJoke(args.dataType)
         viewModel.foodJokeDataItemResponse.observe(viewLifecycleOwner, { response ->
             when (response) {
                 is DataProviderRequestResult.Success -> {

@@ -32,7 +32,8 @@ class RecipesDataHandler @Inject constructor(
         return result
     }
 
-    suspend fun getFoodJoke(api: String) = foodRecipesApi.getFoodJoke(api)
+    suspend fun getFoodJoke(path: String, api: String) =
+        foodRecipesApi.getFoodJoke(path, api)
 
     private fun Response<RecipeDataItem>.getRecipesResult() =
         when {

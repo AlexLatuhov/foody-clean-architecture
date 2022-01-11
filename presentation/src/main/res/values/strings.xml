@@ -31,6 +31,7 @@
     <string name="recipes">Recipes</string>
     <string name="favorite">Favorite</string>
     <string name="joke">Joke</string>
+    <string name="fact">Fact</string>
     <string name="content_description">contentDescription</string>
 
     <string name="no_data">No data</string>

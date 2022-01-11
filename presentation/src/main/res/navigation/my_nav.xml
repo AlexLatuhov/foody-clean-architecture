@@ -30,7 +30,23 @@
         android:id="@+id/foodJokeFragment"
         android:name="com.example.presentation.joke.FoodJokeFragment"
         android:label="@string/joke"
-        tools:layout="@layout/fragment_food_joke" />
+        tools:layout="@layout/fragment_food_joke">
+        <argument
+            android:name="dataType"
+            android:defaultValue="Joke"
+            app:argType="com.example.domain.models.request.InfoTypeDomain" />
+    </fragment>
+    <fragment
+        android:id="@+id/factFragment"
+        android:name="com.example.presentation.joke.FoodJokeFragment"
+        android:label="@string/fact"
+        tools:layout="@layout/fragment_food_joke">
+        <argument
+            android:name="dataType"
+            android:defaultValue="Fact"
+            app:argType="com.example.domain.models.request.InfoTypeDomain" />
+    </fragment>
+
     <dialog
         android:id="@+id/recipesBottomSheet"
         android:name="com.example.presentation.recipes.RecipesBottomSheet"
@@ -42,6 +58,7 @@
             app:popUpTo="@id/recipesFragment"
             app:popUpToInclusive="true" />
     </dialog>
+
     <activity
         android:id="@+id/detailsActivity"
         android:name="com.example.presentation.recipe.DetailsActivity"
