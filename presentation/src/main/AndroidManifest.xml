@@ -16,6 +16,12 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name="com.example.presentation.recipe.DetailsActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/DetailsActivityStyle"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name="com.example.presentation.ingredients.IngredientSearchActivity"
             android:screenOrientation="portrait"
             android:exported="true"
             tools:ignore="LockedOrientationActivity"

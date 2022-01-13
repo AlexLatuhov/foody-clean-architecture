@@ -12,6 +12,7 @@ import com.example.presentation.R
 import com.example.presentation.base.BaseFragment
 import com.example.presentation.databinding.FragmentRecipesBinding
 import com.example.presentation.favorites.FavoritesViewModel
+import com.example.presentation.favorites.IngredientSearchClick
 import com.example.presentation.favorites.RecipeClick
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,6 +38,12 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(), SearchView.OnQue
             object : RecipeClick {
                 override fun onRecipeClick() {
                     findNavController().navigate(R.id.action_recipesFragment_to_recipesBottomSheet)
+                }
+            }
+        binding.ingredientSearchClickListener =
+            object : IngredientSearchClick {
+                override fun onSearchClick() {
+                    findNavController().navigate(R.id.action_recipesFragment_to_ingredientSearchActivity)
                 }
             }
     }

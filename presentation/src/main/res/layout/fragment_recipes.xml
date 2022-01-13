@@ -10,6 +10,10 @@
             type="com.example.presentation.favorites.RecipeClick" />
 
         <variable
+            name="ingredientSearchClickListener"
+            type="com.example.presentation.favorites.IngredientSearchClick" />
+
+        <variable
             name="mainViewModel"
             type="com.example.presentation.favorites.FavoritesViewModel" />
     </data>
@@ -56,6 +60,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/ingredients_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/def_margin"
+            android:layout_marginBottom="@dimen/def_margin_x3"
+            android:clickable="true"
+            android:contentDescription="@string/content_description"
+            android:focusable="true"
+            android:onClick="@{()->ingredientSearchClickListener.onSearchClick()}"
+            android:src="@drawable/ic_ingredients"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/recipes_fab"
+            app:tint="@color/white" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/recipes_fab"

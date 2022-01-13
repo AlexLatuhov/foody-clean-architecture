@@ -32,7 +32,7 @@ private fun ResultDataItem.convertToLocalDbItem(): RecipeItemEntity {
     )
 }
 
-private fun ExtendedIngredientDataItem.convertToLocalDbItem(): ExtendedIngredient {
+fun ExtendedIngredientDataItem.convertToLocalDbItem(): ExtendedIngredient {
     return ExtendedIngredient(
         amount,
         consistency,

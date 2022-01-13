@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_recipesFragment_to_detailsActivity"
             app:destination="@id/detailsActivity" />
+        <action
+            android:id="@+id/action_recipesFragment_to_ingredientSearchActivity"
+            app:destination="@id/ingredientSearchActivity" />
     </fragment>
     <fragment
         android:id="@+id/favoriteRecipesFragment"
@@ -26,6 +29,12 @@
             android:id="@+id/action_favoriteRecipesFragment_to_detailsActivity"
             app:destination="@id/detailsActivity" />
     </fragment>
+
+    <activity
+        android:id="@+id/ingredientSearchActivity"
+        android:name="com.example.presentation.ingredients.IngredientSearchActivity"
+        android:label="@string/ingredients_search"
+        tools:layout="@layout/activity_ingredient_search" />
     <fragment
         android:id="@+id/foodJokeFragment"
         android:name="com.example.presentation.joke.FoodJokeFragment"

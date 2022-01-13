@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
                 )
             )
         )
+        navController.navigate(R.id.action_recipesFragment_to_ingredientSearchActivity)//todo remove test changes
     }
 
     override fun onSupportNavigateUp() = navController.navigateUp() || super.onSupportNavigateUp()

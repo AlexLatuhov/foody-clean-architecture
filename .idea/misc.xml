@@ -61,10 +61,14 @@
         <entry key="presentation/src/main/res/drawable/ic_search.xml" value="0.28854166666666664" />
         <entry key="presentation/src/main/res/drawable/ic_share.xml" value="0.28854166666666664" />
         <entry key="presentation/src/main/res/drawable/ic_star.xml" value="0.28854166666666664" />
+        <entry key="presentation/src/main/res/layout/activity_details.xml" value="0.12993920972644377" />
+        <entry key="presentation/src/main/res/layout/activity_ingredient_search.xml" value="0.2671875" />
         <entry key="presentation/src/main/res/layout/activity_main.xml" value="0.19895833333333332" />
         <entry key="presentation/src/main/res/layout/addtask_frag.xml" value="0.240625" />
+        <entry key="presentation/src/main/res/layout/app_bar.xml" value="0.2671875" />
         <entry key="presentation/src/main/res/layout/fragment_favorite_recipes.xml" value="0.1" />
         <entry key="presentation/src/main/res/layout/fragment_food_joke.xml" value="0.23125" />
+        <entry key="presentation/src/main/res/layout/fragment_ingredient_search.xml" value="0.1" />
         <entry key="presentation/src/main/res/layout/fragment_overview.xml" value="0.1" />
         <entry key="presentation/src/main/res/layout/fragment_recipes.xml" value="0.26927083333333335" />
         <entry key="presentation/src/main/res/layout/recipes_bottom_sheet.xml" value="0.29981884057971014" />

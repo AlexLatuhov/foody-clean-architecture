@@ -38,5 +38,5 @@ private fun RecipeItemEntity.convertToDomainItem() = RecipeDomain(
     veryHealthy
 )
 
-private fun ExtendedIngredient.convertToDomainItem() =
-    ExtendedIngredientDomain(amount, consistency, image, name, original, unit)
+fun ExtendedIngredient.convertToDomainItem() =
+    ExtendedIngredientDomain(amount, consistency, image, name, original, unit ?: "")

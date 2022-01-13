@@ -36,6 +36,7 @@
 
     <string name="no_data">No data</string>
     <string name="search">Search</string>
+    <string name="ingredients_search">Ingredients Search</string>
 
     <string name="saved_to_favorites">Saved to Favorites</string>
     <string name="removed_from_favorites">Removed from Favorites</string>
