@@ -34,6 +34,12 @@ abstract class ViewModelBindsModule {
     abstract fun bindReadFavoriteRecipesUseCase(readFavoriteRecipesUseCaseImpl: ReadFavoriteRecipesUseCaseImpl): ReadFavoriteRecipesUseCase
 
     @Binds
+    abstract fun bindIngredientSearchUseCase(ingredientSearchUseCase: IngredientSearchUseCaseImpl): IngredientSearchUseCase
+
+    @Binds
+    abstract fun bindIngredientInfoUseCase(ingredientInfoUseCase: IngredientInfoUseCaseImpl): IngredientInfoUseCase
+
+    @Binds
     abstract fun bindRemoveFavoriteRecipeUseCase(removeFavoriteRecipeUseCaseImpl: RemoveFavoriteRecipeUseCaseImpl): RemoveFavoriteRecipeUseCase
 
     @Binds
